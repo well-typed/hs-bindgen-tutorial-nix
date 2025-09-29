@@ -32,11 +32,28 @@ family frontend, which we need to set up and connect to `hs-bindgen` so that
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
-interface for us.
+interface for us. In particular, this tutorial contains a minimal Nix Flake
+exposing `hs-bindgen` the client, and a `hs-bindgen` the Template Haskell
+interface.
 
 ## Step A: Generate bindings
 
-### `hs-bindgen-cli`
+### Step A.1: Use the client `hs-bindgen-cli`
+
+Install the Nix package manager and try to build and run the client with
+
+```console
+nix run .#hs-bindgen -- --help | head -n 6
+```
+
+```
+hs-bindgen - generate Haskell bindings from C headers
+
+Usage: hs-bindgen [-v|--verbosity INT] [--log-as-info TRACE_ID]
+                  [--log-as-warning TRACE_ID] [--log-as-error TRACE_ID]
+                  [--log-as-error-warnings] [--log-enable-macro-warnings]
+                  [--log-show-time] [--log-show-call-stack] COMMAND
+```
 
 ### TH example with default GHC and LLVM
 

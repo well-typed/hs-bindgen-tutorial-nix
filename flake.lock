@@ -1,0 +1,166 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "hs-bindgen": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "hs-bindgen-src": "hs-bindgen-src",
+        "libclang-bindings-src": "libclang-bindings-src",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1759163170,
+        "narHash": "sha256-MjuU5EKBXslO/CG+WmLqumJs2Fe30ThckH9iUirQPFU=",
+        "owner": "dschrempf",
+        "repo": "hs-bindgen-flake",
+        "rev": "381335fde57f80823e46f1ab4b20a9cbd7f0f0a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dschrempf",
+        "repo": "hs-bindgen-flake",
+        "type": "github"
+      }
+    },
+    "hs-bindgen-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759149981,
+        "narHash": "sha256-SlYM1W8GPyI/xNeVp8/+YNtSjG3Vv3mDY8uxeLeBlrs=",
+        "owner": "well-typed",
+        "repo": "hs-bindgen",
+        "rev": "52a744c2a21ca483c7f7fe3acd216c4016f2587d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "well-typed",
+        "ref": "dom/1019/loosen-bounds",
+        "repo": "hs-bindgen",
+        "type": "github"
+      }
+    },
+    "libclang-bindings-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759144922,
+        "narHash": "sha256-JuKZU/0VOiFRSDrrsPoegu8LJXpnRHtgFO1nise5duw=",
+        "owner": "well-typed",
+        "repo": "libclang",
+        "rev": "68bb97dd401d8a68bb8110f068f717403931891f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "well-typed",
+        "ref": "dom/loosen-bounds",
+        "repo": "libclang",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1759036355,
+        "narHash": "sha256-0m27AKv6ka+q270dw48KflE0LwQYrO7Fm4/2//KCVWg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e9f00bd893984bc8ce46c895c3bf7cac95331127",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1759036355,
+        "narHash": "sha256-0m27AKv6ka+q270dw48KflE0LwQYrO7Fm4/2//KCVWg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e9f00bd893984bc8ce46c895c3bf7cac95331127",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "hs-bindgen": "hs-bindgen",
+        "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
