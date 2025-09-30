@@ -32,9 +32,9 @@ family frontend, which we need to set up and connect to `hs-bindgen` so that
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
-interface for us. In particular, this tutorial contains a minimal Nix Flake
-exposing `hs-bindgen` the client, and a `hs-bindgen` the Template Haskell
-interface.
+interface for us. In particular, this tutorial contains [a minimal Nix
+Flake](./flake.nix) exposing `hs-bindgen` the client, and a `hs-bindgen` the
+Template Haskell interface.
 
 ## Step A: Generate bindings
 
@@ -65,19 +65,18 @@ minutes. Nix uses the default version of GHC provided by Nixpkgs, and also takes
 care of installing the default version of the required parts of the LLVM
 toolchain.
 
-> [!NOTE] At the time of writing (September 30, 2025), the default version of
-> GHC is 9.8.4.
-
-> [!NOTE] At the time of writing (September 30, 2025), this includes
-> `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`
-> (version 19.1.7).
+> [!NOTE]
+> At the time of writing (September 30, 2025),
+> - the default version of GHC is 9.8.4;
+> - the LLVM toolchain includes version 19.1.7 of packages `llvmPackages.clang`,
+>   `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 Relevant readings:
 - If you want to find out how `hs-bindgen` finds included headers, see the
   [`hs-bindgen` manual section on
   includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
-- If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see the
-section [System environment](#system-environment).
+- If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see Section
+ [System environment](#system-environment) of this tutorial.
 - If you want to use a specific version of GHC or the LLVM toolchain, [see the
 relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
@@ -175,6 +174,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 
 # Notes
 
-> [!NOTE] Last update: September 30, 2025. The [upstream Nix
+> [!NOTE]
+> Last update: September 30, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
