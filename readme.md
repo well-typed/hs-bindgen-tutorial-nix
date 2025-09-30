@@ -76,14 +76,14 @@ toolchain.
 > - the LLVM toolchain includes version 19.1.7 of packages `llvmPackages.clang`,
 >   `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
-Relevant readings:
-- If you want to find out how `hs-bindgen` finds included headers, see the
-  [`hs-bindgen` manual section on
-  includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
-- If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see Section
- [System environment](#system-environment) of this tutorial.
-- If you want to use a specific version of GHC or the LLVM toolchain, [see the
-relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
+> [!TIP]
+> - If you want to find out how `hs-bindgen` finds included headers, see the
+>   [`hs-bindgen` manual section on
+>   includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
+> - If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see Section
+>  [System environment](#system-environment) of this tutorial.
+> - If you want to use a specific version of GHC or the LLVM toolchain, [see the
+> relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
 ### TH example with default GHC and LLVM
 
@@ -179,7 +179,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 
 # Notes
 
-> [!NOTE]
+> [!IMPORTANT]
 > Last update: September 30, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
