@@ -72,6 +72,22 @@ toolchain.
 > `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`
 > (version 19.1.7).
 
+If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see the
+section [System environment](#system-environment).
+
+If you want to use a specific version of GHC or the LLVM toolchain, [see the
+relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
+
+### TH example with default GHC and LLVM
+
+## Step B: Build project using generated code
+
+# Appendix
+
+## System environment
+
+### Client
+
 The Nix Flake wraps the client `hs-bindgen-cli` so that it knows where the LLVM
 toolchain is installed. We use a binary wrapper, and direct inspection of the
 environment is cumbersome. However, we can use `hs-bindgen-cli` itself to report
@@ -87,16 +103,27 @@ For example,
 [Info   ] [HsBindgen] [builtin-include-dir] BINDGEN_BUILTIN_INCLUDE_DIR set: BuiltinIncDirDisable
 ```
 
-If you want to use a specific version of GHC or the LLVM toolchain, please [see
-below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
+In particular (see the [Clang command line argument
+reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
+- `-B/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0`,
+  and `--gcc-toolchain=/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0`:
+  Use and search GCC toolchain for executables, libraries, and data
+  files.
+- `-B/nix/store/10mkp77lmqz8x2awd8hzv6pf7f7rkf6d-clang-19.1.7-lib/lib`, and
+  `-resource-dir=/nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/resource-root`:
+  Use and search the Clang toolchain for executables, libraries, and data files.
+  The `resource-dir` is particularly important, because it contains the headers
+  of the C standard library. We let `hs-bindgen` know that we specified the
+  `resource-dir` directly, so that it does not have to perform heuristic search
+  (`BINDGEN_BUILTIN_INCLUDE_DIR=disable` environment variable).
+- `-nostdlibinc`: Disable standard system `#include` directories only.
+- `-idirafter
+  /nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include`: Fall
+  back to the `glibc` standard library headers.
 
-#### System environment
-
-### TH example with default GHC and LLVM
-
-## Step B: Build project using generated code
-
-# Appendix
+Other options not discussed here:
+  `-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
+  and `-frandom-seed=76bkkqxi8g`.
 
 ## Use specific versions of GHC or the LLVM toolchain
 
