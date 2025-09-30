@@ -24,9 +24,8 @@
       in
       {
         packages = {
-          hs-bindgen = pkgs.hsBindgenCli;
-          hs-bindgen-cli = pkgs.hsBindgenCli;
-          default = pkgs.hsBindgenCli;
+          hs-bindgen-cli = pkgs.hs-bindgen-cli;
+          default = pkgs.hs-bindgen-cli;
         };
       }
     );

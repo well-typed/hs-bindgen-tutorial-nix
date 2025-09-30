@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1759211695,
-        "narHash": "sha256-GtgOwskucLgWnl/EZwVbbF9HMq4Lt0sFaIbfIKvHcCw=",
+        "lastModified": 1759220146,
+        "narHash": "sha256-12u8KHgjypLIyje6Fgk6bmA4Qopg5/5CTu2DtigwCAI=",
         "owner": "dschrempf",
         "repo": "hs-bindgen-flake",
-        "rev": "8a03add6d17760053a1814aabfef732b69aaaad4",
+        "rev": "02e986d4a786afdc57a9ceecef00b4fa71bae811",
         "type": "github"
       },
       "original": {
@@ -60,16 +60,15 @@
     "hs-bindgen-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1759210863,
-        "narHash": "sha256-Jl/RDPXM3yr8N58JQjGHmAIRvcBvQ/P3si57UXnMr88=",
+        "lastModified": 1759217294,
+        "narHash": "sha256-0I0bi4EW/IywvCtQcoZ/2NLSQwszGDCv4TiiTKxlsF8=",
         "owner": "well-typed",
         "repo": "hs-bindgen",
-        "rev": "b454e9f539da2098f4e7cf590447ffdd44b05940",
+        "rev": "bb10582f683dc4a754cdd0142f3dfb2f2d0689f1",
         "type": "github"
       },
       "original": {
         "owner": "well-typed",
-        "ref": "dom/1019/loosen-bounds",
         "repo": "hs-bindgen",
         "type": "github"
       }
@@ -77,16 +76,15 @@
     "libclang-bindings-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1759144922,
+        "lastModified": 1759215204,
         "narHash": "sha256-JuKZU/0VOiFRSDrrsPoegu8LJXpnRHtgFO1nise5duw=",
         "owner": "well-typed",
         "repo": "libclang",
-        "rev": "68bb97dd401d8a68bb8110f068f717403931891f",
+        "rev": "1ea47d44ec4ea99c896592af2680e9d130dcea01",
         "type": "github"
       },
       "original": {
         "owner": "well-typed",
-        "ref": "dom/loosen-bounds",
         "repo": "libclang",
         "type": "github"
       }
