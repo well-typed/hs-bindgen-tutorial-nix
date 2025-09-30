@@ -38,7 +38,7 @@ interface.
 
 ## Step A: Generate bindings
 
-### Step A.1: The `hs-bindgen` client
+### The `hs-bindgen` client
 
 #### Installation
 
@@ -86,7 +86,7 @@ relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
 ## System environment
 
-### Client
+### Client wrapper
 
 The Nix Flake wraps the client `hs-bindgen-cli` so that it knows where the LLVM
 toolchain is installed. We use a binary wrapper, and direct inspection of the
@@ -124,6 +124,47 @@ reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
 Other options not discussed here:
   `-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
   and `-frandom-seed=76bkkqxi8g`.
+
+### `hs-bindgen` hook
+
+We also provide a [setup
+hook](https://nixos.org/manual/nixpkgs/stable/#ssec-setup-hooks) that can be
+used by projects depending on `hs-bindgen` during their build process. The
+`hs-bindgen` setup hook performs the same setup as the wrapper discussed in the
+section [Client wrapper](#client-wrapper) above. The `hs-bindgen` setup hook can
+be used like other setup hooks by adding it to `buildInputs` or
+`propagatedBuildInputs`.
+
+To inspect the `hs-bindgen` setup hook, run
+```sh
+nix build -o hs-bindgen-hook .#hsBindgenHook
+cat hs-bindgen-hook/nix-support/setup-hook
+```
+
+For example,
+```
+# Populate additional environment variables required by `hs-bindgen`.
+
+# NOTE: Use this setup hook when building packages with `hs-bindgen`. The client
+# requires a separate wrapper (doh !) which is defined in `hs-bindgen-cli.nix`.
+# Please keep this setup hook and the wrapper synchronized!
+populateHsBindgenEnv() {
+    # Inform `hs-bindgen` about Nix-specific `CFLAGS` and `CCFLAGS`. In contrast
+    # to `rust-bindgen-hook.sh` (see Nixpkgs), we do not set `CXXFLAGS`.
+    BINDGEN_EXTRA_CLANG_ARGS="$(</nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/nix-support/cc-cflags) $(</nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/nix-support/libc-cflags) $NIX_CFLAGS_COMPILE"
+    export BINDGEN_EXTRA_CLANG_ARGS
+
+    # Inform `hs-bindgen` that it does not have to perform heuristic search for
+    # the builtin include directory. (We set the builtin include directory using
+    # `BINDGEN_EXTRA_CLANG_ARGS`).
+    BINDGEN_BUILTIN_INCLUDE_DIR=disable
+    export BINDGEN_BUILTIN_INCLUDE_DIR
+
+    # ...
+}
+
+postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
+```
 
 ## Use specific versions of GHC or the LLVM toolchain
 
