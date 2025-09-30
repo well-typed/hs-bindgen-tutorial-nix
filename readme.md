@@ -1,10 +1,11 @@
 # Generate Haskell bindings from C header files with `hs-bindgen`
 
-In this tutorial, we will (A) automatically generate Haskell bindings for
-[`libpcap`](https://github.com/the-tcpdump-group/libpcap), an interface to
-various kernel packet capture mechanisms. Further, we will (B) use the generated
-Haskell bindings to print the list of network devices available on the local
-machine.
+In this tutorial, we will use `hs-bindgen` to (A) automatically generate Haskell
+bindings for [`libpcap`](https://github.com/the-tcpdump-group/libpcap), an
+interface to various kernel packet capture mechanisms. Further, we will (B) use
+the generated Haskell bindings to print the list of network devices available on
+the local machine. We use the [Nix package manager](https://nixos.org/download/)
+to manage installation of `hs-bindgen` and other system dependencies.
 
 ### Step A: Generate bindings
 
