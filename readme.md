@@ -13,7 +13,7 @@ First, we will generate bindings in two ways:
    generates a set of modules exposing a Haskell interface to the translated C
    header files.
 2. We use the `hs-bindgen` Template Haskell interface. With the Template Haskell
-   interface, we can directly "#include" the C header files in our Haskell
+   interface, we can directly `#include` the C header files in our Haskell
    source code files.
 
 ### Step B: Use bindings
@@ -34,7 +34,9 @@ Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
 interface for us. In particular, this tutorial contains [a minimal Nix
 Flake](./flake.nix) exposing `hs-bindgen` the client, and a `hs-bindgen` the
-Template Haskell interface.
+Template Haskell interface. This Nix Flake only exports some outputs provided by
+an [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we
+maintain alongside `hs-bindgen`.
 
 ## Step A: Generate bindings
 
