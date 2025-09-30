@@ -72,10 +72,13 @@ toolchain.
 > `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`
 > (version 19.1.7).
 
-If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see the
+Relevant readings:
+- If you want to find out how `hs-bindgen` finds included headers, see the
+  [`hs-bindgen` manual section on
+  includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
+- If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see the
 section [System environment](#system-environment).
-
-If you want to use a specific version of GHC or the LLVM toolchain, [see the
+- If you want to use a specific version of GHC or the LLVM toolchain, [see the
 relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
 ### TH example with default GHC and LLVM
