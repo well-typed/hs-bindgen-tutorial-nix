@@ -183,3 +183,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 > Last update: September 30, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
+
+# Ideas
+
+- Use `info include-graph`.
