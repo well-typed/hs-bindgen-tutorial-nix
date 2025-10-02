@@ -11,23 +11,23 @@ bindings to print the list of network devices available on the local machine. We
 use the [Nix package manager](https://nixos.org/download/) to manage
 installation of `hs-bindgen` and other system dependencies.
 
-### Overview of Step A: Generate bindings
+### Overview of Method A: Command line client
 
-First, we generate bindings in two ways:
+First, we generate bindings using the `hs-bindgen` client with binary name
+`hs-bindgen-cli`. The client generates a set of modules exposing a Haskell
+interface to the translated C header files.
 
-1. We use the `hs-bindgen` client with binary name `hs-bindgen-cli`. The client
-   generates a set of modules exposing a Haskell interface to the translated C
-   header files.
-2. We use the `hs-bindgen` Template Haskell interface. With the Template Haskell
-   interface, we can directly `#include` the C header files in our Haskell
-   source code files.
+We compile our program and link the object files to the shared `libpcap` library
+object files which need to be available. That is, while generating the bindings
+only requires the C header files to be available, using the generated bindings
+requires a (compiled) _implementation_ of the interface defined in the C header
+files.
 
-### Overview of Step B: Build project using generated bindings
+### Overview of Method B: Template Haskell interface
 
-Second, we compile our program and link the object files to the shared `libpcap`
-library object files which need to be available. That is, while Step A only
-requires the C header files to be available, Step B requires a (compiled)
-_implementation_ of the interface defined in the C header files.
+We use the `hs-bindgen` Template Haskell interface. With the Template Haskell
+interface, we can directly `#include` the C header files in our Haskell source
+code files.
 
 ### System environment, LLVM and Nix
 
@@ -46,11 +46,9 @@ maintain alongside `hs-bindgen`. You should use this upstream Nix Flake directly
 in your future projects, if you decide to use the Nix package manager to manage
 your `hs-bindgen` installation.
 
-## Step A: Generate bindings
+## Method A: Command line client
 
-### The `hs-bindgen` client
-
-#### Installation
+### Installation
 
 Install the [Nix package manager](https://nixos.org/download/) and try to build
 and run the client with
@@ -72,9 +70,9 @@ Usage: hs-bindgen [-v|--verbosity INT] [--log-as-info TRACE_ID]
 
 The build uses the [default NixOS binary cache](https://cache.nixos.org/), but
 some dependencies are `hs-bindgen`-specific and compilation will take a few
-minutes. Nix uses the default version of GHC provided by Nixpkgs, and also takes
-care of installing the default version of the required parts of the LLVM
-toolchain.
+minutes. The `hs-bindgen-cli` package derivation uses the default version of GHC
+provided by Nixpkgs, and also takes care of installing the default version of
+the required parts of the LLVM toolchain.
 
 > [!NOTE]
 > At the time of writing (September 30, 2025),
@@ -91,11 +89,30 @@ toolchain.
 > - If you want to use a specific version of GHC or the LLVM toolchain, [see the
 > relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
-### The Template Haskell interface
+### Generate bindings
 
-TH example with default GHC and LLVM
+We have [prepared a small project](./pcap-client) that generates bindings for
+`libpcap` and uses them in an minimal application. Change your current working
+directory to this sub-project:
 
-## Step B: Build project using generated bindings
+```sh
+cd pcap-client
+```
+
+> [!NOTE]
+> We did not check in the generated bindings, but provide a derivation that
+> generates the bindings during the build process. That is, you can run the
+> application without generating bindings yourself!
+>
+> ```
+> nix run .#hs-pcap
+> ```
+>
+> This should print a list of network devices found on your machine.
+
+## Method B: Template Haskell interface
+
+- TH example with default GHC and LLVM
 
 ## Appendix
 

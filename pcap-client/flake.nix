@@ -22,9 +22,24 @@
           overlays = [ hs-bindgen.overlays.default ];
         };
         hpkgs = pkgs.haskellPackages;
-        hs-pcap = hpkgs.callCabal2nix "hs-pcap" ./. { };
+        hlib = pkgs.haskell.lib.compose;
+        hs-pcap = hlib.overrideCabal (drv: {
+          executableToolDepends = (drv.executableToolDepends or [ ]) ++ [
+            pkgs.hs-bindgen-cli
+            pkgs.libpcap
+            pkgs.hsBindgenHook
+          ];
+          postUnpack = ''
+            ${drv.postUnpack or ""}
+            (cd pcap-client; ${pkgs.bash}/bin/bash generate-bindings)
+          '';
+        }) (hpkgs.callCabal2nix "hs-pcap" ./. { });
       in
       {
+        packages = {
+          inherit hs-pcap;
+          default = hs-pcap;
+        };
         devShells = {
           default = hpkgs.shellFor {
             packages = _: [ hs-pcap ];
