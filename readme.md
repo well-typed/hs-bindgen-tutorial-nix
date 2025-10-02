@@ -109,14 +109,16 @@ $ cd pcap-client
 ### Generate bindings
 
 A Nix development shell provides access to the Haskell toolchain, the
-`hs-bindgen` client, the Clang toolchain, and the `libpcap` library and compiled
-shared object files. The relevant code from [the Nix
+`hs-bindgen` client, the Clang toolchain, and the `libpcap` library (header
+files and compiled shared object files). The relevant code from [the Nix
 Flake](./pcap-client/flake.nix) is:
 
 ```nix
 hpkgs.shellFor {
   packages = _: [ hs-pcap ];
   nativeBuildInputs = [
+    ...
+
     # `hs-bindgen` client.
     pkgs.hs-bindgen-cli
 
@@ -144,6 +146,23 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 
 The environment variable `BINDGEN_EXTRA_CLANG_ARGS` is used by `hs-bindgen` and
 forwarded to `libclang`.
+
+Then, generate bindings with the provided script:
+```console
+$ ./generate-bindings
+```
+
+The [`generate-bindings` script](./pcap-client/generate-bindings) is well
+documented, please have a look at the different command line flags. We generated
+the script using an iterative procedure, adding and removing command line flags
+as required.
+
+The script should generate several files in folder `./src/Generated/` that you
+are encouraged to inspect. In particular, we separate bindings into modules
+exposing different binding categories. For example. `./src/Generated/Pcap.hs`
+exposes types, whereas `./src/Generated/Pcap/Safe.hs` and
+`./src/Generated/Pcap/Unsafe.hs` expose [`safe` and `unsafe` versions of foreign
+imports](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/ffi.html).
 
 ## Method B: Template Haskell interface
 
@@ -198,11 +217,12 @@ and `-frandom-seed=76bkkqxi8g`.
 
 We also provide a [setup
 hook](https://nixos.org/manual/nixpkgs/stable/#ssec-setup-hooks) that can be
-used by projects depending on `hs-bindgen` during their build process. The
-`hs-bindgen` setup hook performs the same setup as the wrapper discussed in the
-section [Client wrapper](#client-wrapper) above. The `hs-bindgen` setup hook can
-be used like other setup hooks by adding it to `buildInputs` or
-`propagatedBuildInputs`.
+used by projects depending on `hs-bindgen` during their build process. [The
+`hs-bindgen` setup
+hook](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/hs-bindgen/hs-bindgen-hook.sh)
+performs the same setup as the wrapper discussed in the section [Client
+wrapper](#client-wrapper) above. The `hs-bindgen` setup hook can be used like
+other setup hooks by adding it to `buildInputs` or `propagatedBuildInputs`.
 
 To inspect the `hs-bindgen` setup hook, run
 

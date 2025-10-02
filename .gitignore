@@ -1,3 +1,4 @@
-/pcap-client/dist-newstyle/
-/pcap-client/.envrc
 /pcap-client/.direnv/
+/pcap-client/.envrc
+/pcap-client/dist-newstyle/
+/pcap-client/src/
