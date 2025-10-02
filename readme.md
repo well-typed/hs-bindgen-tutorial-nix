@@ -164,6 +164,39 @@ exposes types, whereas `./src/Generated/Pcap/Safe.hs` and
 `./src/Generated/Pcap/Unsafe.hs` expose [`safe` and `unsafe` versions of foreign
 imports](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/ffi.html).
 
+### Compile and run `hs-pcap` project
+
+After generating the bindings, compile and run the minimal application using
+standard commands. We have prepared a Cabal package:
+
+```console
+$ cabal build
+...
+```
+
+Have a look at the [executable code in `./app/Pcap.hs`](./app/Pcap.hs).
+
+Building the project requires the `libpcap` shared object files. The
+`hs-bindgen` hook sets `LD_LIBRARY_PATH` to point to the location of these
+files. You can also set `package.extra-include-dirs` and
+`package.extra-lib-dirs` stanzas in your `cabal.project` or
+`cabal.project.local` file.
+
+On my machine, running the program produces the following output:
+
+```console
+$ cabal run
+Hello!
+List of network devices found on your machine:
+  - wlp0s20f3
+  - any
+  - lo
+  - enp0s13f0u3u4u4
+  - nflog
+  - nfqueue
+Bye!
+```
+
 ## Method B: Template Haskell interface
 
 - TH example with default GHC and LLVM
