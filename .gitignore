@@ -1,2 +1,5 @@
 /pcap-client/libpcap/
 /pcap-client/src/Generated/
+/pcap-client/dist-newstyle/
+/pcap-client/.envrc
+/pcap-client/.direnv/

@@ -22,6 +22,9 @@ library
   hs-source-dirs:  src
   exposed-modules:
     , Generated.Pcap
+    , Generated.Pcap.FunPtr
+    , Generated.Pcap.Safe
+    , Generated.Pcap.Unsafe
   autogen-modules:
   ghc-options:
   extra-libraries: pcap

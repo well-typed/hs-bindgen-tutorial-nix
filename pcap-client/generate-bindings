@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-[ -d libpcap ] || git clone https://github.com/the-tcpdump-group/libpcap.git libpcap
-
 module_flags=(
-    -I ./libpcap
     --hs-output-dir src
     --module Generated.Pcap
 )
@@ -28,13 +25,17 @@ select_flags=(
     --select-by-header-path pcap.h
     # Select transitive dependencies.
     --enable-program-slicing
+    --select-except-deprecated
 )
 
 debug_flags=(
+    # Run `hs-bindgen` with log level "Info".
+    -v3
+    # # Run `hs-bindgen` with log level "Debug".
     # -v4
 )
 
-nix run ../#hs-bindgen-cli -- preprocess \
+hs-bindgen-cli preprocess \
     "${module_flags[@]}" \
     "${c_flags[@]}" \
     "${parse_flags[@]}" \

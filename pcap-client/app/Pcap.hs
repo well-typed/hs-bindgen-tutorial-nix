@@ -1,9 +1,12 @@
 module Main where
 
 import Control.Monad (unless)
+
 import Foreign qualified
 import Foreign.C qualified as C
+
 import Generated.Pcap qualified as Pcap
+import Generated.Pcap.Safe qualified as Pcap
 
 main :: IO ()
 main = mapM_ putStrLn =<< findAllDevNames
