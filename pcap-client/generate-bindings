@@ -9,20 +9,29 @@ module_flags=(
 )
 
 c_flags=(
+    # Enable GNU extensions. GNU extensions define types, such as `u_int`, which
+    # `libpcap` requires.
     --gnu
 )
 
 parse_flags=(
-    # TODO: Why do we need `--parse-all`? We get "unavailable transitive
-    # dependencies" if we do not use `--parse-all`.
-    # --parse-all
+    # TODO https://github.com/well-typed/hs-bindgen/issues/1178: Why do we need
+    # `--parse-all`? We get "unavailable transitive dependencies" if we do not
+    # use `--parse-all`.
+    --parse-all
 )
 
 select_flags=(
-    # Also select bindings from other headers matching PCRE ".*pcap\.h.*".
+    # `pcap.h` itself does not define any declarations, but only includes
+    # `pcap/pcap.h`. Tell `hs-bindgen` to also select bindings from other
+    # headers matching Pearl-compatible regular expression ".*pcap\.h.*".
     --select-by-header-path pcap.h
     # Select transitive dependencies.
     --enable-program-slicing
+)
+
+debug_flags=(
+    # -v4
 )
 
 nix run ../#hs-bindgen-cli -- preprocess \
@@ -30,5 +39,5 @@ nix run ../#hs-bindgen-cli -- preprocess \
     "${c_flags[@]}" \
     "${parse_flags[@]}" \
     "${select_flags[@]}" \
-    -v4 \
+    "${debug_flags[@]}" \
     pcap.h
