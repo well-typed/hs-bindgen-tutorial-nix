@@ -26,6 +26,19 @@ select_flags=(
     # Select transitive dependencies.
     --enable-program-slicing
     --select-except-deprecated
+    # We manually de-select some declarations. These declarations are only
+    # available when `libpcap` is built with "remote capture" enabled, which is
+    # not the case by default in Nixpkgs.
+    --select-except-by-decl-name 'pcap_open'
+    --select-except-by-decl-name 'pcap_createsrcstr'
+    --select-except-by-decl-name 'pcap_parsesrcstr'
+    --select-except-by-decl-name 'pcap_findalldevs_ex'
+    --select-except-by-decl-name 'pcap_setsampling'
+    --select-except-by-decl-name 'pcap_remoteact_accept'
+    --select-except-by-decl-name 'pcap_remoteact_accept_ex'
+    --select-except-by-decl-name 'pcap_remoteact_list'
+    --select-except-by-decl-name 'pcap_remoteact_close'
+    --select-except-by-decl-name 'pcap_remoteact_cleanup'
 )
 
 debug_flags=(
