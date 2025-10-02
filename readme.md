@@ -308,7 +308,7 @@ using `libclang` version 20 with the `pcap-client` project:
 
 ```nix
 useLlvm20 = final: prev: {
-  llvmPackages = prev.llvmPackages_20;
+  llvmPackages = final.llvmPackages_20;
 };
 pkgs = import nixpkgs {
   inherit system;
@@ -319,10 +319,21 @@ pkgs = import nixpkgs {
 };
 ```
 
+Note that even when you have `clang` version 19 in your path, `hs-bindgen` uses
+`clang` version 20 when the above overlay is activated. You can see this by
+inspecting `BINDGEN_EXTRA_CLANG_ARGS` when the development shell is active:
+
+```console
+$ echo $BINDGEN_EXTRA_CLANG_ARGS
+...
+-resource-dir=/nix/store/8s647qbgn3yy2l52ykznsh0xkvgcrqhx-clang-wrapper-20.1.8/resource-root
+...
+```
+
 ## Notes
 
 > [!IMPORTANT]
-> Last update: September 30, 2025. The [upstream Nix
+> Last update: October 2, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
 

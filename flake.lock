@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1759409223,
+        "lastModified": 1759417734,
         "narHash": "sha256-ybNVZRG4ytBoMNY8uOkfvuz4cG49j5zbRDw6zmbrLNo=",
         "owner": "dschrempf",
         "repo": "hs-bindgen-flake",
-        "rev": "089e35d0d33818e67ac622dc81baeabadaf926ef",
+        "rev": "97f13daa87c89359c255f3a7be2eccc30ce87f52",
         "type": "github"
       },
       "original": {
