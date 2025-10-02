@@ -68,22 +68,23 @@ The build uses the [default NixOS binary cache](https://cache.nixos.org/), but
 some dependencies are `hs-bindgen`-specific and compilation will take a few
 minutes. The `hs-bindgen-cli` package derivation uses the default version of GHC
 provided by Nixpkgs, and also takes care of installing the default version of
-the required parts of the LLVM toolchain.
+the required parts of the Clang toolchain.
 
 > [!NOTE]
 > At the time of writing (September 30, 2025),
 > - the default version of GHC is 9.8.4;
-> - the LLVM toolchain includes version 19.1.7 of packages `llvmPackages.clang`,
->   `llvmPackages.libclang`, and `llvmPackages.llvm`.
+> - the Clang toolchain includes version 19.1.7 of packages
+>   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
 > - If you want to find out how `hs-bindgen` finds included headers, see the
 >   [`hs-bindgen` manual section on
 >   includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
-> - If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see Section
->  [System environment](#system-environment) of this tutorial.
-> - If you want to use a specific version of GHC or the LLVM toolchain, [see the
-> relevant section below](#use-specific-versions-of-the-ghc-or-llvm-toolchains).
+> - If you want to analyze how `hs-bindgen` finds the Clang toolchain, see
+>  Section [System environment](#system-environment) of this tutorial.
+> - If you want to use a specific version of GHC or the Clang toolchain, [see
+>   the relevant section
+>   below](#use-specific-versions-of-the-ghc-or-clang-toolchains).
 
 ### Whet your appetite!
 
@@ -199,7 +200,7 @@ Bye!
 
 ## Method B: Template Haskell interface
 
-- TH example with default GHC and LLVM
+- TH example with default GHC and Clang toolchain versions
 
 ## Appendix
 
@@ -207,7 +208,7 @@ Bye!
 
 #### Client wrapper
 
-The Nix Flake wraps the client `hs-bindgen-cli` so that it knows where the LLVM
+The Nix Flake wraps the client `hs-bindgen-cli` so that it knows where the Clang
 toolchain is installed. We use a binary wrapper, and direct inspection of the
 environment is cumbersome. However, we can use `hs-bindgen-cli` itself to report
 the system environment it is picking up:
@@ -290,11 +291,11 @@ populateHsBindgenEnv() {
 postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ```
 
-### Use specific versions of the GHC or LLVM toolchains
+### Use specific versions of the GHC or Clang toolchains
 
 One possibility to specify the GHC toolchain is to simply use a different
-Haskell package set. For example, building the `pcap-client` project with GHC 9.12
-only requires a small change in the Nix Flake:
+Haskell package set. For example, building the `pcap-client` project with GHC
+9.12 only requires a small change in the Nix Flake:
 
 ```nix
 ...
