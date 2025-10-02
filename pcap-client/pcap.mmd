@@ -1,0 +1,17 @@
+graph TD;
+  v0["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap.h"]
+  v76["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/bpf.h"]
+  v4["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/compiler-tests.h"]
+  v77["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/dlt.h"]
+  v3["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/funcattrs.h"]
+  v5["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/pcap-inttypes.h"]
+  v2["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/pcap.h"]
+  v52["/nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include/pcap/socket.h"]
+  v0-->|"#include &lt;pcap/pcap.h&gt;"|v2
+  v2-->|"#include &lt;pcap/funcattrs.h&gt;"|v3
+  v76-->|"#include &lt;pcap/funcattrs.h&gt;"|v3
+  v3-->|"#include &lt;pcap/compiler-tests.h&gt;"|v4
+  v2-->|"#include &lt;pcap/pcap-inttypes.h&gt;"|v5
+  v2-->|"#include &lt;pcap/socket.h&gt;"|v52
+  v2-->|"#include &lt;pcap/bpf.h&gt;"|v76
+  v76-->|"#include &lt;pcap/dlt.h&gt;"|v77

@@ -198,6 +198,10 @@ List of network devices found on your machine:
 Bye!
 ```
 
+### Create and inspect include graph
+
+![Include graph](./pcap-client/pcap.svg)
+
 ## Method B: Template Haskell interface
 
 - TH example with default GHC and Clang toolchain versions

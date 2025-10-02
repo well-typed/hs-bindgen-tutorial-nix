@@ -21,6 +21,11 @@
           inherit system;
           overlays = [ hs-bindgen.overlays.default ];
         };
+        # TODO: I don't know why `mermaid-cli` triggers a Chromium rebuild using
+        # the `hs-bindgen` overlay, but here we go.
+        defPkgs = import nixpkgs {
+          inherit system;
+        };
         hpkgs = pkgs.haskellPackages;
         hlib = pkgs.haskell.lib.compose;
         hs-pcap = hlib.overrideCabal (drv: {
@@ -55,6 +60,9 @@
               # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
               pkgs.hsBindgenHook
               pkgs.libpcap
+
+              # Misc.
+              defPkgs.mermaid-cli
             ];
           };
         };

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+module_flags=(
+    --unique-id org.hs-bindgen.tutorial
+)
+libclang_flags=(
+    --gnu
+)
+parse_flags=(
+    --parse-from-main-header-dirs
+)
+select_flags=(
+    --select-by-header-path pcap.h
+    --enable-program-slicing
+    --select-except-deprecated
+    --select-except-by-decl-name 'pcap_open'
+    --select-except-by-decl-name 'pcap_createsrcstr'
+    --select-except-by-decl-name 'pcap_parsesrcstr'
+    --select-except-by-decl-name 'pcap_findalldevs_ex'
+    --select-except-by-decl-name 'pcap_setsampling'
+    --select-except-by-decl-name 'pcap_remoteact_accept'
+    --select-except-by-decl-name 'pcap_remoteact_accept_ex'
+    --select-except-by-decl-name 'pcap_remoteact_list'
+    --select-except-by-decl-name 'pcap_remoteact_close'
+    --select-except-by-decl-name 'pcap_remoteact_cleanup'
+)
+
+hs-bindgen-cli info include-graph \
+    "${module_flags[@]}" \
+    "${libclang_flags[@]}" \
+    "${parse_flags[@]}" \
+    "${select_flags[@]}" \
+    pcap.h -o pcap.mmd
+
+mmdc -i pcap.mmd -o pcap.svg
