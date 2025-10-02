@@ -53,13 +53,9 @@ your `hs-bindgen` installation.
 Install the [Nix package manager](https://nixos.org/download/) and try to build
 and run the client with
 
-```sh
-nix run .#hs-bindgen-cli -- --help | head -n 6
-```
+```console
+$ nix run .#hs-bindgen-cli -- --help | head -n 6
 
-For example,
-
-```
 hs-bindgen - generate Haskell bindings from C headers
 
 Usage: hs-bindgen [-v|--verbosity INT] [--log-as-info TRACE_ID]
@@ -89,14 +85,14 @@ the required parts of the LLVM toolchain.
 > - If you want to use a specific version of GHC or the LLVM toolchain, [see the
 > relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
-### Generate bindings
+### Whet your appetite!
 
 We have [prepared a small project](./pcap-client) that generates bindings for
-`libpcap` and uses them in an minimal application. Change your current working
-directory to this sub-project:
+`libpcap` and uses them to list the network devices found on your machine.
+Change your current working directory to this sub-project:
 
-```sh
-cd pcap-client
+```console
+$ cd pcap-client
 ```
 
 > [!NOTE]
@@ -104,11 +100,50 @@ cd pcap-client
 > generates the bindings during the build process. That is, you can run the
 > application without generating bindings yourself!
 >
-> ```
-> nix run .#hs-pcap
+> ```console
+> $ nix run .#hs-pcap
 > ```
 >
 > This should print a list of network devices found on your machine.
+
+### Generate bindings
+
+A Nix development shell provides access to the Haskell toolchain, the
+`hs-bindgen` client, the Clang toolchain, and the `libpcap` library and compiled
+shared object files. The relevant code from [the Nix
+Flake](./pcap-client/flake.nix) is:
+
+```nix
+hpkgs.shellFor {
+  packages = _: [ hs-pcap ];
+  nativeBuildInputs = [
+    # `hs-bindgen` client.
+    pkgs.hs-bindgen-cli
+
+    # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
+    pkgs.hsBindgenHook
+    pkgs.libpcap
+  ];
+};
+```
+
+Enter the development shell
+
+```console
+$ nix develop
+```
+
+Let's analyze the environment set up by [`hsBindgenHook`](#hs-bindgen-hook):
+
+```console
+$ echo $BINDGEN_EXTRA_CLANG_ARGS
+...
+-isystem /nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include
+...
+```
+
+The environment variable `BINDGEN_EXTRA_CLANG_ARGS` is used by `hs-bindgen` and
+forwarded to `libclang`.
 
 ## Method B: Template Haskell interface
 
