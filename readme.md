@@ -83,7 +83,7 @@ the required parts of the LLVM toolchain.
 > - If you want to analyze how `hs-bindgen` finds the LLVM toolchain, see Section
 >  [System environment](#system-environment) of this tutorial.
 > - If you want to use a specific version of GHC or the LLVM toolchain, [see the
-> relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
+> relevant section below](#use-specific-versions-of-the-ghc-or-llvm-toolchains).
 
 ### Whet your appetite!
 
@@ -290,9 +290,33 @@ populateHsBindgenEnv() {
 postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ```
 
-### Use specific versions of GHC or the LLVM toolchain
+### Use specific versions of the GHC or LLVM toolchains
 
-- TH example with custom GHC and LLVM
+One possibility to specify the GHC toolchain is to simply use a different
+Haskell package set. For example, building the `pcap-client` project with GHC 9.12
+only requires a small change in the Nix Flake:
+
+```nix
+...
+hpkgs = pkgs.haskell.packages.ghc912;
+...
+```
+
+Changing the version of the Clang toolchain requires an overlay. For example,
+using `libclang` version 20 with the `pcap-client` project:
+
+```nix
+useLlvm20 = final: prev: {
+  llvmPackages = prev.llvmPackages_20;
+};
+pkgs = import nixpkgs {
+  inherit system;
+  overlays = [
+    hs-bindgen.overlays.default
+    useLlvm20
+  ];
+};
+```
 
 ## Notes
 
