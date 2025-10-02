@@ -1,17 +1,20 @@
 # Generate Haskell bindings from C header files with `hs-bindgen`
 
-In this tutorial, we will use
-[`hs-bindgen`](https://github.com/well-typed/hs-bindgen) to (A) automatically
+## Introduction
+
+In this tutorial, we use
+[`hs-bindgen`](https://github.com/well-typed/hs-bindgen) to automatically
 generate Haskell bindings for
 [`libpcap`](https://github.com/the-tcpdump-group/libpcap), an interface to
-various kernel packet capture mechanisms. Further, we will (B) use the generated
-Haskell bindings to print the list of network devices available on the local
-machine. We use the [Nix package manager](https://nixos.org/download/) to manage
+various kernel packet capture mechanisms. Further, we use the generated Haskell
+bindings to print the list of network devices available on the local machine. We
+use the [Nix package manager](https://nixos.org/download/) to manage
 installation of `hs-bindgen` and other system dependencies.
 
-### Step A: Generate bindings
+### Overview of Step A: Generate bindings
 
-First, we will generate bindings in two ways:
+First, we generate bindings in two ways:
+
 1. We use the `hs-bindgen` client with binary name `hs-bindgen-cli`. The client
    generates a set of modules exposing a Haskell interface to the translated C
    header files.
@@ -19,27 +22,29 @@ First, we will generate bindings in two ways:
    interface, we can directly `#include` the C header files in our Haskell
    source code files.
 
-### Step B: Use bindings
+### Overview of Step B: Build project using generated bindings
 
-Second, we will compile our program and link the object files to the shared
-`libpcap` library object files which need to be available. That is, while Step A
-only required the C header files, Step B requires a (compiled) _implementation_
-of the interface defined in the C header files.
+Second, we compile our program and link the object files to the shared `libpcap`
+library object files which need to be available. That is, while Step A only
+requires the C header files to be available, Step B requires a (compiled)
+_implementation_ of the interface defined in the C header files.
 
 ### System environment, LLVM and Nix
 
 `hs-bindgen` uses [`libclang`](https://clang.llvm.org/doxygen/index.html) to
-parse and interpret C header files. `libclang` is a part of the Clang C language
-family frontend, which we need to set up and connect to `hs-bindgen` so that
-`hs-bindgen` can use the Clang installation available on the current machine.
+parse and interpret C header files. `libclang` is a part of the [LLVM compiler
+infrastructure](https://llvm.org/), which we need to set up and connect to
+`hs-bindgen`.
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
 interface for us. In particular, this tutorial contains [a minimal Nix
-Flake](./flake.nix) exposing `hs-bindgen` the client, and a `hs-bindgen` the
+Flake](./flake.nix) exposing `hs-bindgen` the client, and `hs-bindgen` the
 Template Haskell interface. This Nix Flake only exports some outputs provided by
 an [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we
-maintain alongside `hs-bindgen`.
+maintain alongside `hs-bindgen`. You should use this upstream Nix Flake directly
+in your future projects, if you decide to use the Nix package manager to manage
+your `hs-bindgen` installation.
 
 ## Step A: Generate bindings
 
@@ -55,6 +60,7 @@ nix run .#hs-bindgen-cli -- --help | head -n 6
 ```
 
 For example,
+
 ```
 hs-bindgen - generate Haskell bindings from C headers
 
@@ -85,15 +91,17 @@ toolchain.
 > - If you want to use a specific version of GHC or the LLVM toolchain, [see the
 > relevant section below](#use-specific-versions-of-ghc-and-the-llvm-toolchain).
 
-### TH example with default GHC and LLVM
+### The Template Haskell interface
 
-## Step B: Build project using generated code
+TH example with default GHC and LLVM
 
-# Appendix
+## Step B: Build project using generated bindings
 
-## System environment
+## Appendix
 
-### Client wrapper
+### System environment
+
+#### Client wrapper
 
 The Nix Flake wraps the client `hs-bindgen-cli` so that it knows where the LLVM
 toolchain is installed. We use a binary wrapper, and direct inspection of the
@@ -105,6 +113,7 @@ nix run .#hs-bindgen-cli -- info libclang -v4
 ```
 
 For example,
+
 ```
 [Info   ] [HsBindgen] [extra-clang-args] Picked up evironment variable BINDGEN_EXTRA_CLANG_ARGS; parsed 'libclang' arguments: ["-B/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0","--gcc-toolchain=/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0","-B/nix/store/10mkp77lmqz8x2awd8hzv6pf7f7rkf6d-clang-19.1.7-lib/lib","-nostdlibinc","-resource-dir=/nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/resource-root","-idirafter","/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include","-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include","-frandom-seed=76bkkqxi8g"]
 [Info   ] [HsBindgen] [builtin-include-dir] BINDGEN_BUILTIN_INCLUDE_DIR set: BuiltinIncDirDisable
@@ -112,6 +121,7 @@ For example,
 
 In particular (see the [Clang command line argument
 reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
+
 - `-B/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0`,
   and `--gcc-toolchain=/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0`:
   Use and search GCC toolchain for executables, libraries, and data
@@ -129,10 +139,10 @@ reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
   back to the `glibc` standard library headers.
 
 Other options not discussed here:
-  `-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
-  and `-frandom-seed=76bkkqxi8g`.
+`-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
+and `-frandom-seed=76bkkqxi8g`.
 
-### `hs-bindgen` hook
+#### `hs-bindgen` hook
 
 We also provide a [setup
 hook](https://nixos.org/manual/nixpkgs/stable/#ssec-setup-hooks) that can be
@@ -143,13 +153,15 @@ be used like other setup hooks by adding it to `buildInputs` or
 `propagatedBuildInputs`.
 
 To inspect the `hs-bindgen` setup hook, run
+
 ```sh
 nix build -o hs-bindgen-hook .#hsBindgenHook
 cat hs-bindgen-hook/nix-support/setup-hook
 ```
 
 For example,
-```
+
+```sh
 # Populate additional environment variables required by `hs-bindgen`.
 
 # NOTE: Use this setup hook when building packages with `hs-bindgen`. The client
@@ -173,17 +185,17 @@ populateHsBindgenEnv() {
 postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ```
 
-## Use specific versions of GHC or the LLVM toolchain
+### Use specific versions of GHC or the LLVM toolchain
 
 - TH example with custom GHC and LLVM
 
-# Notes
+## Notes
 
 > [!IMPORTANT]
 > Last update: September 30, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
 
-# Ideas
+## Ideas
 
-- Use `info include-graph`.
+- Use `hs-bindgen-cli info include-graph`.
