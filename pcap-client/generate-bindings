@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+[ -d libpcap ] || git clone https://github.com/the-tcpdump-group/libpcap.git libpcap
+
+module_flags=(
+    -I ./libpcap
+    --hs-output-dir src
+    --module Generated.Pcap
+)
+
+c_flags=(
+    --gnu
+)
+
+parse_flags=(
+    # TODO: Why do we need `--parse-all`? We get "unavailable transitive
+    # dependencies" if we do not use `--parse-all`.
+    # --parse-all
+)
+
+select_flags=(
+    # Also select bindings from other headers matching PCRE ".*pcap\.h.*".
+    --select-by-header-path pcap.h
+    # Select transitive dependencies.
+    --enable-program-slicing
+)
+
+nix run ../#hs-bindgen-cli -- preprocess \
+    "${module_flags[@]}" \
+    "${c_flags[@]}" \
+    "${parse_flags[@]}" \
+    "${select_flags[@]}" \
+    -v4 \
+    pcap.h
