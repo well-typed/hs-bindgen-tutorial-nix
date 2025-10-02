@@ -24,8 +24,7 @@
       in
       {
         packages = {
-          hs-bindgen-cli = pkgs.hs-bindgen-cli;
-          hsBindgenHook = pkgs.hsBindgenHook;
+          inherit (pkgs) hs-bindgen-cli hsBindgenHook;
           default = pkgs.hs-bindgen-cli;
         };
       }

@@ -25,10 +25,6 @@
         hs-pcap = hpkgs.callCabal2nix "hs-pcap" ./. { };
       in
       {
-        packages = {
-          inherit (pkgs) hs-bindgen-cli;
-          default = pkgs.hs-bindgen-cli;
-        };
         devShells = {
           default = hpkgs.shellFor {
             packages = _: [ hs-pcap ];

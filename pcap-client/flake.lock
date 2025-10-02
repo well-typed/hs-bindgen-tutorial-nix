@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1759391279,
-        "narHash": "sha256-xrj947ifKCXOZ1+7Ts6SL1kCMY+ReroexXzsL6PSoiY=",
+        "lastModified": 1759409223,
+        "narHash": "sha256-ybNVZRG4ytBoMNY8uOkfvuz4cG49j5zbRDw6zmbrLNo=",
         "owner": "dschrempf",
         "repo": "hs-bindgen-flake",
-        "rev": "d68d5f75ec1869a7d178eca271bf0dd3dd0133a0",
+        "rev": "089e35d0d33818e67ac622dc81baeabadaf926ef",
         "type": "github"
       },
       "original": {
@@ -60,11 +60,11 @@
     "hs-bindgen-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1759390378,
-        "narHash": "sha256-0QqV9dOs0lsjTF38hFBJj8Dvc0AOfyHDow/jnRMeFz8=",
+        "lastModified": 1759395402,
+        "narHash": "sha256-ZX39o8dGHiOVwNY+Nxi1MIvVHY6t8nadrkrNm6W7D6U=",
         "owner": "well-typed",
         "repo": "hs-bindgen",
-        "rev": "601727eebd3a1194a0009822758b2924df5be004",
+        "rev": "2645fd3dc0b33fd6b4586b6152f5272fdaa39018",
         "type": "github"
       },
       "original": {
