@@ -17,11 +17,11 @@ First, we generate bindings using the `hs-bindgen` client with binary name
 `hs-bindgen-cli`. The client generates a set of modules exposing a Haskell
 interface to the translated C header files.
 
-We compile our program and link the object files to the shared `libpcap` library
-object files which need to be available. That is, while generating the bindings
-only requires the C header files to be available, using the generated bindings
-requires a (compiled) _implementation_ of the interface defined in the C header
-files.
+We compile our program, linking the resulting object files to the shared
+`libpcap` library which needs to be available. That is, while generating the
+bindings only requires the C header files to be available, using the generated
+bindings requires a (compiled) _implementation_ of the interface defined in the
+C header files.
 
 ### Overview of Method B: Template Haskell interface
 
