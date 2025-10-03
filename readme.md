@@ -96,22 +96,24 @@ the required parts of the Clang toolchain.
 
 We have [prepared a small project](./pcap-client) that generates bindings for
 `libpcap` and uses them to list the network devices found on your machine.
-Change your current working directory to this sub-project:
+Change your current working directory to this sub-project,
 
 ```console
 $ cd pcap-client
 ```
 
+Run the the application
+
+```console
+$ nix run .#hs-pcap
+```
+
+This should print a list of network devices found on your machine.
+
 > [!NOTE]
-> We did not check in the generated bindings, but provide a derivation that
-> generates the bindings during the build process. That is, you can run the
-> application without generating bindings yourself!
->
-> ```console
-> $ nix run .#hs-pcap
-> ```
->
-> This should print a list of network devices found on your machine.
+> We did not check in the generated bindings! The derivation generates the
+> bindings during the build process. That is, you can run the application
+> without manually generating bindings yourself!
 
 ### Generate bindings
 
