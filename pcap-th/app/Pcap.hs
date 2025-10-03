@@ -1,12 +1,28 @@
+{-# OPTIONS_GHC -ddump-splices #-}
+
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE OverloadedLabels #-}
+
 module Main where
+
+import HsBindgen.TH
+import HsBindgen.Runtime.Prelude qualified
 
 import Control.Monad (unless)
 
 import Foreign qualified
 import Foreign.C qualified as C
 
-import Generated.Pcap qualified as Pcap
-import Generated.Pcap.Safe qualified as Pcap
+import Optics ((%), (&), (.~))
+
+let cfg :: Config
+    cfg = def
+      & #parsePredicate .~ PTrue
+      & #selectPredicate .~ PIf (SelectDecl DeclNameMatches "pcap.h")
+      & #programSlicing .~ EnableProgramSlicing
+    cfgTH :: ConfigTH
+    cfgTH = ConfigTH { safety = Safe }
+ in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 
 main :: IO ()
 main = do
@@ -17,18 +33,18 @@ main = do
 
 findAllDevNames :: IO [String]
 findAllDevNames = Foreign.alloca $ \pcapIfTPtrPtr -> do
-    Foreign.allocaBytes (fromIntegral Pcap.pCAP_ERRBUF_SIZE) $ \errBuf -> do
-      success <- Pcap.pcap_findalldevs pcapIfTPtrPtr errBuf
+    Foreign.allocaBytes (fromIntegral pCAP_ERRBUF_SIZE) $ \errBuf -> do
+      success <- pcap_findalldevs pcapIfTPtrPtr errBuf
       unless (success == 0) $ fail "find all devices failed"
     pcapIfTPtr <- Foreign.peek pcapIfTPtrPtr
     devNames <- aux [] pcapIfTPtr
-    Pcap.pcap_freealldevs pcapIfTPtr
+    pcap_freealldevs pcapIfTPtr
     return devNames
   where
-    aux :: [String] -> Foreign.Ptr Pcap.Pcap_if_t -> IO [String]
+    aux :: [String] -> Foreign.Ptr Pcap_if_t -> IO [String]
     aux acc ptr
       | ptr == Foreign.nullPtr = return $ reverse acc
       | otherwise = do
           pcapIfT <- Foreign.peek ptr
-          devName <- C.peekCString $ Pcap.pcap_if_t_name pcapIfT
-          aux (devName : acc) (Pcap.pcap_if_t_next pcapIfT)
+          devName <- C.peekCString $ pcap_if_t_name pcapIfT
+          aux (devName : acc) (pcap_if_t_next pcapIfT)

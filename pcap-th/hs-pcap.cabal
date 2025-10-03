@@ -30,3 +30,4 @@ executable hs-pcap-bin
     , c-expr-runtime
     , hs-bindgen
     , hs-bindgen-runtime
+    , optics
