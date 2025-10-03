@@ -32,4 +32,6 @@ hs-bindgen-cli info include-graph \
     "${select_flags[@]}" \
     pcap.h -o pcap.mmd
 
+sed -i 's/\/nix\/store\/[a-zA-Z0-9]\+-[^\/ ]*\/include\///g' pcap.mmd
+
 mmdc -i pcap.mmd -o pcap.svg

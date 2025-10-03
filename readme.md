@@ -164,9 +164,10 @@ $ ./generate-bindings
 ```
 
 The [`generate-bindings` script](./pcap-client/generate-bindings) is well
-documented, please have a look at the different command line flags. We generated
-the script using an iterative procedure, adding and removing command line flags
-as required.
+documented, please have a look at the different command line flags. In
+particular, analyze the parse and select flags which determine the set of
+translated declarations. We generated the script using an iterative procedure,
+adding and removing command line flags as required.
 
 The script should generate several files in folder `./src/Generated/` that you
 are encouraged to inspect. In particular, we separate bindings into modules
@@ -185,7 +186,6 @@ package](./pcap-client/hs-pcap.cabal):
 
 ```console
 $ cabal build
-...
 ```
 
 Have a look at the [application code `./app/Pcap.hs`](./app/Pcap.hs).
@@ -221,7 +221,17 @@ Bye!
 
 ### Create and inspect include graph
 
+`hs-bindgen` can also create include graphs for you. In particular, we can
+create and visualize the include graph for `libpcap`. To this end,execute
+
+```console
+$ ./generate-include-graph
+```
+
 ![Include graph](./pcap-client/pcap.svg)
+
+Include graphs can be tremendously helpful while adapting the command line flags
+to parse and select the desired declarations.
 
 ## Method B: Template Haskell interface
 
