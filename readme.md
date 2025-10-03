@@ -55,8 +55,9 @@ your `hs-bindgen` installation.
 
 ### Installation
 
-Install the [Nix package manager](https://nixos.org/download/) and try to build
-and run the client with
+Install the [Nix package manager](https://nixos.org/download/), [enable Nix
+Flakes](https://wiki.nixos.org/wiki/Flakes#Setup), and try to build and run the
+client with
 
 ```console
 $ nix run .#hs-bindgen-cli -- --help | head -n 6
@@ -76,13 +77,13 @@ provided by Nixpkgs, and also takes care of installing the default version of
 the required parts of the Clang toolchain.
 
 > [!NOTE]
-> At the time of writing (September 30, 2025),
+> At the time of writing (October 3, 2025),
 > - the default version of GHC is 9.8.4;
 > - the Clang toolchain includes version 19.1.7 of packages
 >   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
-> - If you want to find out how `hs-bindgen` finds included headers, see the
+> - If you are interested in how `hs-bindgen` finds included headers, see the
 >   [`hs-bindgen` manual section on
 >   includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
 > - If you want to analyze how `hs-bindgen` finds the Clang toolchain, see
@@ -342,7 +343,7 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: October 2, 2025. The [upstream Nix
+> Last update: October 3, 2025. The [upstream Nix
 > Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
 
