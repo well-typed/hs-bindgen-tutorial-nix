@@ -154,7 +154,9 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ```
 
 The environment variable `BINDGEN_EXTRA_CLANG_ARGS` is used by `hs-bindgen` and
-forwarded to `libclang`.
+forwarded to `libclang`. For details, see [the `hs-bindgen` manual section on
+Clang
+options](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ClangOptions.md).
 
 Then, generate bindings with the provided script:
 ```console
@@ -172,24 +174,35 @@ exposing different binding categories. For example. `./src/Generated/Pcap.hs`
 exposes types, whereas `./src/Generated/Pcap/Safe.hs` and
 `./src/Generated/Pcap/Unsafe.hs` expose [`safe` and `unsafe` versions of foreign
 imports](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/ffi.html).
+The `Safe` and `Unsafe` modules export the same identifiers, and the user has to
+decide on user one of them, or imported them qualified.
 
 ### Compile and run `hs-pcap` project
 
 After generating the bindings, compile and run the minimal application using
-standard commands. We have prepared a Cabal package:
+standard commands. We have prepared a [Cabal
+package](./pcap-client/hs-pcap.cabal):
 
 ```console
 $ cabal build
 ...
 ```
 
-Have a look at the [executable code in `./app/Pcap.hs`](./app/Pcap.hs).
+Have a look at the [application code `./app/Pcap.hs`](./app/Pcap.hs).
 
-Building the project requires the `libpcap` shared object files. The
-`hs-bindgen` hook sets `LD_LIBRARY_PATH` to point to the location of these
-files. You can also set `package.extra-include-dirs` and
-`package.extra-lib-dirs` stanzas in your `cabal.project` or
-`cabal.project.local` file.
+Building the project requires the `libpcap` shared object files which are
+provided by Nix,
+
+```console
+$ echo $NIX_CFLAGS_COMPILE
+...
+-isystem /nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include
+...
+```
+
+You can also set the `package.<name>.extra-include-dirs` and
+`package.<name>.extra-lib-dirs` stanzas in your `cabal.project` or
+`cabal.project.local` files.
 
 On my machine, running the program produces the following output:
 
