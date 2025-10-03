@@ -25,9 +25,11 @@ C header files.
 
 ### Overview of Method B: Template Haskell interface
 
-We use the `hs-bindgen` Template Haskell interface. With the Template Haskell
-interface, we can directly `#include` the C header files in our Haskell source
-code files.
+The `hs-bindgen` Template Haskell interface allows direct inclusion (a'la
+`#include`) of C header files into our Haskell source code files. We rebuild the
+same application developed [using the `hs-bindgen`
+client](#overview-of-method-a-command-line-client) with the `hs-bindgen`
+Template Haskell interface.
 
 ### System environment, LLVM and Nix
 
