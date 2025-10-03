@@ -42,7 +42,7 @@ infrastructure](https://llvm.org/), which we need to set up and connect to
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
-interface for us. In particular, this tutorial contains [Nix
+interface for us. In particular, this tutorial contains self-contained [Nix
 Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html)
 exposing the `hs-bindgen` the client, and `hs-bindgen` the Template Haskell
 interface, respectively. These Nix Flakes only export outputs provided by an
@@ -60,7 +60,7 @@ Flakes](https://wiki.nixos.org/wiki/Flakes#Setup), and try to build and run the
 client with
 
 ```console
-$ nix run .#hs-bindgen-cli -- --help | head -n 6
+$ nix run ./pcap-client#hs-bindgen-cli -- --help | head -n 6
 
 hs-bindgen - generate Haskell bindings from C headers
 

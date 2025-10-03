@@ -43,6 +43,7 @@
       {
         packages = {
           inherit hs-pcap;
+          inherit (pkgs) hs-bindgen-cli;
           default = hs-pcap;
         };
         devShells = {
