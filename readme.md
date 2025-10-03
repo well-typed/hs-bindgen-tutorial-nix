@@ -13,9 +13,10 @@ installation of `hs-bindgen` and other system dependencies.
 
 ### Overview of Method A: Command line client
 
-First, we generate bindings using the `hs-bindgen` client with binary name
-`hs-bindgen-cli`. The client generates a set of modules exposing a Haskell
-interface to the translated C header files.
+First, we [generate bindings using the `hs-bindgen`
+client](#method-a-command-line-client) with binary name `hs-bindgen-cli`. The
+client generates a set of modules exposing a Haskell interface to the translated
+C header files.
 
 We compile our program, linking the resulting object files to the shared
 `libpcap` library which needs to be available. That is, while generating the
@@ -25,7 +26,8 @@ C header files.
 
 ### Overview of Method B: Template Haskell interface
 
-The `hs-bindgen` Template Haskell interface allows direct inclusion (a'la
+The [`hs-bindgen` Template Haskell
+interface](#method-b-template-haskell-interface) allows direct inclusion (a'la
 `#include`) of C header files into our Haskell source code files. We rebuild the
 same application developed [using the `hs-bindgen`
 client](#overview-of-method-a-command-line-client) with the `hs-bindgen`
@@ -40,10 +42,11 @@ infrastructure](https://llvm.org/), which we need to set up and connect to
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
-interface for us. In particular, this tutorial contains [a minimal Nix
-Flake](./flake.nix) exposing `hs-bindgen` the client, and `hs-bindgen` the
-Template Haskell interface. This Nix Flake only exports some outputs provided by
-an [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we
+interface for us. In particular, this tutorial contains [Nix
+Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html)
+exposing the `hs-bindgen` the client, and `hs-bindgen` the Template Haskell
+interface, respectively. These Nix Flakes only export outputs provided by an
+[upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we
 maintain alongside `hs-bindgen`. You should use this upstream Nix Flake directly
 in your future projects, if you decide to use the Nix package manager to manage
 your `hs-bindgen` installation.
