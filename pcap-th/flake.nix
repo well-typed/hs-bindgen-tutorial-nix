@@ -1,5 +1,5 @@
 {
-  description = "`hs-bindgen` tutorial: Client project";
+  description = "`hs-bindgen` tutorial: Template Haskell project";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -21,29 +21,12 @@
           inherit system;
           overlays = [ hs-bindgen.overlays.default ];
         };
-        # TODO: I don't know why `mermaid-cli` triggers a Chromium rebuild using
-        # the `hs-bindgen` overlay, but here we go.
-        defPkgs = import nixpkgs {
-          inherit system;
-        };
         hpkgs = pkgs.haskellPackages;
-        hlib = pkgs.haskell.lib.compose;
-        hs-pcap = hlib.overrideCabal (drv: {
-          executableToolDepends = (drv.executableToolDepends or [ ]) ++ [
-            pkgs.hs-bindgen-cli
-            pkgs.libpcap
-            pkgs.hsBindgenHook
-          ];
-          postUnpack = ''
-            ${drv.postUnpack or ""}
-            (cd pcap-client; ${pkgs.bash}/bin/bash generate-bindings)
-          '';
-        }) (hpkgs.callCabal2nix "hs-pcap" ./. { });
+        hs-pcap = hpkgs.callCabal2nix "hs-pcap" ./. { };
       in
       {
         packages = {
           inherit hs-pcap;
-          inherit (pkgs) hs-bindgen-cli;
           default = hs-pcap;
         };
         devShells = {
@@ -55,15 +38,9 @@
               hpkgs.ghc
               hpkgs.haskell-language-server
 
-              # `hs-bindgen` client.
-              pkgs.hs-bindgen-cli
-
               # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
               pkgs.hsBindgenHook
               pkgs.libpcap
-
-              # Misc.
-              defPkgs.mermaid-cli
             ];
           };
         };

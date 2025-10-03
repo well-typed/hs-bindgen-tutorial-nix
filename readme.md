@@ -24,14 +24,14 @@ bindings only requires the C header files to be available, using the generated
 bindings requires a (compiled) _implementation_ of the interface defined in the
 C header files.
 
-### Overview of Method B: Template Haskell interface
+### Overview of Method B: Template-Haskell interface
 
-The [`hs-bindgen` Template Haskell
+The [`hs-bindgen` Template-Haskell
 interface](#method-b-template-haskell-interface) allows direct inclusion (a'la
 `#include`) of C header files into our Haskell source code files. We rebuild the
 same application developed [using the `hs-bindgen`
 client](#overview-of-method-a-command-line-client) with the `hs-bindgen`
-Template Haskell interface.
+Template-Haskell interface.
 
 ### System environment, LLVM and Nix
 
@@ -41,10 +41,10 @@ infrastructure](https://llvm.org/), which we need to set up and connect to
 `hs-bindgen`.
 
 Nix, the package manager and build system, takes care of setting up the Clang
-toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template Haskell
+toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template-Haskell
 interface for us. In particular, this tutorial contains self-contained [Nix
 Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html)
-exposing the `hs-bindgen` the client, and `hs-bindgen` the Template Haskell
+exposing the `hs-bindgen` the client, and `hs-bindgen` the Template-Haskell
 interface, respectively. These Nix Flakes only export outputs provided by an
 [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we
 maintain alongside `hs-bindgen`. You should use this upstream Nix Flake directly
@@ -233,7 +233,7 @@ $ ./generate-include-graph
 Include graphs can be tremendously helpful while adapting the command line flags
 to parse and select the desired declarations.
 
-## Method B: Template Haskell interface
+## Method B: Template-Haskell interface
 
 - TH example with default GHC and Clang toolchain versions
 
