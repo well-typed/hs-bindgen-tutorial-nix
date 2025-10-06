@@ -60,7 +60,6 @@
 
               # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
               pkgs.hsBindgenHook
-              pkgs.libpcap
 
               # Misc.
               defPkgs.mermaid-cli

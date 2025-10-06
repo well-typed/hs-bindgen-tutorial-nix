@@ -40,8 +40,16 @@
 
               # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
               pkgs.hsBindgenHook
-              pkgs.libpcap
             ];
+            # We need to add the `libpcap` library to `LD_LIBRARY_PATH` manually
+            # here because otherwise Haskell Language Server does not find it.
+            # Nix tooling ensures that other parts of the Haskell toolchain
+            # (e.g., `cabal`, `ghc`) find the shared libraries of dependencies
+            # without the need to temper with `LD_LIBRARY_PATH`.
+            shellHook = ''
+              LD_LIBRARY_PATH="${pkgs.libpcap.lib}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
+              export LD_LIBRARY_PATH
+            '';
           };
         };
       }
