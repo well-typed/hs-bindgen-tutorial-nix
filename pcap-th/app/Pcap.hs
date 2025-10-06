@@ -1,7 +1,12 @@
-{-# OPTIONS_GHC -ddump-splices #-}
-
-{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE CApiFFI #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE MagicHash #-}
 {-# LANGUAGE OverloadedLabels #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Main where
 
@@ -13,23 +18,34 @@ import Control.Monad (unless)
 import Foreign qualified
 import Foreign.C qualified as C
 
-import Optics ((%), (&), (.~))
+import Optics ((&), (.~))
 
-let cfg :: Config
+let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
+    isDeprecated  = BIf $ SelectDecl DeclDeprecated
+    nameHas       = BIf . SelectDecl . DeclNameMatches
+    excludedNames =
+        BOr (nameHas "pcap_open")
+      $ BOr (nameHas "pcap_createsrcstr")
+      $ BOr (nameHas "pcap_parsesrcstr")
+      $ BOr (nameHas "pcap_findalldevs_ex")
+      $ BOr (nameHas "pcap_setsampling")
+            (nameHas "remoteact")
+    selectP = BAnd headerHasPcap
+            $ BAnd (BNot isDeprecated)
+                   (BNot excludedNames)
+    cfg :: Config
     cfg = def
-      & #parsePredicate .~ PTrue
-      & #selectPredicate .~ PIf (SelectDecl DeclNameMatches "pcap.h")
-      & #programSlicing .~ EnableProgramSlicing
+      & #parsePredicate  .~ BTrue
+      & #selectPredicate .~ selectP
+      & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
     cfgTH = ConfigTH { safety = Safe }
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 
 main :: IO ()
 main = do
-  putStrLn "Hello!"
-  putStrLn "List of network devices found on your machine:"
+  putStrLn "List of network devices found:"
   mapM_ (putStrLn . ("  - " ++)) =<< findAllDevNames
-  putStrLn "Bye!"
 
 findAllDevNames :: IO [String]
 findAllDevNames = Foreign.alloca $ \pcapIfTPtrPtr -> do

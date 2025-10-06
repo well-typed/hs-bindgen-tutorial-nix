@@ -10,10 +10,8 @@ import Generated.Pcap.Safe qualified as Pcap
 
 main :: IO ()
 main = do
-  putStrLn "Hello!"
-  putStrLn "List of network devices found on your machine:"
+  putStrLn "List of network devices found:"
   mapM_ (putStrLn . ("  - " ++)) =<< findAllDevNames
-  putStrLn "Bye!"
 
 findAllDevNames :: IO [String]
 findAllDevNames = Foreign.alloca $ \pcapIfTPtrPtr -> do
