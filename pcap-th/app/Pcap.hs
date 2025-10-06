@@ -21,18 +21,18 @@ import Foreign.C qualified as C
 import Optics ((&), (.~))
 
 let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
-    isDeprecated  = BIf $ SelectDecl DeclDeprecated
-    nameHas       = BIf . SelectDecl . DeclNameMatches
-    excludedNames =
-        BOr (nameHas "pcap_open")
-      $ BOr (nameHas "pcap_createsrcstr")
-      $ BOr (nameHas "pcap_parsesrcstr")
-      $ BOr (nameHas "pcap_findalldevs_ex")
-      $ BOr (nameHas "pcap_setsampling")
-            (nameHas "remoteact")
+    isDeprecated  = BIf $ SelectDecl     DeclDeprecated
+    hasName       = BIf . SelectDecl   . DeclNameMatches
+    isExcluded     =
+        BOr (hasName "pcap_open")
+      $ BOr (hasName "pcap_createsrcstr")
+      $ BOr (hasName "pcap_parsesrcstr")
+      $ BOr (hasName "pcap_findalldevs_ex")
+      $ BOr (hasName "pcap_setsampling")
+            (hasName "pcap_remoteact")
     selectP = BAnd headerHasPcap
             $ BAnd (BNot isDeprecated)
-                   (BNot excludedNames)
+                   (BNot isExcluded)
     cfg :: Config
     cfg = def
       & #parsePredicate  .~ BTrue

@@ -47,11 +47,7 @@ select_flags=(
     --select-except-by-decl-name 'pcap_parsesrcstr'
     --select-except-by-decl-name 'pcap_findalldevs_ex'
     --select-except-by-decl-name 'pcap_setsampling'
-    --select-except-by-decl-name 'pcap_remoteact_accept'
-    --select-except-by-decl-name 'pcap_remoteact_accept_ex'
-    --select-except-by-decl-name 'pcap_remoteact_list'
-    --select-except-by-decl-name 'pcap_remoteact_close'
-    --select-except-by-decl-name 'pcap_remoteact_cleanup'
+    --select-except-by-decl-name 'pcap_remoteact'
 )
 
 # Increase the verbosity of `hs-bindgen` to learn something about its internals.
