@@ -188,7 +188,7 @@ package](./pcap-client/hs-pcap.cabal):
 $ cabal build
 ```
 
-Have a look at the [application code `./app/Pcap.hs`](./app/Pcap.hs).
+Have a look at the [application code `./app/Pcap.hs`](./pcap-client/app/Pcap.hs).
 
 Building the project requires the `libpcap` shared object files which are
 provided by Nix,
@@ -208,7 +208,6 @@ On my machine, running the program produces the following output:
 
 ```console
 $ cabal run
-Hello!
 List of network devices found on your machine:
   - wlp0s20f3
   - any
@@ -216,7 +215,6 @@ List of network devices found on your machine:
   - enp0s13f0u3u4u4
   - nflog
   - nfqueue
-Bye!
 ```
 
 ### Create and inspect include graph
@@ -235,7 +233,117 @@ to parse and select the desired declarations.
 
 ## Method B: Template-Haskell interface
 
-- TH example with default GHC and Clang toolchain versions
+The Template-Haskell (TH) interface of `hs-bindgen` allows direct inclusion
+(a'la `#include`) of C header files into Haskell source code. Thereby,
+`hs-bindgen` generates Haskell bindings to the C header files at compile time.
+This has the advantage that the user does not need to perform additional steps,
+but can directly use the generated bindings bindings. Also, changes of the C
+header files directly propagate into the Haskell source code, and there is no
+need to manage additional files containing the generated bindings.
+
+In TH mode, it is harder to tune the `hs-bindgen` configuration, especially for
+complicated C libraries, and we can not directly observe the generated bindings
+(but see `-ddump-splices` below).
+
+### Inspect and compile the application
+
+Change your current working directory to the `pcap-th` sub-project using the TH
+interface of `hs-bindgen`,
+
+```console
+$ cd pcap-th
+```
+
+Build and run the application,
+
+```console
+$ cabal run
+```
+
+The output should be the same list of network devices as before.
+
+Now, enter the provided development shell
+
+```console
+$ nix develop
+```
+
+and inspect the [application code `./app/Pcap.hs`](./pcap-th/app/Pcap.hs). The
+development shell provides Haskell Language Server (HLS), and ensures HLS can
+compile the project and link to the shared `pcap` library.
+
+The TH function generating the `hs-bindgen` splice is
+
+```haskell
+let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
+    isDeprecated  = BIf $ SelectDecl     DeclDeprecated
+    hasName       = BIf . SelectDecl   . DeclNameMatches
+    isExcluded     =
+        BOr (hasName "pcap_open")
+      $ BOr (hasName "pcap_createsrcstr")
+      $ BOr (hasName "pcap_parsesrcstr")
+      $ BOr (hasName "pcap_findalldevs_ex")
+      $ BOr (hasName "pcap_setsampling")
+            (hasName "pcap_remoteact")
+    selectP = BAnd headerHasPcap
+            $ BAnd (BNot isDeprecated)
+                   (BNot isExcluded)
+    cfg :: Config
+    cfg = def
+      & #parsePredicate  .~ BTrue
+      & #selectPredicate .~ selectP
+      & #programSlicing  .~ EnableProgramSlicing
+    cfgTH :: ConfigTH
+    cfgTH = ConfigTH { safety = Safe }
+ in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
+```
+
+Most of this code defines the appropriate parse and select predicates; compare
+with the [respective command line flags of the client
+example](./pcap-client/generate-bindings).
+
+### Documentation
+
+Also in TH mode, `hs-bindgen` generates documentation for translated functions,
+and the HLS can show the automatically generated documentation. For example,
+navigate your cursor to `pcap_findalldevs`
+
+```haskell
+pcap_findalldevs :: Ptr (Ptr Pcap_if_t) -> Ptr CChar -> IO CInt
+```
+
+```markdown
+Defined at /path/to/Pcap.hs:24:1
+
+__C declaration__:   pcap_findalldevs
+__defined at__:   pcap/pcap.h:795:14
+__exported by__:   pcap.h
+```
+
+### Inspect generated bindings
+
+Further, we can inspect the code generated during compile time using GHC
+options. In particular, we can [debug the compiler using
+`ddump-slices`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/debugging.html#ghc-flag-ddump-splices)
+by adding
+
+```haskell
+{-# OPTIONS_GHC -ddump-splices #-}
+```
+
+to the top of the file. For example, the generated code corresponding to the documentation
+of `pcap_finalldevs` above is
+
+```haskell
+foreign import ccall safe
+  "hs_bindgen_hspcap0_1_0_0inplacehspcapbin_172d2c8dfa18cccf" pcap_findalldevs
+  :: Foreign.Ptr (Foreign.Ptr Pcap_if_t)
+     -> Foreign.Ptr C.CChar -> IO C.CIn
+```
+
+> [!TIP]
+>
+> Have a look at [section about setting the GHC or LLVM toolchain versions](#use-specific-versions-of-the-ghc-or-clang-toolchains).
 
 ## Appendix
 

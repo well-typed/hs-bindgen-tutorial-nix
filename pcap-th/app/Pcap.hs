@@ -1,3 +1,5 @@
+-- {-# OPTIONS_GHC -ddump-splices #-}
+
 {-# LANGUAGE CApiFFI #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DerivingStrategies #-}
