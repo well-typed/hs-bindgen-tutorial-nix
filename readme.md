@@ -236,14 +236,16 @@ to parse and select the desired declarations.
 The Template-Haskell (TH) interface of `hs-bindgen` allows direct inclusion
 (a'la `#include`) of C header files into Haskell source code. Thereby,
 `hs-bindgen` generates Haskell bindings to the C header files at compile time.
-This has the advantage that the user does not need to perform additional steps,
-but can directly use the generated bindings bindings. Also, changes of the C
-header files directly propagate into the Haskell source code, and there is no
-need to manage additional files containing the generated bindings.
+This has the advantage that the user does not need to perform additional
+compilation steps, but can directly use the generated bindings. Also, changes to
+the C header files directly propagate into the Haskell source code, and there is
+no need to manage additional files containing the generated bindings.
 
-In TH mode, it is harder to tune the `hs-bindgen` configuration, especially for
-complicated C libraries, and we can not directly observe the generated bindings
-(but see `-ddump-splices` below).
+In TH mode, it may be harder for you to tune the `hs-bindgen` configuration,
+especially when translating C libraries that require detailed configuration.
+Also, the generated bindings are less readily available, and we need compiler
+flags to observe them (see the Section [Inspect generated
+bindings](#inspect-generated-bindings) below).
 
 ### Inspect and compile the application
 
@@ -269,8 +271,8 @@ $ nix develop
 ```
 
 and inspect the [application code `./app/Pcap.hs`](./pcap-th/app/Pcap.hs). The
-development shell provides Haskell Language Server (HLS), and ensures HLS can
-compile the project and link to the shared `pcap` library.
+development shell provides the Haskell Language Server (HLS), and ensures HLS
+can compile the project and link to the shared `pcap` library.
 
 The TH function generating the `hs-bindgen` splice is
 
@@ -305,7 +307,7 @@ example](./pcap-client/generate-bindings).
 ### Documentation
 
 Also in TH mode, `hs-bindgen` generates documentation for translated functions,
-and the HLS can show the automatically generated documentation. For example,
+and HLS can show the automatically generated documentation. For example,
 navigate your cursor to `pcap_findalldevs`
 
 ```haskell
@@ -316,8 +318,8 @@ pcap_findalldevs :: Ptr (Ptr Pcap_if_t) -> Ptr CChar -> IO CInt
 Defined at /path/to/Pcap.hs:24:1
 
 __C declaration__:   pcap_findalldevs
-__defined at__:   pcap/pcap.h:795:14
-__exported by__:   pcap.h
+__defined at__:      pcap/pcap.h:795:14
+__exported by__:     pcap.h
 ```
 
 ### Inspect generated bindings
