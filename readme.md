@@ -270,7 +270,31 @@ $ cabal run
 
 The output should be the same list of network devices as before.
 
-Now, enter the provided development shell
+The provided Nix development shell is similar to the one from `pcap-client`;
+however, please note the following workaround to connect Haskell Language Server
+with the `libpcap`:
+
+```nix
+devShells = {
+  default = hpkgs.shellFor {
+    packages = _: [ pcap-th ];
+
+    ...
+
+    # We need to add the `libpcap` library to `LD_LIBRARY_PATH` manually
+    # here because otherwise Haskell Language Server does not find it.
+    # Nix tooling ensures that other parts of the Haskell toolchain
+    # (e.g., `cabal`, `ghc`) find the shared libraries of dependencies
+    # without the need to temper with `LD_LIBRARY_PATH`.
+    shellHook = ''
+      LD_LIBRARY_PATH="${pkgs.libpcap.lib}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
+      export LD_LIBRARY_PATH
+    '';
+  };
+};
+```
+
+Enter the provided development shell
 
 ```console
 $ nix develop
@@ -308,6 +332,11 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
 
 Most of this code defines the appropriate parse and select predicates; compare
 with the [respective command line flags of the client example](./pcap-client/generate-bindings).
+
+Some notes:
+- In TH mode, we do not have to set a __`unique-id`__; `hs-bindgen`
+  automatically generates one using TH features
+  (`Language.Haskell.TH.location`).
 
 ### Documentation
 
