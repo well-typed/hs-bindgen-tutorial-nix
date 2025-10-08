@@ -22,16 +22,16 @@
           overlays = [ hs-bindgen.overlays.default ];
         };
         hpkgs = pkgs.haskellPackages;
-        hs-pcap = hpkgs.callCabal2nix "hs-pcap" ./. { };
+        pcap-th = hpkgs.callCabal2nix "pcap-th" ./. { };
       in
       {
         packages = {
-          inherit hs-pcap;
-          default = hs-pcap;
+          inherit pcap-th;
+          default = pcap-th;
         };
         devShells = {
           default = hpkgs.shellFor {
-            packages = _: [ hs-pcap ];
+            packages = _: [ pcap-th ];
             nativeBuildInputs = [
               # Haskell toolchain.
               hpkgs.cabal-install

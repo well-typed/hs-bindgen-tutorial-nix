@@ -1,5 +1,5 @@
 cabal-version:      3.4
-name:               hs-pcap
+name:               pcap-th
 version:            0.1.0.0
 license:            BSD-3-Clause
 license-file:       LICENSE
@@ -17,7 +17,7 @@ common common
   default-language:
       GHC2021
 
-executable hs-pcap-bin
+executable pcap-th-bin
   import:          common
   main-is:         Pcap.hs
   hs-source-dirs:  app

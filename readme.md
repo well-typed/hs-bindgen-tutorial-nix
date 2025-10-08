@@ -105,7 +105,7 @@ $ cd pcap-client
 Run the the application
 
 ```console
-$ nix run .#hs-pcap
+$ nix run .#pcap-client
 ```
 
 This should print a list of network devices found on your machine.
@@ -119,12 +119,16 @@ This should print a list of network devices found on your machine.
 
 A Nix development shell provides access to the Haskell toolchain, the
 `hs-bindgen` client, the Clang toolchain, and the `libpcap` library (header
-files and compiled shared object files). The relevant code from [the Nix
-Flake](./pcap-client/flake.nix) is:
+files and compiled shared object files). The simplified, relevant code from [the
+Nix Flake](./pcap-client/flake.nix) is:
 
 ```nix
-hpkgs.shellFor {
-  packages = _: [ hs-pcap ];
+pcap-client = haskellPackages.callCabal2nix "pcap-client" ./. { }; # Simplified.
+
+...
+
+devShells.default = haskellPackges.shellFor {
+  packages = _: [ pcap-client ];
   nativeBuildInputs = [
     ...
 
@@ -133,7 +137,6 @@ hpkgs.shellFor {
 
     # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
     pkgs.hsBindgenHook
-    pkgs.libpcap
   ];
 };
 ```
@@ -178,11 +181,11 @@ imports](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/ffi.html
 The `Safe` and `Unsafe` modules export the same identifiers, and the user has to
 decide on user one of them, or imported them qualified.
 
-### Compile and run `hs-pcap` project
+### Compile and run `pcap-client` project
 
 After generating the bindings, compile and run the minimal application using
 standard commands. We have prepared a [Cabal
-package](./pcap-client/hs-pcap.cabal):
+package](./pcap-client/pcap-client.cabal):
 
 ```console
 $ cabal build
