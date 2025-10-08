@@ -151,6 +151,7 @@ forwarded to `libclang`. For details, see [the `hs-bindgen` manual section on
 Clang options](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ClangOptions.md).
 
 Then, generate bindings with the provided script:
+
 ```console
 $ ./generate-bindings
 ```
@@ -223,6 +224,27 @@ List of network devices found on your machine:
   - nflog
   - nfqueue
 ```
+
+### Access documentation
+
+We use the types and Doxygen comments to create documentation for the generated
+bindings. The Haskell pipeline implemented in Nix builds documentation by
+default, which can be accessed quite easily. Create a symlink `result-doc` to
+the documentation:
+
+```console
+$ nix build .#pcap-client.doc
+```
+
+On my machine, the path to the documentation is
+
+```console
+result-doc/share/doc/pcap-client-0.1.0.0/html/index.html
+```
+
+`libpcap` does not provide Doxygen comments, and the documentation only contains
+type signatures and location information; but even so, the documentation is
+already quite useful.
 
 ### Create and inspect include graph
 
