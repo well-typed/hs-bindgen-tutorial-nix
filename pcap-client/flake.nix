@@ -35,7 +35,7 @@
           ];
           postUnpack = ''
             ${drv.postUnpack or ""}
-            (cd pcap-client; ${pkgs.bash}/bin/bash generate-bindings)
+            (cd pcap-client; ${pkgs.bash}/bin/bash ${./generate-bindings})
           '';
         }) (hpkgs.callCabal2nix "pcap-client" ./. { });
       in
