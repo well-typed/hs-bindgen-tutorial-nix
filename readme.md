@@ -119,7 +119,8 @@ pkgs = import inputs.nixpkgs {
 };
 
 # Collect the dependencies for the `pcap` client project.
-pcap-client = haskellPackages.callCabal2nix "pcap-client" ./. { }; # Simplified.
+pcap-client = haskell.lib.compose.generateBindings ./generate-bindings
+  (haskellPackages.callCabal2nix "pcap-client" ./. { });
 
 ...
 
@@ -137,11 +138,14 @@ devShells.default = haskellPackges.shellFor {
 };
 ```
 
-The [overlay provided by the upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/overlay/default.nix) adds `hs-bindgen` relevant
-packages to the Haskell package sets (i.e., `haskell.packages.ghc*`). In
-particular, it also adds [`libclang-bindings`](https://github.com/well-typed/libclang), which is not yet available on
-Hackage nor in Nixpkgs. The overlay also provides the `hs-bindgen-cli` as well
-as `hsBindgenHook` packages.
+The [overlay provided by the upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/overlay/default.nix):
+- Adds `hs-bindgen` relevant packages to the Haskell package sets (i.e.,
+`haskell.packages.ghc*`). In particular, it also adds [`libclang-bindings`](https://github.com/well-typed/libclang),
+which is not yet available on Hackage nor in Nixpkgs.
+- Provides [the function `generateBindings`](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/hs-bindgen-lib.nix) in the `haskell.lib.compose`
+  attribute set. The function `generateBindings` executes the provided binding
+  generation script during build.
+- Provides the `hs-bindgen-cli` as well as `hsBindgenHook` packages.
 
 Interestingly, [`hsBindgenHook`](#hs-bindgen-hook) picks up `libpcap`, which is defined as a
 dependency in the Cabal file. Enter the development shell

@@ -30,16 +30,7 @@
           };
           hpkgs = pkgs.haskellPackages;
           hlib = pkgs.haskell.lib.compose;
-          pcap-client = hlib.overrideCabal (drv: {
-            executableToolDepends = (drv.executableToolDepends or [ ]) ++ [
-              pkgs.hs-bindgen-cli
-              pkgs.hsBindgenHook
-            ];
-            postUnpack = ''
-              ${drv.postUnpack or ""}
-              (cd pcap-client; ${pkgs.bash}/bin/bash ${./generate-bindings})
-            '';
-          }) (hpkgs.callCabal2nix "pcap-client" ./. { });
+          pcap-client = hlib.generateBindings ./generate-bindings (hpkgs.callCabal2nix "pcap-client" ./. { });
         in
         {
           packages = {
