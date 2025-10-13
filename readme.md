@@ -137,6 +137,12 @@ devShells.default = haskellPackges.shellFor {
 };
 ```
 
+The [overlay provided by the upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/overlay/default.nix) adds `hs-bindgen` relevant
+packages to the Haskell package sets (i.e., `haskell.packages.ghc*`). In
+particular, it also adds [`libclang-bindings`](https://github.com/well-typed/libclang), which is not yet available on
+Hackage nor in Nixpkgs. The overlay also provides the `hs-bindgen-cli` as well
+as `hsBindgenHook` packages.
+
 Interestingly, [`hsBindgenHook`](#hs-bindgen-hook) picks up `libpcap`, which is defined as a
 dependency in the Cabal file. Enter the development shell
 
@@ -219,6 +225,10 @@ $ echo $NIX_CFLAGS_COMPILE
 ...
 ```
 
+`NIX_CFLAGS_COMPILE` is a Nix-specific environment variable. The wrapper for the
+C compiler provided by Nix uses `NIX_CFLAGS_COMPILE` to inject extra C compiler
+flags.
+
 You can also set the `package.<name>.extra-include-dirs` and
 `package.<name>.extra-lib-dirs` stanzas in your `cabal.project` or
 `cabal.project.local` files.
@@ -298,7 +308,7 @@ $ cd pcap-th
 Build and run the application,
 
 ```console
-$ cabal run
+$ nix run
 ```
 
 The output should be the same list of network devices as before.
