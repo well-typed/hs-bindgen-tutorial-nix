@@ -68,9 +68,9 @@ Nixpkgs, and also takes care of installing the default version of the required
 parts of the Clang toolchain.
 
 > [!NOTE]
-> At the time of writing (October 3, 2025),
-> - the default version of GHC is 9.8.4;
-> - the Clang toolchain includes version 19.1.7 of packages
+> At the time of writing (October 13, 2025),
+> - the default version of GHC is 9.10.3;
+> - the Clang toolchain includes version 21.1.1 of packages
 >   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
@@ -112,6 +112,13 @@ files and compiled shared object files). The simplified, relevant code from [the
 Nix Flake](./pcap-client/flake.nix) is:
 
 ```nix
+# Apply the overlay provided by the upstream Nix Flake.
+pkgs = import inputs.nixpkgs {
+  inherit system;
+  overlays = [ hs-bindgen.overlays.default ];
+};
+
+# Collect the dependencies for the `pcap` client project.
 pcap-client = haskellPackages.callCabal2nix "pcap-client" ./. { }; # Simplified.
 
 ...
@@ -184,8 +191,12 @@ separate bindings into modules exposing different binding categories. For
 example. `./src/Generated/Pcap.hs` exposes types, whereas
 `./src/Generated/Pcap/Safe.hs` and `./src/Generated/Pcap/Unsafe.hs` expose
 [`safe` and `unsafe` versions of foreign imports](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/ffi.html). The `Safe` and `Unsafe`
-modules export the same identifiers, and the user has to decide on user one of
-them, or imported them qualified.
+modules export the same identifiers, and the user has to choose one of them, or
+import them qualified.
+
+> [!TIP]
+> There is an [excellent Haskell Unfoldr episode](https://www.youtube.com/watch?v=IMrBTx7aYjs&list=PLD8gywOEY4HaG5VSrKVnHxCptlJv2GAn7&index=36) about safe and unsafe
+> foreign function imports.
 
 ### Compile and run `pcap-client` project
 
@@ -528,5 +539,5 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: October 3, 2025. The [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
+> Last update: October 13, 2025. The [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
 > updates in the meantime.
