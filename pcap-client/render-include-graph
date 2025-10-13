@@ -1,0 +1,5 @@
+#!/usr/bin/env magix
+#!magix bash
+#!packages mermaid-cli
+
+mmdc -i pcap.mmd -o pcap.svg

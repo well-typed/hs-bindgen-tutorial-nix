@@ -33,5 +33,3 @@ hs-bindgen-cli info include-graph \
     pcap.h -o pcap.mmd
 
 sed -i 's/\/nix\/store\/[a-zA-Z0-9]\+-[^\/ ]*\/include\///g' pcap.mmd
-
-mmdc -i pcap.mmd -o pcap.svg
