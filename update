@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+flakes=(pcap-client pcap-th)
+
+for flake in "${flakes[@]}"; do
+    (
+        cd "$flake" || exit 1
+        nix flake update
+    )
+done
+
+nix flake update
+nix flake check

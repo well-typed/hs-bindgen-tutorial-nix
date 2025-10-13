@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1760340279,
-        "narHash": "sha256-AfumCALS+VZ82E4xX0C/2B+SjvYUulf2y3EC1LfVTDo=",
+        "lastModified": 1760346546,
+        "narHash": "sha256-doB/nEMqtrNhRTpagult5/z1Xi5q9DA8VVprGqMaMrI=",
         "owner": "dschrempf",
         "repo": "hs-bindgen-flake",
-        "rev": "cdf98b12c97ef428e324a678136d9a48083a4e1e",
+        "rev": "4a6db840bfc749993a43db69cdb973c92f1870b2",
         "type": "github"
       },
       "original": {
@@ -91,16 +91,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1760038930,
-        "narHash": "sha256-Oncbh0UmHjSlxO7ErQDM3KM0A5/Znfofj2BSzlHLeVw=",
+        "lastModified": 1760256791,
+        "narHash": "sha256-uTpzDHRASEDeFUuToWSQ46Re8beXyG9dx4W36FQa0/c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0b4defa2584313f3b781240b29d61f6f9f7e0df3",
+        "rev": "832e3b6db48508ae436c2c7bfc0cf914eac6938e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }

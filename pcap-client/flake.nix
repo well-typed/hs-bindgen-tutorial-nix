@@ -22,12 +22,12 @@
         "x86_64-darwin"
       ];
       perSystem =
-        {
-          pkgs,
-          system,
-          ...
-        }:
+        { system, ... }:
         let
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ hs-bindgen.overlays.default ];
+          };
           hpkgs = pkgs.haskellPackages;
           hlib = pkgs.haskell.lib.compose;
           pcap-client = hlib.overrideCabal (drv: {
@@ -42,11 +42,6 @@
           }) (hpkgs.callCabal2nix "pcap-client" ./. { });
         in
         {
-          _module.args.pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ hs-bindgen.overlays.default ];
-          };
-
           packages = {
             inherit pcap-client;
             inherit (pkgs) hs-bindgen-cli;
