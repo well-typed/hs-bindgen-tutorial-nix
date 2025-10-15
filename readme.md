@@ -39,9 +39,10 @@ toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template-Haskell
 interface for us. In particular, this tutorial contains self-contained [Nix
 Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html) exposing the `hs-bindgen` the client, and `hs-bindgen` the
 Template-Haskell interface, respectively. These Nix Flakes only export outputs
-provided by an [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) which we maintain alongside `hs-bindgen`.
-You should use this upstream Nix Flake directly in your future projects, if you
-decide to use the Nix package manager to manage your `hs-bindgen` installation.
+provided by the [`hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen) which we maintain alongside
+`hs-bindgen`. You should use this upstream Nix Flake directly in your future
+projects, if you decide to use the Nix package manager to manage your
+`hs-bindgen` installation.
 
 ## Method A: Command line client
 
@@ -138,11 +139,11 @@ devShells.default = haskellPackges.shellFor {
 };
 ```
 
-The [overlay provided by the upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/overlay/default.nix):
+The [overlay provided by the `hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen/blob/main/nix/overlay/default.nix):
 - Adds `hs-bindgen` relevant packages to the Haskell package sets (i.e.,
 `haskell.packages.ghc*`). In particular, it also adds [`libclang-bindings`](https://github.com/well-typed/libclang),
 which is not yet available on Hackage nor in Nixpkgs.
-- Provides [the function `generateBindings`](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/hs-bindgen-lib.nix) in the `haskell.lib.compose`
+- Provides [the function `generateBindings`](https://github.com/well-typed/hs-bindgen/blob/main/nix/hs-bindgen-lib.nix) in the `haskell.lib.compose`
   attribute set. The function `generateBindings` executes the provided binding
   generation script during build.
 - Provides the `hs-bindgen-cli` as well as `hsBindgenHook` packages.
@@ -473,7 +474,7 @@ and `-frandom-seed=76bkkqxi8g`.
 #### `hs-bindgen` hook
 
 We also provide a [setup hook](https://nixos.org/manual/nixpkgs/stable/#ssec-setup-hooks) that can be used by projects depending on
-`hs-bindgen` during their build process. [The `hs-bindgen` setup hook](https://github.com/dschrempf/hs-bindgen-flake/blob/main/nix/hs-bindgen/hs-bindgen-hook.sh)
+`hs-bindgen` during their build process. [The `hs-bindgen` setup hook](https://github.com/well-typed/hs-bindgen/blob/main/nix/hs-bindgen/hs-bindgen-hook.sh)
 performs the same setup as the wrapper discussed in the section [Client
 wrapper](#client-wrapper) above. The `hs-bindgen` setup hook can be used like other setup
 hooks by adding it to `buildInputs` or `propagatedBuildInputs`.
@@ -553,5 +554,5 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: October 13, 2025. The [upstream Nix Flake](https://github.com/dschrempf/hs-bindgen-flake) may have received
+> Last update: October 13, 2025. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
 > updates in the meantime.
