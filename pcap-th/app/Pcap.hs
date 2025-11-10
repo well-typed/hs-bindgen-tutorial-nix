@@ -20,7 +20,7 @@ import Control.Monad (unless)
 import Foreign qualified
 import Foreign.C qualified as C
 
-import Optics ((&), (.~))
+import Optics ((&), (.~), (%))
 
 let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     isDeprecated  = BIf $ SelectDecl     DeclDeprecated
@@ -37,6 +37,7 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
                    (BNot isExcluded)
     cfg :: Config
     cfg = def
+      & #clang % #gnu    .~ EnableGnu
       & #parsePredicate  .~ BTrue
       & #selectPredicate .~ selectP
       & #programSlicing  .~ EnableProgramSlicing
