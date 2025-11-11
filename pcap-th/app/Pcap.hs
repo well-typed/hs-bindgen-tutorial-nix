@@ -38,6 +38,8 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     cfg :: Config
     cfg = def
       & #clang % #gnu    .~ EnableGnu
+      -- TODO: We panic without `--parse-all`, see
+      -- https://github.com/well-typed/hs-bindgen/issues/1155.
       & #parsePredicate  .~ BTrue
       & #selectPredicate .~ selectP
       & #programSlicing  .~ EnableProgramSlicing
