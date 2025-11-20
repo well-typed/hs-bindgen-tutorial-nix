@@ -9,6 +9,7 @@
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 module Main where
 
@@ -44,7 +45,7 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       & #selectPredicate .~ selectP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
-    cfgTH = ConfigTH { safety = Safe }
+    cfgTH = def { safety = Safe }
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 
 main :: IO ()
