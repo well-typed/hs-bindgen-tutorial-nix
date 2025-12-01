@@ -515,7 +515,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ### Use specific versions of the GHC or Clang toolchains
 
 > [!NOTE]
-> As of 2025, November 11, pinning the version of LLVM is problematic because
+> As of 2025, November 28, pinning the version of LLVM is problematic because
 > the build is cached. See the corresponding [GitHub issue](https://github.com/well-typed/hs-bindgen-tutorial-nix/issues/2) for more details.
 
 One possibility to specify the GHC toolchain is to simply use a different
