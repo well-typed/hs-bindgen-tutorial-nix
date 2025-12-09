@@ -8,6 +8,7 @@ module_flags=(
     # Base output directory of generated bindings.
     --hs-output-dir src
     --create-output-dirs
+    --overwrite-files
     # Base module name. Submodules will have name `Generated.Pcap.Safe`, for
     # example.
     --module Generated.Pcap
@@ -24,9 +25,15 @@ libclang_flags=(
 # the declarations into an `hs-bindgen`-internal abstract syntax tree. These
 # flags affect the parsing/reifying step.
 parse_flags=(
-    # TODO: We panic without `--parse-all`, see
-    # https://github.com/well-typed/hs-bindgen/issues/1155.
-    --parse-all
+    # The external binding specifications we provide for the C standard library
+    # do not cover all definitions. We instruct `hs-bindgen` to parse additional
+    # headers.
+    --parse-by-header-path "socket.h"
+    --parse-by-header-path "struct_timeval.h"
+    # By default `hs-bindgen` parses all headers in the main header directory,
+    # but we adjust the parse predicate above, and so need to provide this
+    # option.
+    --parse-from-main-header-dirs
 )
 
 # We only generate bindings for a sub-set of all parsed/reified declarations.

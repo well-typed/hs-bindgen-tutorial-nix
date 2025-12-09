@@ -26,7 +26,7 @@ import Optics ((&), (.~), (%))
 let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     isDeprecated  = BIf $ SelectDecl     DeclDeprecated
     hasName       = BIf . SelectDecl   . DeclNameMatches
-    isExcluded     =
+    isExcluded    =
         BOr (hasName "pcap_open")
       $ BOr (hasName "pcap_createsrcstr")
       $ BOr (hasName "pcap_parsesrcstr")
@@ -36,13 +36,18 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     selectP = BAnd headerHasPcap
             $ BAnd (BNot isDeprecated)
                    (BNot isExcluded)
+    parseP =
+        BOr (BIf $ ParseHeader FromMainHeaderDirs)
+      -- The external binding specifications we provide for the C standard
+      -- library do not cover all definitions. We instruct `hs-bindgen` to parse
+      -- additional headers.
+      $ BOr (BIf $ ParseHeader $ HeaderPathMatches "socket.h")
+            (BIf $ ParseHeader $ HeaderPathMatches "struct_timeval.h")
     cfg :: Config
     cfg = def
       & #clang % #gnu    .~ EnableGnu
-      -- TODO: We panic without `--parse-all`, see
-      -- https://github.com/well-typed/hs-bindgen/issues/1155.
-      & #parsePredicate  .~ BTrue
       & #selectPredicate .~ selectP
+      & #parsePredicate  .~ parseP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
     cfgTH = def { safety = Safe }
