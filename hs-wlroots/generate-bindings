@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+c_flags=(
+    # Enable unstable features of Wlroots.
+    --clang-option -DWLR_USE_UNSTABLE
+)
+
+parse_flags=(
+    --parse-all
+)
+
+select_flags=(
+    --select-by-header-path wlr/backend.h
+    --enable-program-slicing
+)
+
+module_flags=(
+    --unique-id com.hs-bindgen.wlroots
+    --module Generated.Wlroots.Backend
+    --hs-output-dir src
+    --create-output-dirs
+    --overwrite-files
+)
+
+hs-bindgen-cli preprocess wlr/backend.h \
+    -v 3 \
+    "${c_flags[@]}" \
+    "${parse_flags[@]}" \
+    "${select_flags[@]}" \
+    "${module_flags[@]}"
