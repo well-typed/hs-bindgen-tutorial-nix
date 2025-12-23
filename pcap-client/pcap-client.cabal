@@ -30,8 +30,10 @@ library
   extra-libraries: pcap
   build-depends:
     , c-expr-runtime
+    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
     , ghc-prim
     , hs-bindgen-runtime
+    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
     , primitive
 
 executable pcap-client-bin

@@ -29,7 +29,9 @@ executable pcap-th-bin
     , base >=4.7 && <5
     , c-expr-runtime
     , hs-bindgen
+    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
     , ghc-prim
     , hs-bindgen-runtime
     , optics
+    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
     , primitive
