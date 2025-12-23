@@ -5,3 +5,7 @@
 /pcap-th/dist-newstyle/
 /pcap-th/.envrc
 /pcap-th/.direnv/
+/hs-wlroots/.direnv/
+/hs-wlroots/.envrc
+/hs-wlroots/dist-newstyle/
+/hs-wlroots/src/
