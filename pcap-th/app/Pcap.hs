@@ -10,6 +10,8 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE UnboxedTuples #-}
+{-# LANGUAGE DerivingVia #-}
 
 module Main where
 
@@ -50,7 +52,7 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       & #parsePredicate  .~ parseP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
-    cfgTH = def { safety = Safe }
+    cfgTH = def { bindingCategoryChoice = useSafeCategory }
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 
 main :: IO ()

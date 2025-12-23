@@ -29,5 +29,7 @@ executable pcap-th-bin
     , base >=4.7 && <5
     , c-expr-runtime
     , hs-bindgen
+    , ghc-prim
     , hs-bindgen-runtime
     , optics
+    , primitive

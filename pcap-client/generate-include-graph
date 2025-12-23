@@ -2,6 +2,7 @@
 
 module_flags=(
     --unique-id org.hs-bindgen.tutorial
+    --overwrite-files
 )
 libclang_flags=(
     --gnu
