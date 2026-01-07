@@ -31,8 +31,40 @@
           };
           hpkgs = pkgs.haskellPackages;
           hlib = pkgs.haskell.lib.compose;
-          hs-wlroots = hlib.generateBindings ./generate-bindings (hpkgs.callCabal2nix "hs-wlroots" ./. { });
+
+          # NOTE Work around some `wlroots` quirks. In particular, the `wlroots`
+          # headers reside in a weird sub-path, and `callCabal2nix` does not
+          # detect the transitive dependencies `wayland` and `pixman`. Please
+          # correct me, if there is an easier way of pointing `hs-bindgen` to
+          # the required headers and shared libraries!
           wlroots = pkgs.wlroots_0_19;
+          wlrootsDeps = [
+            pkgs.pixman
+            pkgs.wayland
+            wlroots
+          ];
+          wlrootsHook = ''
+            # The `wlroots` headers reside in a weird sub-path.
+            BINDGEN_EXTRA_CLANG_ARGS="-isystem ${wlroots}/include/wlroots-0.19 ''${BINDGEN_EXTRA_CLANG_ARGS}"
+            export BINDGEN_EXTRA_CLANG_ARGS
+            C_INCLUDE_PATH="${wlroots}/include/wlroots-0.19''${C_INCLUDE_PATH:+:''${C_INCLUDE_PATH}}"
+            export C_INCLUDE_PATH
+            LD_LIBRARY_PATH="${wlroots}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
+            export LD_LIBRARY_PATH
+          '';
+          applyHook = (
+            hlib.overrideCabal (drv: {
+              librarySystemDepends = (drv.executableToolDepends or [ ]) ++ wlrootsDeps;
+              postUnpack = ''
+                ${drv.postUnpack or ""}
+                ${wlrootsHook}
+              '';
+            })
+          );
+          genBindings = hlib.generateBindings ./generate-bindings;
+          hs-wlroots-base = hpkgs.callCabal2nix "hs-wlroots" ./. { };
+
+          hs-wlroots = genBindings (applyHook hs-wlroots-base);
         in
         {
           packages = {
@@ -53,25 +85,11 @@
                 # `hs-bindgen` client.
                 pkgs.hs-bindgen-cli
 
-                # Connect `hs-bindgen` to the Clang toolchain and dependent
-                # libraries.
+                # Connect `hs-bindgen` to the Clang toolchain and libraries.
                 pkgs.hsBindgenHook
               ];
-              buildInputs = [
-                # Wlroots dependencies.
-                pkgs.pixman
-                pkgs.wayland
-                wlroots
-              ];
-              shellHook = ''
-                # The Wlroots headers reside in a weird sub-path.
-                BINDGEN_EXTRA_CLANG_ARGS="-isystem ${wlroots}/include/wlroots-0.19 ''${BINDGEN_EXTRA_CLANG_ARGS}"
-                export BINDGEN_EXTRA_CLANG_ARGS
-                C_INCLUDE_PATH="${wlroots}/include/wlroots-0.19''${C_INCLUDE_PATH:+:''${C_INCLUDE_PATH}}"
-                export C_INCLUDE_PATH
-                LD_LIBRARY_PATH="${wlroots}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
-                export LD_LIBRARY_PATH
-              '';
+              # We need to apply the hook again :-|.
+              shellHook = wlrootsHook;
             };
           };
         };

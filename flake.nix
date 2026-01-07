@@ -31,8 +31,7 @@
             hs-bindgen-cli-check = pcap-client.packages.${system}.hs-bindgen-cli;
             pcap-client-check = pcap-client.packages.${system}.pcap-client;
             pcap-th-check = pcap-th.packages.${system}.pcap-th;
-            # TODO: Check fails because the shell hook sets up some paths and is not executed.
-            # hs-wlroots-check = hs-wlroots.packages.${system}.hs-wlroots;
+            hs-wlroots-check = hs-wlroots.packages.${system}.hs-wlroots;
           };
         };
     };
