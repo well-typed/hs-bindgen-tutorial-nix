@@ -1,30 +1,79 @@
 #!/usr/bin/env bash
 
-c_flags=(
-    # Enable unstable features of Wlroots.
-    --clang-option -DWLR_USE_UNSTABLE
-)
+debug=(-v 2)
 
-parse_flags=(
-    --parse-all
-)
+wl() {
+    local header="wayland-server-core.h"
 
-select_flags=(
-    --select-by-header-path wlr/backend.h
-    --enable-program-slicing
-)
+    local c_flags=(
+    )
 
-module_flags=(
-    --unique-id com.hs-bindgen.wlroots
-    --module Generated.Wlroots.Backend
-    --hs-output-dir src
-    --create-output-dirs
-    --overwrite-files
-)
+    local parse_flags=(
+        --parse-all
+    )
 
-hs-bindgen-cli preprocess wlr/backend.h \
-    -v 3 \
-    "${c_flags[@]}" \
-    "${parse_flags[@]}" \
-    "${select_flags[@]}" \
-    "${module_flags[@]}"
+    local select_flags=(
+        --enable-program-slicing
+    )
+
+    local module_flags=(
+        --unique-id com.hs-bindgen.wayland
+        --module Generated.Wayland
+        --hs-output-dir src
+        --create-output-dirs
+        --overwrite-files
+    )
+
+    local binding_specs_flags=(
+        --gen-binding-spec Wayland.yaml
+    )
+
+    hs-bindgen-cli preprocess "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${parse_flags[@]}" \
+        "${select_flags[@]}" \
+        "${module_flags[@]}" \
+        "${binding_specs_flags[@]}"
+}
+
+wlr() {
+    local header="wlr/backend.h"
+
+    local c_flags=(
+        # Enable unstable features of Wlroots.
+        --clang-option -DWLR_USE_UNSTABLE
+    )
+
+    local parse_flags=(
+        --parse-all
+    )
+
+    local select_flags=(
+        --select-by-header-path wlr/backend.h
+        --enable-program-slicing
+    )
+
+    local module_flags=(
+        --unique-id com.hs-bindgen.wlroots
+        --module Generated.Wlroots.Backend
+        --hs-output-dir src
+        --create-output-dirs
+        --overwrite-files
+    )
+
+    local binding_specs_flags=(
+        --external-binding-spec Wayland.yaml
+    )
+
+    hs-bindgen-cli preprocess "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${parse_flags[@]}" \
+        "${select_flags[@]}" \
+        "${module_flags[@]}" \
+        "${binding_specs_flags[@]}"
+}
+
+wl
+wlr
