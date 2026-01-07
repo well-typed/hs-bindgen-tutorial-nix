@@ -53,7 +53,8 @@
                 # `hs-bindgen` client.
                 pkgs.hs-bindgen-cli
 
-                # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
+                # Connect `hs-bindgen` to the Clang toolchain and dependent
+                # libraries.
                 pkgs.hsBindgenHook
               ];
               buildInputs = [

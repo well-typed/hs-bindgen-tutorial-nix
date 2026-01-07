@@ -21,13 +21,19 @@ library
   import:          common
   hs-source-dirs:  src
   exposed-modules:
+    , Generated.Wayland
+    , Generated.Wayland.FunPtr
+    , Generated.Wayland.Safe
+    , Generated.Wayland.Unsafe
     , Generated.Wlroots.Backend
     , Generated.Wlroots.Backend.FunPtr
     , Generated.Wlroots.Backend.Safe
     , Generated.Wlroots.Backend.Unsafe
   autogen-modules:
   ghc-options: -optc-DWLR_USE_UNSTABLE
-  extra-libraries: wlroots-0.19
+  extra-libraries:
+    , wlroots-0.19
+    , wayland-server
   build-depends:
     , c-expr-runtime
     , ghc-prim
@@ -43,4 +49,5 @@ executable hs-wlroots-bin
   ghc-options:
   build-depends:
     , base >=4.7 && <5
+    , hs-bindgen-runtime
     , hs-wlroots
