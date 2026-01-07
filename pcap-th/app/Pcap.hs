@@ -52,7 +52,7 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       & #parsePredicate  .~ parseP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
-    cfgTH = def { bindingCategoryChoice = useSafeCategory }
+    cfgTH = def { categoryChoice = useSafeCategory }
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 
 main :: IO ()
