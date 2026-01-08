@@ -1,4 +1,4 @@
-# Generate bindings for `wlroots`
+# Generate bindings for `wlroots` (`backend.h`)
 
 `wlroots` is a large project with several dependencies. Therefore, we split the
 library into several components. For each component, we separately generate
@@ -23,15 +23,15 @@ with `cabal run`.
 
 Include graphs are indispensable tools in the process of generating bindings for
 larger projects because they give an overview of the header and library
-inter-dependencies. For example, the include graph for `wlroots` without
-standard headers and with manually collapsed nodes (_Wlroots sub-headers_,
-_Wayland server_, and _Pixman_) is
+inter-dependencies. For example, the include graph for `backend.h` of `wlroots`
+without standard headers and with manually collapsed nodes (_Wlroots
+sub-headers_, _Wayland server_, and _Pixman_) is
 
 ![Reduced, manually edited include graph](./include-graph-reduced-edited.svg)
 
 We can see that `wayland-util.h` is the core header that the Wayland server as
-well as `wlroots` depend on. Also, we see that Pixman is a dependency of
-`wlroots`, but not of the Wayland server.
+well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
+`wlr/backend.h`, but not of the Wayland server.
 
 [Generate the include graphs](./generate-include-graphs) with
 
