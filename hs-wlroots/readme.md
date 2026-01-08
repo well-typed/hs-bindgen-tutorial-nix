@@ -1,7 +1,9 @@
 # Generate bindings for `wlroots`
 
-`wlroots` is a large project with several dependencies. Therefore, we generate
-the bindings using a layered approach with external binding specifications.
+`wlroots` is a large project with several dependencies. Therefore, we split the
+library into several components. For each component, we separately generate
+bindings. We use external binding specifications to inform higher-level
+components of types defined in lower-level components.
 
 Run the test application code with
 
@@ -44,19 +46,19 @@ well as `wlroots` depend on. Also, we see that Pixman is a dependency of
 ## Bindings
 
 Given the include graph above, we separate binding generation into five
-sub-modules or layers:
+components:
 - Wayland utilities (`wayland-util.h`),
 - Wayland server (`wayland-server-core.h`) ,
 - Pixman (`pixman.h`),
 - `wlroots` output type (`wlr/types/wlr_output.h`), and
 - `wlroots` backend (`wlr/backend.h`).
 
-We use [_external binding specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level layers of
-the types provided by lower-level libraries. We generate external binding
-specifications for lower-level layers such as `wayland-util.h` with the
+We use [_external binding specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level components
+of the types provided by lower-level libraries. We generate external binding
+specifications for lower-level components such as `wayland-util.h` with the
 `--gen-binding-spec` flag, and use those binding specifications in higher-level
-layers such as the `wlroots` backend with the `--external-binding-spec` flag.
-For details, see the [binding generation script](./generate-bindings)
+components such as the `wlroots` backend with the `--external-binding-spec`
+flag. For details, see the [binding generation script](./generate-bindings)
 
 ```bash
 ./generate-bindings
