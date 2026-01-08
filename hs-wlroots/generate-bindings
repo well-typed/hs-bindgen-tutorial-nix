@@ -114,7 +114,49 @@ pixman() {
         "${binding_specs_flags[@]}"
 }
 
-wlroots() {
+wlr-types-output() {
+    local header="wlr/types/wlr_output.h"
+
+    local c_flags=(
+        # Enable unstable features of Wlroots.
+        --clang-option -DWLR_USE_UNSTABLE
+    )
+
+    local parse_flags=(
+        --parse-all
+    )
+
+    local select_flags=(
+        --select-by-header-path "${header}"
+        --select-except-deprecated
+        --enable-program-slicing
+    )
+
+    local module_flags=(
+        --unique-id com.hs-bindgen.wlr.output
+        --module Generated.Wlr.Types.Output
+        --hs-output-dir src
+        --create-output-dirs
+        --overwrite-files
+    )
+
+    local binding_specs_flags=(
+        --external-binding-spec WaylandUtil.yaml
+        --external-binding-spec WaylandServerCore.yaml
+        --external-binding-spec Pixman.yaml
+        --gen-binding-spec WlrTypesOutput.yaml
+    )
+
+    hs-bindgen-cli preprocess "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${parse_flags[@]}" \
+        "${select_flags[@]}" \
+        "${module_flags[@]}" \
+        "${binding_specs_flags[@]}"
+}
+
+wlr-backend() {
     local header="wlr/backend.h"
 
     local c_flags=(
@@ -133,8 +175,8 @@ wlroots() {
     )
 
     local module_flags=(
-        --unique-id com.hs-bindgen.wlroots.backend
-        --module Generated.Wlroots.Backend
+        --unique-id com.hs-bindgen.wlr.backend
+        --module Generated.Wlr.Backend
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -144,6 +186,7 @@ wlroots() {
         --external-binding-spec WaylandUtil.yaml
         --external-binding-spec WaylandServerCore.yaml
         --external-binding-spec Pixman.yaml
+        --external-binding-spec WlrTypesOutput.yaml
     )
 
     hs-bindgen-cli preprocess "${header}" \
@@ -158,4 +201,5 @@ wlroots() {
 wayland-util
 wayland-core
 pixman
-wlroots
+wlr-types-output
+wlr-backend

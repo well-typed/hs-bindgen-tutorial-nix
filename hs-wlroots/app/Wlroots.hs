@@ -11,8 +11,9 @@ import Generated.Wayland.Server.Core
 import Generated.Wayland.Server.Core.Safe
 import Generated.Wayland.Util
 import Generated.Wayland.Util.Safe
-import Generated.Wlroots.Backend
-import Generated.Wlroots.Backend.Safe
+import Generated.Wlr.Backend
+import Generated.Wlr.Backend.Safe
+import Generated.Wlr.Types.Output
 import HsBindgen.Runtime.FunPtr
 import HsBindgen.Runtime.HasCField
 

@@ -33,10 +33,14 @@ library
     , Generated.Wayland.Server.Core.FunPtr
     , Generated.Wayland.Server.Core.Safe
     , Generated.Wayland.Server.Core.Unsafe
-    , Generated.Wlroots.Backend
-    , Generated.Wlroots.Backend.FunPtr
-    , Generated.Wlroots.Backend.Safe
-    , Generated.Wlroots.Backend.Unsafe
+    , Generated.Wlr.Backend
+    , Generated.Wlr.Backend.FunPtr
+    , Generated.Wlr.Backend.Safe
+    , Generated.Wlr.Backend.Unsafe
+    , Generated.Wlr.Types.Output
+    , Generated.Wlr.Types.Output.FunPtr
+    , Generated.Wlr.Types.Output.Safe
+    , Generated.Wlr.Types.Output.Unsafe
   autogen-modules:
   ghc-options: -optc-DWLR_USE_UNSTABLE
   extra-libraries:
