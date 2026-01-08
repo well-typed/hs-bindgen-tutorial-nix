@@ -24,7 +24,7 @@ hs-bindgen-cli info include-graph "${header}" \
     "${c_flags[@]}" \
     "${select_flags[@]}" \
     "${module_flags[@]}" \
-    -o include-graph-backend.mermaid
+    -o include-graph-backend.mmd
 
 hs-bindgen-cli info include-graph "${header}" \
     "${debug[@]}" \
@@ -32,7 +32,7 @@ hs-bindgen-cli info include-graph "${header}" \
     "${select_flags[@]}" \
     "${module_flags[@]}" \
     --parse-all \
-    -o include-graph-all.mermaid
+    -o include-graph-all.mmd
 
 hs-bindgen-cli info include-graph "${header}" \
     "${debug[@]}" \
@@ -42,7 +42,7 @@ hs-bindgen-cli info include-graph "${header}" \
     --parse-all \
     --parse-except-by-header-path ".*glibc.*" \
     --parse-except-by-header-path ".*clang-wrapper.*" \
-    -o include-graph-no-stdlibs.mermaid
+    -o include-graph-no-stdlibs.mmd
 
 # The above code is shorter than direct exclusion of standard headers (see
 # below), but it is system-dependent!

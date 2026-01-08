@@ -1,0 +1,767 @@
+version:
+  hs_bindgen: 0.1.0
+  binding_specification: '1.0'
+target: x86_64-pc-linux-gnu
+hsmodule: Generated.Wlr.Types.Output
+ctypes:
+- headers: wlr/types/wlr_output.h
+  cname: __time_t
+  hsname: C__Time_t
+- headers: wlr/types/wlr_output.h
+  cname: __syscall_slong_t
+  hsname: C__Syscall_slong_t
+- headers: wlr/types/wlr_output.h
+  cname: struct timespec
+  hsname: Timespec
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_addon_set
+  hsname: Wlr_addon_set
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_addon_set_WLR_PRIVATE
+  hsname: Wlr_addon_set_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: enum wl_output_subpixel
+  hsname: Wl_output_subpixel
+- headers: wlr/types/wlr_output.h
+  cname: enum wl_output_transform
+  hsname: Wl_output_transform
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_box
+  hsname: Wlr_box
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_fbox
+  hsname: Wlr_fbox
+- headers: wlr/types/wlr_output.h
+  cname: struct wl_object
+  hsname: Wl_object
+- headers: wlr/types/wlr_output.h
+  cname: struct wl_resource
+  hsname: Wl_resource
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_buffer
+  hsname: Wlr_buffer
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_buffer_impl
+  hsname: Wlr_buffer_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_buffer_events
+  hsname: Wlr_buffer_events
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_texture_impl
+  hsname: Wlr_texture_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_texture
+  hsname: Wlr_texture
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_render_pass
+  hsname: Wlr_render_pass
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_render_timer
+  hsname: Wlr_render_timer
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_buffer_pass_options
+  hsname: Wlr_buffer_pass_options
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_color_transform
+  hsname: Wlr_color_transform
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_drm_syncobj_timeline
+  hsname: Wlr_drm_syncobj_timeline
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_backend
+  hsname: Wlr_backend
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_renderer_impl
+  hsname: Wlr_renderer_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_drm_format_set
+  hsname: Wlr_drm_format_set
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_renderer
+  hsname: Wlr_renderer
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_renderer_events
+  hsname: Wlr_renderer_events
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_renderer_features
+  hsname: Wlr_renderer_features
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_renderer_WLR_PRIVATE
+  hsname: Wlr_renderer_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: enum wlr_output_mode_aspect_ratio
+  hsname: Wlr_output_mode_aspect_ratio
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_mode
+  hsname: Wlr_output_mode
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_cursor
+  hsname: Wlr_output_cursor
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_output_cursor_WLR_PRIVATE
+  hsname: Wlr_output_cursor_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: enum wlr_output_adaptive_sync_status
+  hsname: Wlr_output_adaptive_sync_status
+- headers: wlr/types/wlr_output.h
+  cname: enum wlr_output_state_field
+  hsname: Wlr_output_state_field
+- headers: wlr/types/wlr_output.h
+  cname: enum wlr_output_state_mode_type
+  hsname: Wlr_output_state_mode_type
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_state
+  hsname: Wlr_output_state
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_output_state_custom_mode
+  hsname: Wlr_output_state_custom_mode
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_layer_state
+  hsname: Wlr_output_layer_state
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_impl
+  hsname: Wlr_output_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output
+  hsname: Wlr_output
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_output_events
+  hsname: Wlr_output_events
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_swapchain
+  hsname: Wlr_swapchain
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_allocator
+  hsname: Wlr_allocator
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_output_WLR_PRIVATE
+  hsname: Wlr_output_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_damage
+  hsname: Wlr_output_event_damage
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_precommit
+  hsname: Wlr_output_event_precommit
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_commit
+  hsname: Wlr_output_event_commit
+- headers: wlr/types/wlr_output.h
+  cname: enum wlr_output_present_flag
+  hsname: Wlr_output_present_flag
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_present
+  hsname: Wlr_output_event_present
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_bind
+  hsname: Wlr_output_event_bind
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_output_event_request_state
+  hsname: Wlr_output_event_request_state
+hstypes:
+- hsname: C__Syscall_slong_t
+  representation:
+    newtype:
+      constructor: C__Syscall_slong_t
+      fields:
+      - un_C__Syscall_slong_t
+      ffitype: CLong
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Prim
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: C__Time_t
+  representation:
+    newtype:
+      constructor: C__Time_t
+      fields:
+      - un_C__Time_t
+      ffitype: CLong
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Prim
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Timespec
+  representation:
+    record:
+      constructor: Timespec
+      fields:
+      - timespec_tv_sec
+      - timespec_tv_nsec
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Wl_object
+  representation:
+    record:
+      constructor: Wl_object
+      fields:
+      - wl_object_interface
+      - wl_object_implementation
+      - wl_object_id
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wl_output_subpixel
+  representation:
+    newtype:
+      constructor: Wl_output_subpixel
+      fields:
+      - un_Wl_output_subpixel
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wl_output_transform
+  representation:
+    newtype:
+      constructor: Wl_output_transform
+      fields:
+      - un_Wl_output_transform
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wl_resource
+  representation:
+    record:
+      constructor: Wl_resource
+      fields:
+      - wl_resource_object
+      - wl_resource_destroy
+      - wl_resource_link
+      - wl_resource_destroy_signal
+      - wl_resource_client
+      - wl_resource_data
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_addon_set
+  representation:
+    record:
+      constructor: Wlr_addon_set
+      fields:
+      - wlr_addon_set_WLR_PRIVATE
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_addon_set_WLR_PRIVATE
+  representation:
+    record:
+      constructor: Wlr_addon_set_WLR_PRIVATE
+      fields:
+      - wlr_addon_set_WLR_PRIVATE_addons
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_allocator
+  representation: opaque
+- hsname: Wlr_backend
+  representation: opaque
+- hsname: Wlr_box
+  representation:
+    record:
+      constructor: Wlr_box
+      fields:
+      - wlr_box_x
+      - wlr_box_y
+      - wlr_box_width
+      - wlr_box_height
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Wlr_buffer
+  representation:
+    record:
+      constructor: Wlr_buffer
+      fields:
+      - wlr_buffer_impl
+      - wlr_buffer_width
+      - wlr_buffer_height
+      - wlr_buffer_dropped
+      - wlr_buffer_n_locks
+      - wlr_buffer_accessing_data_ptr
+      - wlr_buffer_events
+      - wlr_buffer_addons
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_buffer_events
+  representation:
+    record:
+      constructor: Wlr_buffer_events
+      fields:
+      - wlr_buffer_events_destroy
+      - wlr_buffer_events_release
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_buffer_impl
+  representation: opaque
+- hsname: Wlr_buffer_pass_options
+  representation:
+    record:
+      constructor: Wlr_buffer_pass_options
+      fields:
+      - wlr_buffer_pass_options_timer
+      - wlr_buffer_pass_options_color_transform
+      - wlr_buffer_pass_options_signal_timeline
+      - wlr_buffer_pass_options_signal_point
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_color_transform
+  representation: opaque
+- hsname: Wlr_drm_format_set
+  representation: opaque
+- hsname: Wlr_drm_syncobj_timeline
+  representation: opaque
+- hsname: Wlr_fbox
+  representation:
+    record:
+      constructor: Wlr_fbox
+      fields:
+      - wlr_fbox_x
+      - wlr_fbox_y
+      - wlr_fbox_width
+      - wlr_fbox_height
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Wlr_output
+  representation:
+    record:
+      constructor: Wlr_output
+      fields:
+      - wlr_output_impl
+      - wlr_output_backend
+      - wlr_output_event_loop
+      - wlr_output_global
+      - wlr_output_resources
+      - wlr_output_name
+      - wlr_output_description
+      - wlr_output_make
+      - wlr_output_model
+      - wlr_output_serial
+      - wlr_output_phys_width
+      - wlr_output_phys_height
+      - wlr_output_modes
+      - wlr_output_current_mode
+      - wlr_output_width
+      - wlr_output_height
+      - wlr_output_refresh
+      - wlr_output_enabled
+      - wlr_output_scale
+      - wlr_output_subpixel
+      - wlr_output_transform
+      - wlr_output_adaptive_sync_status
+      - wlr_output_render_format
+      - wlr_output_adaptive_sync_supported
+      - wlr_output_needs_frame
+      - wlr_output_frame_pending
+      - wlr_output_non_desktop
+      - wlr_output_commit_seq
+      - wlr_output_events
+      - wlr_output_idle_frame
+      - wlr_output_idle_done
+      - wlr_output_attach_render_locks
+      - wlr_output_cursors
+      - wlr_output_hardware_cursor
+      - wlr_output_cursor_swapchain
+      - wlr_output_cursor_front_buffer
+      - wlr_output_software_cursor_locks
+      - wlr_output_layers
+      - wlr_output_allocator
+      - wlr_output_renderer
+      - wlr_output_swapchain
+      - wlr_output_addons
+      - wlr_output_data
+      - wlr_output_WLR_PRIVATE
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_WLR_PRIVATE
+  representation:
+    record:
+      constructor: Wlr_output_WLR_PRIVATE
+      fields:
+      - wlr_output_WLR_PRIVATE_display_destroy
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_adaptive_sync_status
+  representation:
+    newtype:
+      constructor: Wlr_output_adaptive_sync_status
+      fields:
+      - un_Wlr_output_adaptive_sync_status
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wlr_output_cursor
+  representation:
+    record:
+      constructor: Wlr_output_cursor
+      fields:
+      - wlr_output_cursor_output
+      - wlr_output_cursor_x
+      - wlr_output_cursor_y
+      - wlr_output_cursor_enabled
+      - wlr_output_cursor_visible
+      - wlr_output_cursor_width
+      - wlr_output_cursor_height
+      - wlr_output_cursor_src_box
+      - wlr_output_cursor_transform
+      - wlr_output_cursor_hotspot_x
+      - wlr_output_cursor_hotspot_y
+      - wlr_output_cursor_texture
+      - wlr_output_cursor_own_texture
+      - wlr_output_cursor_wait_timeline
+      - wlr_output_cursor_wait_point
+      - wlr_output_cursor_link
+      - wlr_output_cursor_WLR_PRIVATE
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_cursor_WLR_PRIVATE
+  representation:
+    record:
+      constructor: Wlr_output_cursor_WLR_PRIVATE
+      fields:
+      - wlr_output_cursor_WLR_PRIVATE_renderer_destroy
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_bind
+  representation:
+    record:
+      constructor: Wlr_output_event_bind
+      fields:
+      - wlr_output_event_bind_output
+      - wlr_output_event_bind_resource
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_commit
+  representation:
+    record:
+      constructor: Wlr_output_event_commit
+      fields:
+      - wlr_output_event_commit_output
+      - wlr_output_event_commit_when
+      - wlr_output_event_commit_state
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_damage
+  representation:
+    record:
+      constructor: Wlr_output_event_damage
+      fields:
+      - wlr_output_event_damage_output
+      - wlr_output_event_damage_damage
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_precommit
+  representation:
+    record:
+      constructor: Wlr_output_event_precommit
+      fields:
+      - wlr_output_event_precommit_output
+      - wlr_output_event_precommit_when
+      - wlr_output_event_precommit_state
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_present
+  representation:
+    record:
+      constructor: Wlr_output_event_present
+      fields:
+      - wlr_output_event_present_output
+      - wlr_output_event_present_commit_seq
+      - wlr_output_event_present_presented
+      - wlr_output_event_present_when
+      - wlr_output_event_present_seq
+      - wlr_output_event_present_refresh
+      - wlr_output_event_present_flags
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_event_request_state
+  representation:
+    record:
+      constructor: Wlr_output_event_request_state
+      fields:
+      - wlr_output_event_request_state_output
+      - wlr_output_event_request_state_state
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_events
+  representation:
+    record:
+      constructor: Wlr_output_events
+      fields:
+      - wlr_output_events_frame
+      - wlr_output_events_damage
+      - wlr_output_events_needs_frame
+      - wlr_output_events_precommit
+      - wlr_output_events_commit
+      - wlr_output_events_present
+      - wlr_output_events_bind
+      - wlr_output_events_description
+      - wlr_output_events_request_state
+      - wlr_output_events_destroy
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_impl
+  representation: opaque
+- hsname: Wlr_output_layer_state
+  representation: opaque
+- hsname: Wlr_output_mode
+  representation:
+    record:
+      constructor: Wlr_output_mode
+      fields:
+      - wlr_output_mode_width
+      - wlr_output_mode_height
+      - wlr_output_mode_refresh
+      - wlr_output_mode_preferred
+      - wlr_output_mode_picture_aspect_ratio
+      - wlr_output_mode_link
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_mode_aspect_ratio
+  representation:
+    newtype:
+      constructor: Wlr_output_mode_aspect_ratio
+      fields:
+      - un_Wlr_output_mode_aspect_ratio
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wlr_output_present_flag
+  representation:
+    newtype:
+      constructor: Wlr_output_present_flag
+      fields:
+      - un_Wlr_output_present_flag
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wlr_output_state
+  representation:
+    record:
+      constructor: Wlr_output_state
+      fields:
+      - wlr_output_state_committed
+      - wlr_output_state_allow_reconfiguration
+      - wlr_output_state_damage
+      - wlr_output_state_enabled
+      - wlr_output_state_scale
+      - wlr_output_state_transform
+      - wlr_output_state_adaptive_sync_enabled
+      - wlr_output_state_render_format
+      - wlr_output_state_subpixel
+      - wlr_output_state_buffer
+      - wlr_output_state_buffer_src_box
+      - wlr_output_state_buffer_dst_box
+      - wlr_output_state_tearing_page_flip
+      - wlr_output_state_mode_type
+      - wlr_output_state_mode
+      - wlr_output_state_custom_mode
+      - wlr_output_state_gamma_lut
+      - wlr_output_state_gamma_lut_size
+      - wlr_output_state_layers
+      - wlr_output_state_layers_len
+      - wlr_output_state_wait_timeline
+      - wlr_output_state_wait_point
+      - wlr_output_state_signal_timeline
+      - wlr_output_state_signal_point
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_state_custom_mode
+  representation:
+    record:
+      constructor: Wlr_output_state_custom_mode
+      fields:
+      - wlr_output_state_custom_mode_width
+      - wlr_output_state_custom_mode_height
+      - wlr_output_state_custom_mode_refresh
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_output_state_field
+  representation:
+    newtype:
+      constructor: Wlr_output_state_field
+      fields:
+      - un_Wlr_output_state_field
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wlr_output_state_mode_type
+  representation:
+    newtype:
+      constructor: Wlr_output_state_mode_type
+      fields:
+      - un_Wlr_output_state_mode_type
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wlr_render_pass
+  representation: opaque
+- hsname: Wlr_render_timer
+  representation: opaque
+- hsname: Wlr_renderer
+  representation:
+    record:
+      constructor: Wlr_renderer
+      fields:
+      - wlr_renderer_render_buffer_caps
+      - wlr_renderer_events
+      - wlr_renderer_features
+      - wlr_renderer_WLR_PRIVATE
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_renderer_WLR_PRIVATE
+  representation:
+    record:
+      constructor: Wlr_renderer_WLR_PRIVATE
+      fields:
+      - wlr_renderer_WLR_PRIVATE_impl
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_renderer_events
+  representation:
+    record:
+      constructor: Wlr_renderer_events
+      fields:
+      - wlr_renderer_events_destroy
+      - wlr_renderer_events_lost
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_renderer_features
+  representation:
+    record:
+      constructor: Wlr_renderer_features
+      fields:
+      - wlr_renderer_features_output_color_transform
+      - wlr_renderer_features_timeline
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_renderer_impl
+  representation: opaque
+- hsname: Wlr_swapchain
+  representation: opaque
+- hsname: Wlr_texture
+  representation:
+    record:
+      constructor: Wlr_texture
+      fields:
+      - wlr_texture_impl
+      - wlr_texture_width
+      - wlr_texture_height
+      - wlr_texture_renderer
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wlr_texture_impl
+  representation: opaque
