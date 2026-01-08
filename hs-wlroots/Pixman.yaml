@@ -1,0 +1,950 @@
+version:
+  hs_bindgen: 0.1.0
+  binding_specification: '1.0'
+target: x86_64-pc-linux-gnu
+hsmodule: Generated.Pixman
+ctypes:
+- headers: pixman.h
+  cname: pixman_bool_t
+  hsname: Pixman_bool_t
+- headers: pixman.h
+  cname: pixman_fixed_32_32_t
+  hsname: Pixman_fixed_32_32_t
+- headers: pixman.h
+  cname: pixman_fixed_48_16_t
+  hsname: Pixman_fixed_48_16_t
+- headers: pixman.h
+  cname: pixman_fixed_1_31_t
+  hsname: Pixman_fixed_1_31_t
+- headers: pixman.h
+  cname: pixman_fixed_1_16_t
+  hsname: Pixman_fixed_1_16_t
+- headers: pixman.h
+  cname: pixman_fixed_16_16_t
+  hsname: Pixman_fixed_16_16_t
+- headers: pixman.h
+  cname: pixman_fixed_t
+  hsname: Pixman_fixed_t
+- headers: pixman.h
+  cname: pixman_color_t
+  hsname: Pixman_color_t
+- headers: pixman.h
+  cname: pixman_point_fixed_t
+  hsname: Pixman_point_fixed_t
+- headers: pixman.h
+  cname: pixman_line_fixed_t
+  hsname: Pixman_line_fixed_t
+- headers: pixman.h
+  cname: pixman_vector_t
+  hsname: Pixman_vector_t
+- headers: pixman.h
+  cname: pixman_transform_t
+  hsname: Pixman_transform_t
+- headers: pixman.h
+  cname: struct pixman_color
+  hsname: Pixman_color_t
+- headers: pixman.h
+  cname: struct pixman_point_fixed
+  hsname: Pixman_point_fixed_t
+- headers: pixman.h
+  cname: struct pixman_line_fixed
+  hsname: Pixman_line_fixed_t
+- headers: pixman.h
+  cname: struct pixman_vector
+  hsname: Pixman_vector
+- headers: pixman.h
+  cname: struct pixman_transform
+  hsname: Pixman_transform
+- headers: pixman.h
+  cname: union pixman_image
+  hsname: Pixman_image_t
+- headers: pixman.h
+  cname: pixman_image_t
+  hsname: Pixman_image_t
+- headers: pixman.h
+  cname: pixman_f_transform_t
+  hsname: Pixman_f_transform_t
+- headers: pixman.h
+  cname: pixman_f_vector_t
+  hsname: Pixman_f_vector_t
+- headers: pixman.h
+  cname: struct pixman_f_vector
+  hsname: Pixman_f_vector
+- headers: pixman.h
+  cname: struct pixman_f_transform
+  hsname: Pixman_f_transform
+- headers: pixman.h
+  cname: enum pixman_repeat_t
+  hsname: Pixman_repeat_t
+- headers: pixman.h
+  cname: pixman_repeat_t
+  hsname: Pixman_repeat_t
+- headers: pixman.h
+  cname: enum pixman_dither_t
+  hsname: Pixman_dither_t
+- headers: pixman.h
+  cname: pixman_dither_t
+  hsname: Pixman_dither_t
+- headers: pixman.h
+  cname: enum pixman_filter_t
+  hsname: Pixman_filter_t
+- headers: pixman.h
+  cname: pixman_filter_t
+  hsname: Pixman_filter_t
+- headers: pixman.h
+  cname: enum pixman_op_t
+  hsname: Pixman_op_t
+- headers: pixman.h
+  cname: pixman_op_t
+  hsname: Pixman_op_t
+- headers: pixman.h
+  cname: pixman_region16_data_t
+  hsname: Pixman_region16_data_t
+- headers: pixman.h
+  cname: pixman_box16_t
+  hsname: Pixman_box16_t
+- headers: pixman.h
+  cname: pixman_rectangle16_t
+  hsname: Pixman_rectangle16_t
+- headers: pixman.h
+  cname: pixman_region16_t
+  hsname: Pixman_region16_t
+- headers: pixman.h
+  cname: struct pixman_region16_data
+  hsname: Pixman_region16_data_t
+- headers: pixman.h
+  cname: struct pixman_rectangle16
+  hsname: Pixman_rectangle16_t
+- headers: pixman.h
+  cname: struct pixman_box16
+  hsname: Pixman_box16
+- headers: pixman.h
+  cname: struct pixman_region16
+  hsname: Pixman_region16_t
+- headers: pixman.h
+  cname: enum pixman_region_overlap_t
+  hsname: Pixman_region_overlap_t
+- headers: pixman.h
+  cname: pixman_region_overlap_t
+  hsname: Pixman_region_overlap_t
+- headers: pixman.h
+  cname: pixman_region32_data_t
+  hsname: Pixman_region32_data_t
+- headers: pixman.h
+  cname: pixman_box32_t
+  hsname: Pixman_box32_t
+- headers: pixman.h
+  cname: pixman_rectangle32_t
+  hsname: Pixman_rectangle32_t
+- headers: pixman.h
+  cname: pixman_region32_t
+  hsname: Pixman_region32_t
+- headers: pixman.h
+  cname: struct pixman_region32_data
+  hsname: Pixman_region32_data_t
+- headers: pixman.h
+  cname: struct pixman_rectangle32
+  hsname: Pixman_rectangle32_t
+- headers: pixman.h
+  cname: struct pixman_box32
+  hsname: Pixman_box32_t
+- headers: pixman.h
+  cname: struct pixman_region32
+  hsname: Pixman_region32_t
+- headers: pixman.h
+  cname: pixman_region64f_data_t
+  hsname: Pixman_region64f_data_t
+- headers: pixman.h
+  cname: pixman_box64f_t
+  hsname: Pixman_box64f_t
+- headers: pixman.h
+  cname: pixman_rectangle64f_t
+  hsname: Pixman_rectangle64f_t
+- headers: pixman.h
+  cname: pixman_region64f_t
+  hsname: Pixman_region64f_t
+- headers: pixman.h
+  cname: struct pixman_region64f_data
+  hsname: Pixman_region64f_data_t
+- headers: pixman.h
+  cname: struct pixman_rectangle64f
+  hsname: Pixman_rectangle64f_t
+- headers: pixman.h
+  cname: struct pixman_box64f
+  hsname: Pixman_box64f_t
+- headers: pixman.h
+  cname: struct pixman_region64f
+  hsname: Pixman_region64f_t
+- headers: pixman.h
+  cname: pixman_indexed_t
+  hsname: Pixman_indexed_t
+- headers: pixman.h
+  cname: pixman_gradient_stop_t
+  hsname: Pixman_gradient_stop_t
+- headers: pixman.h
+  cname: pixman_read_memory_func_t
+  hsname: Pixman_read_memory_func_t
+- headers: pixman.h
+  cname: pixman_write_memory_func_t
+  hsname: Pixman_write_memory_func_t
+- headers: pixman.h
+  cname: pixman_image_destroy_func_t
+  hsname: Pixman_image_destroy_func_t
+- headers: pixman.h
+  cname: struct pixman_gradient_stop
+  hsname: Pixman_gradient_stop_t
+- headers: pixman.h
+  cname: pixman_index_type
+  hsname: Pixman_index_type
+- headers: pixman.h
+  cname: struct pixman_indexed
+  hsname: Pixman_indexed_t
+- headers: pixman.h
+  cname: enum pixman_format_code_t
+  hsname: Pixman_format_code_t
+- headers: pixman.h
+  cname: pixman_format_code_t
+  hsname: Pixman_format_code_t
+- headers: pixman.h
+  cname: enum pixman_kernel_t
+  hsname: Pixman_kernel_t
+- headers: pixman.h
+  cname: pixman_kernel_t
+  hsname: Pixman_kernel_t
+- headers: pixman.h
+  cname: struct pixman_glyph_cache_t
+  hsname: Pixman_glyph_cache_t
+- headers: pixman.h
+  cname: pixman_glyph_cache_t
+  hsname: Pixman_glyph_cache_t
+- headers: pixman.h
+  cname: struct pixman_glyph_t
+  hsname: Pixman_glyph_t
+- headers: pixman.h
+  cname: pixman_glyph_t
+  hsname: Pixman_glyph_t
+- headers: pixman.h
+  cname: pixman_edge_t
+  hsname: Pixman_edge_t
+- headers: pixman.h
+  cname: pixman_trapezoid_t
+  hsname: Pixman_trapezoid_t
+- headers: pixman.h
+  cname: pixman_trap_t
+  hsname: Pixman_trap_t
+- headers: pixman.h
+  cname: pixman_span_fix_t
+  hsname: Pixman_span_fix_t
+- headers: pixman.h
+  cname: pixman_triangle_t
+  hsname: Pixman_triangle_t
+- headers: pixman.h
+  cname: struct pixman_edge
+  hsname: Pixman_edge_t
+- headers: pixman.h
+  cname: struct pixman_trapezoid
+  hsname: Pixman_trapezoid_t
+- headers: pixman.h
+  cname: struct pixman_triangle
+  hsname: Pixman_triangle_t
+- headers: pixman.h
+  cname: struct pixman_span_fix
+  hsname: Pixman_span_fix_t
+- headers: pixman.h
+  cname: struct pixman_trap
+  hsname: Pixman_trap_t
+hstypes:
+- hsname: Pixman_bool_t
+  representation:
+    newtype:
+      constructor: Pixman_bool_t
+      fields:
+      - un_Pixman_bool_t
+      ffitype: CInt
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Prim
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_box16
+  representation:
+    record:
+      constructor: Pixman_box16
+      fields:
+      - pixman_box16_x1
+      - pixman_box16_y1
+      - pixman_box16_x2
+      - pixman_box16_y2
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_box16_t
+  representation:
+    newtype:
+      constructor: Pixman_box16_t
+      fields:
+      - un_Pixman_box16_t
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_box32_t
+  representation:
+    record:
+      constructor: Pixman_box32_t
+      fields:
+      - pixman_box32_t_x1
+      - pixman_box32_t_y1
+      - pixman_box32_t_x2
+      - pixman_box32_t_y2
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_box64f_t
+  representation:
+    record:
+      constructor: Pixman_box64f_t
+      fields:
+      - pixman_box64f_t_x1
+      - pixman_box64f_t_y1
+      - pixman_box64f_t_x2
+      - pixman_box64f_t_y2
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Pixman_color_t
+  representation:
+    record:
+      constructor: Pixman_color_t
+      fields:
+      - pixman_color_t_red
+      - pixman_color_t_green
+      - pixman_color_t_blue
+      - pixman_color_t_alpha
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_dither_t
+  representation:
+    newtype:
+      constructor: Pixman_dither_t
+      fields:
+      - un_Pixman_dither_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_edge_t
+  representation:
+    record:
+      constructor: Pixman_edge_t
+      fields:
+      - pixman_edge_t_x
+      - pixman_edge_t_e
+      - pixman_edge_t_stepx
+      - pixman_edge_t_signdx
+      - pixman_edge_t_dy
+      - pixman_edge_t_dx
+      - pixman_edge_t_stepx_small
+      - pixman_edge_t_stepx_big
+      - pixman_edge_t_dx_small
+      - pixman_edge_t_dx_big
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_f_transform
+  representation:
+    record:
+      constructor: Pixman_f_transform
+      fields:
+      - pixman_f_transform_m
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_f_transform_t
+  representation:
+    newtype:
+      constructor: Pixman_f_transform_t
+      fields:
+      - un_Pixman_f_transform_t
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_f_vector
+  representation:
+    record:
+      constructor: Pixman_f_vector
+      fields:
+      - pixman_f_vector_v
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_f_vector_t
+  representation:
+    newtype:
+      constructor: Pixman_f_vector_t
+      fields:
+      - un_Pixman_f_vector_t
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_filter_t
+  representation:
+    newtype:
+      constructor: Pixman_filter_t
+      fields:
+      - un_Pixman_filter_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_fixed_16_16_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_16_16_t
+      fields:
+      - un_Pixman_fixed_16_16_t
+      ffitype: Int32
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_fixed_1_16_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_1_16_t
+      fields:
+      - un_Pixman_fixed_1_16_t
+      ffitype: Word32
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_fixed_1_31_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_1_31_t
+      fields:
+      - un_Pixman_fixed_1_31_t
+      ffitype: Word32
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_fixed_32_32_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_32_32_t
+      fields:
+      - un_Pixman_fixed_32_32_t
+      ffitype: Int64
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_fixed_48_16_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_48_16_t
+      fields:
+      - un_Pixman_fixed_48_16_t
+      ffitype: Int64
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_fixed_t
+  representation:
+    newtype:
+      constructor: Pixman_fixed_t
+      fields:
+      - un_Pixman_fixed_t
+      ffitype: Int32
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_format_code_t
+  representation:
+    newtype:
+      constructor: Pixman_format_code_t
+      fields:
+      - un_Pixman_format_code_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_glyph_cache_t
+  representation: opaque
+- hsname: Pixman_glyph_t
+  representation:
+    record:
+      constructor: Pixman_glyph_t
+      fields:
+      - pixman_glyph_t_x
+      - pixman_glyph_t_y
+      - pixman_glyph_t_glyph
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_gradient_stop_t
+  representation:
+    record:
+      constructor: Pixman_gradient_stop_t
+      fields:
+      - pixman_gradient_stop_t_x
+      - pixman_gradient_stop_t_color
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_image_destroy_func_t
+  representation:
+    newtype:
+      constructor: Pixman_image_destroy_func_t
+      fields:
+      - un_Pixman_image_destroy_func_t
+      ffitype: FunPtr
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Show
+  - Storable
+- hsname: Pixman_image_t
+  representation: opaque
+- hsname: Pixman_index_type
+  representation:
+    newtype:
+      constructor: Pixman_index_type
+      fields:
+      - un_Pixman_index_type
+      ffitype: Word8
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Pixman_indexed_t
+  representation:
+    record:
+      constructor: Pixman_indexed_t
+      fields:
+      - pixman_indexed_t_color
+      - pixman_indexed_t_rgba
+      - pixman_indexed_t_ent
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_kernel_t
+  representation:
+    newtype:
+      constructor: Pixman_kernel_t
+      fields:
+      - un_Pixman_kernel_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_line_fixed_t
+  representation:
+    record:
+      constructor: Pixman_line_fixed_t
+      fields:
+      - pixman_line_fixed_t_p1
+      - pixman_line_fixed_t_p2
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_op_t
+  representation:
+    newtype:
+      constructor: Pixman_op_t
+      fields:
+      - un_Pixman_op_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_point_fixed_t
+  representation:
+    record:
+      constructor: Pixman_point_fixed_t
+      fields:
+      - pixman_point_fixed_t_x
+      - pixman_point_fixed_t_y
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_read_memory_func_t
+  representation:
+    newtype:
+      constructor: Pixman_read_memory_func_t
+      fields:
+      - un_Pixman_read_memory_func_t
+      ffitype: FunPtr
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Show
+  - Storable
+- hsname: Pixman_rectangle16_t
+  representation:
+    record:
+      constructor: Pixman_rectangle16_t
+      fields:
+      - pixman_rectangle16_t_x
+      - pixman_rectangle16_t_y
+      - pixman_rectangle16_t_width
+      - pixman_rectangle16_t_height
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_rectangle32_t
+  representation:
+    record:
+      constructor: Pixman_rectangle32_t
+      fields:
+      - pixman_rectangle32_t_x
+      - pixman_rectangle32_t_y
+      - pixman_rectangle32_t_width
+      - pixman_rectangle32_t_height
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_rectangle64f_t
+  representation:
+    record:
+      constructor: Pixman_rectangle64f_t
+      fields:
+      - pixman_rectangle64f_t_x
+      - pixman_rectangle64f_t_y
+      - pixman_rectangle64f_t_width
+      - pixman_rectangle64f_t_height
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Pixman_region16_data_t
+  representation:
+    record:
+      constructor: Pixman_region16_data_t
+      fields:
+      - pixman_region16_data_t_size
+      - pixman_region16_data_t_numRects
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Pixman_region16_t
+  representation:
+    record:
+      constructor: Pixman_region16_t
+      fields:
+      - pixman_region16_t_extents
+      - pixman_region16_t_data
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_region32_data_t
+  representation:
+    record:
+      constructor: Pixman_region32_data_t
+      fields:
+      - pixman_region32_data_t_size
+      - pixman_region32_data_t_numRects
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Pixman_region32_t
+  representation:
+    record:
+      constructor: Pixman_region32_t
+      fields:
+      - pixman_region32_t_extents
+      - pixman_region32_t_data
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_region64f_data_t
+  representation:
+    record:
+      constructor: Pixman_region64f_data_t
+      fields:
+      - pixman_region64f_data_t_size
+      - pixman_region64f_data_t_numRects
+  instances:
+  - Eq
+  - Prim
+  - Show
+  - Storable
+- hsname: Pixman_region64f_t
+  representation:
+    record:
+      constructor: Pixman_region64f_t
+      fields:
+      - pixman_region64f_t_extents
+      - pixman_region64f_t_data
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_region_overlap_t
+  representation:
+    newtype:
+      constructor: Pixman_region_overlap_t
+      fields:
+      - un_Pixman_region_overlap_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_repeat_t
+  representation:
+    newtype:
+      constructor: Pixman_repeat_t
+      fields:
+      - un_Pixman_repeat_t
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Pixman_span_fix_t
+  representation:
+    record:
+      constructor: Pixman_span_fix_t
+      fields:
+      - pixman_span_fix_t_l
+      - pixman_span_fix_t_r
+      - pixman_span_fix_t_y
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_transform
+  representation:
+    record:
+      constructor: Pixman_transform
+      fields:
+      - pixman_transform_matrix
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_transform_t
+  representation:
+    newtype:
+      constructor: Pixman_transform_t
+      fields:
+      - un_Pixman_transform_t
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_trap_t
+  representation:
+    record:
+      constructor: Pixman_trap_t
+      fields:
+      - pixman_trap_t_top
+      - pixman_trap_t_bot
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_trapezoid_t
+  representation:
+    record:
+      constructor: Pixman_trapezoid_t
+      fields:
+      - pixman_trapezoid_t_top
+      - pixman_trapezoid_t_bottom
+      - pixman_trapezoid_t_left
+      - pixman_trapezoid_t_right
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_triangle_t
+  representation:
+    record:
+      constructor: Pixman_triangle_t
+      fields:
+      - pixman_triangle_t_p1
+      - pixman_triangle_t_p2
+      - pixman_triangle_t_p3
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_vector
+  representation:
+    record:
+      constructor: Pixman_vector
+      fields:
+      - pixman_vector_vector
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_vector_t
+  representation:
+    newtype:
+      constructor: Pixman_vector_t
+      fields:
+      - un_Pixman_vector_t
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Pixman_write_memory_func_t
+  representation:
+    newtype:
+      constructor: Pixman_write_memory_func_t
+      fields:
+      - un_Pixman_write_memory_func_t
+      ffitype: FunPtr
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Show
+  - Storable

@@ -13,6 +13,7 @@ wayland-util() {
     )
 
     local select_flags=(
+        --select-except-deprecated
         --enable-program-slicing
     )
 
@@ -48,6 +49,7 @@ wayland-core() {
     )
 
     local select_flags=(
+        --select-except-deprecated
         --enable-program-slicing
     )
 
@@ -60,8 +62,47 @@ wayland-core() {
     )
 
     local binding_specs_flags=(
-        --gen-binding-spec WaylandServerCore.yaml
         --external-binding-spec WaylandUtil.yaml
+        --gen-binding-spec WaylandServerCore.yaml
+    )
+
+    hs-bindgen-cli preprocess "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${parse_flags[@]}" \
+        "${select_flags[@]}" \
+        "${module_flags[@]}" \
+        "${binding_specs_flags[@]}"
+}
+
+pixman() {
+    local header="pixman.h"
+
+    local c_flags=(
+    )
+
+    local parse_flags=(
+        --parse-all
+    )
+
+    local select_flags=(
+        --select-by-header-path "${header}"
+        --select-except-deprecated
+        --enable-program-slicing
+    )
+
+    local module_flags=(
+        --unique-id com.hs-bindgen.pixman
+        --module Generated.Pixman
+        --hs-output-dir src
+        --create-output-dirs
+        --overwrite-files
+    )
+
+    local binding_specs_flags=(
+        --external-binding-spec WaylandUtil.yaml
+        --external-binding-spec WaylandServerCore.yaml
+        --gen-binding-spec Pixman.yaml
     )
 
     hs-bindgen-cli preprocess "${header}" \
@@ -87,6 +128,7 @@ wlroots() {
 
     local select_flags=(
         --select-by-header-path "${header}"
+        --select-except-deprecated
         --enable-program-slicing
     )
 
@@ -101,6 +143,7 @@ wlroots() {
     local binding_specs_flags=(
         --external-binding-spec WaylandUtil.yaml
         --external-binding-spec WaylandServerCore.yaml
+        --external-binding-spec Pixman.yaml
     )
 
     hs-bindgen-cli preprocess "${header}" \
@@ -114,4 +157,5 @@ wlroots() {
 
 wayland-util
 wayland-core
+pixman
 wlroots

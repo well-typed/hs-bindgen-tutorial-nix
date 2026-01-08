@@ -21,6 +21,10 @@ library
   import:          common
   hs-source-dirs:  src
   exposed-modules:
+    , Generated.Pixman
+    , Generated.Pixman.FunPtr
+    , Generated.Pixman.Safe
+    , Generated.Pixman.Unsafe
     , Generated.Wayland.Util
     , Generated.Wayland.Util.FunPtr
     , Generated.Wayland.Util.Safe
