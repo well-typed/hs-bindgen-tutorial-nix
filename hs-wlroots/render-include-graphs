@@ -6,6 +6,7 @@ graphs=(
   include-graph-all.mmd
   include-graph-backend.mmd
   include-graph-no-stdlibs.mmd
+  include-graph-minimal.mmd
 )
 
 for graph in "${graphs[@]}"; do

@@ -1,0 +1,15 @@
+%% Manually reduced include graph.
+
+graph TD;
+  v57["Pixman"]
+  v98["Wayland server"]
+  v29[".../wayland-1.24.0-dev/include/wayland-util.h"]
+  v0[".../wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
+  v99["Wlroots sub-headers"]
+  v0-->|"#include &lt;wayland-server-core.h&gt;"|v98
+  v99-->|"#include &lt;wayland-server-core.h&gt;"|v98
+  v98-->|"#include &quot;wayland-util.h&quot;"|v29
+  v99-->|"#include &lt;wayland-util.h&gt;"|v29
+  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v99
+  v99-->|"#include &lt;pixman.h&gt;"|v57
+  v99-->|"#include &lt;wayland-server-protocol.h&gt;"|v98
