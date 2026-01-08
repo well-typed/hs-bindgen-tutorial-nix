@@ -25,7 +25,7 @@ inter-dependencies. For example, the include graph for `wlroots` without
 standard headers and with manually collapsed nodes (_Wlroots sub-headers_,
 _Wayland server_, and _Pixman_) is
 
-![Manually reduced include graph](./include-graph-minimal.svg)
+![Reduced, manually edited include graph](./include-graph-reduced-edited.svg)
 
 We can see that `wayland-util.h` is the core header that the Wayland server as
 well as `wlroots` depend on. Also, we see that Pixman is a dependency of

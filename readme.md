@@ -211,8 +211,9 @@ import them qualified.
 
 ### Compile and run `pcap-client` project
 
-After generating the bindings, compile and run the minimal application using
-standard commands. We have prepared a [Cabal package](./pcap-client/pcap-client.cabal):
+After generating the bindings, compile and run the test application using
+standard commands. We have prepared a [Cabal
+package](./pcap-client/pcap-client.cabal):
 
 ```console
 $ cabal build
