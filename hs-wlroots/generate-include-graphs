@@ -9,10 +9,6 @@ c_flags=(
     --clang-option -DWLR_USE_UNSTABLE
 )
 
-parse_flags=(
-    --parse-all
-)
-
 select_flags=(
     --select-by-header-path "${header}"
     --enable-program-slicing
@@ -21,12 +17,19 @@ select_flags=(
 module_flags=(
     --unique-id com.hs-bindgen.wlroots
     --overwrite-files
-    -o include-graph.mermaid
 )
 
 hs-bindgen-cli info include-graph "${header}" \
     "${debug[@]}" \
     "${c_flags[@]}" \
-    "${parse_flags[@]}" \
     "${select_flags[@]}" \
-    "${module_flags[@]}"
+    "${module_flags[@]}" \
+    -o include-graph-backend.mermaid
+
+hs-bindgen-cli info include-graph "${header}" \
+    "${debug[@]}" \
+    "${c_flags[@]}" \
+    "${select_flags[@]}" \
+    "${module_flags[@]}" \
+    --parse-all \
+    -o include-graph-all.mermaid

@@ -1,0 +1,23 @@
+graph TD;
+  v0["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
+  v72["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
+  v69["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
+  v68["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
+  v71["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
+  v73["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
+  v56["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
+  v74["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
+  v70["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
+  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v56
+  v56-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v68
+  v68-->|"#include &lt;wlr/render/pass.h&gt;"|v69
+  v56-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v68-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v69-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v71-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v68-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v71
+  v71-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
+  v73-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
+  v56-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v73
+  v56-->|"#include &lt;wlr/util/addon.h&gt;"|v74
+  v73-->|"#include &lt;wlr/util/addon.h&gt;"|v74
