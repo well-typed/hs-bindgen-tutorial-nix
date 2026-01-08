@@ -33,3 +33,32 @@ hs-bindgen-cli info include-graph "${header}" \
     "${module_flags[@]}" \
     --parse-all \
     -o include-graph-all.mermaid
+
+hs-bindgen-cli info include-graph "${header}" \
+    "${debug[@]}" \
+    "${c_flags[@]}" \
+    "${select_flags[@]}" \
+    "${module_flags[@]}" \
+    --parse-all \
+    --parse-except-by-header-path ".*glibc.*" \
+    --parse-except-by-header-path ".*clang-wrapper.*" \
+    -o include-graph-no-stdlibs.mermaid
+
+# The above code is shorter than direct exclusion of standard headers (see
+# below), but it is system-dependent!
+
+# Direct exclusion:
+#
+# --parse-except-by-header-path "stdarg" \
+# --parse-except-by-header-path "stdbool" \
+# --parse-except-by-header-path "stddef" \
+# --parse-except-by-header-path "stdint" \
+# --parse-except-by-header-path "bits/.*\.h" \
+# --parse-except-by-header-path "gnu/.*\.h" \
+# --parse-except-by-header-path "features-time64\.h" \
+# --parse-except-by-header-path "features\.h" \
+# --parse-except-by-header-path "inttypes\.h" \
+# --parse-except-by-header-path "math\.h" \
+# --parse-except-by-header-path "stdc-predef\.h" \
+# --parse-except-by-header-path "sys/.*\.h" \
+# --parse-except-by-header-path "time\.h" \
