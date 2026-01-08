@@ -1,0 +1,143 @@
+version:
+  hs_bindgen: 0.1.0
+  binding_specification: '1.0'
+target: x86_64-pc-linux-gnu
+hsmodule: Generated.Wayland.Util
+ctypes:
+- headers: wayland-util.h
+  cname: struct wl_object
+  hsname: Wl_object
+- headers: wayland-util.h
+  cname: struct wl_message
+  hsname: Wl_message
+- headers: wayland-util.h
+  cname: struct wl_interface
+  hsname: Wl_interface
+- headers: wayland-util.h
+  cname: struct wl_list
+  hsname: Wl_list
+- headers: wayland-util.h
+  cname: struct wl_array
+  hsname: Wl_array
+- headers: wayland-util.h
+  cname: wl_fixed_t
+  hsname: Wl_fixed_t
+- headers: wayland-util.h
+  cname: union wl_argument
+  hsname: Wl_argument
+- headers: wayland-util.h
+  cname: wl_dispatcher_func_t
+  hsname: Wl_dispatcher_func_t
+- headers: wayland-util.h
+  cname: enum wl_iterator_result
+  hsname: Wl_iterator_result
+hstypes:
+- hsname: Wl_argument
+  representation:
+    newtype:
+      constructor: Wl_argument
+      fields:
+      - un_Wl_argument
+  instances:
+  - Storable
+- hsname: Wl_array
+  representation:
+    record:
+      constructor: Wl_array
+      fields:
+      - wl_array_size
+      - wl_array_alloc
+      - wl_array_data
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wl_dispatcher_func_t
+  representation:
+    newtype:
+      constructor: Wl_dispatcher_func_t
+      fields:
+      - un_Wl_dispatcher_func_t
+      ffitype: FunPtr
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Show
+  - Storable
+- hsname: Wl_fixed_t
+  representation:
+    newtype:
+      constructor: Wl_fixed_t
+      fields:
+      - un_Wl_fixed_t
+      ffitype: Int32
+  instances:
+  - Bits
+  - Bounded
+  - Enum
+  - Eq
+  - FiniteBits
+  - HasBaseForeignType
+  - Integral
+  - Ix
+  - Num
+  - Ord
+  - Read
+  - Real
+  - Show
+  - Storable
+- hsname: Wl_interface
+  representation:
+    record:
+      constructor: Wl_interface
+      fields:
+      - wl_interface_name
+      - wl_interface_version
+      - wl_interface_method_count
+      - wl_interface_methods
+      - wl_interface_event_count
+      - wl_interface_events
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wl_iterator_result
+  representation:
+    newtype:
+      constructor: Wl_iterator_result
+      fields:
+      - un_Wl_iterator_result
+      ffitype: CUInt
+  instances:
+  - Eq
+  - HasBaseForeignType
+  - Ord
+  - Read
+  - Show
+  - Storable
+- hsname: Wl_list
+  representation:
+    record:
+      constructor: Wl_list
+      fields:
+      - wl_list_prev
+      - wl_list_next
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wl_message
+  representation:
+    record:
+      constructor: Wl_message
+      fields:
+      - wl_message_name
+      - wl_message_signature
+      - wl_message_types
+  instances:
+  - Eq
+  - Show
+  - Storable
+- hsname: Wl_object
+  representation: opaque

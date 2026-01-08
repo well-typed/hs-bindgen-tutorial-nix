@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+debug=(-v 2)
+
+header="wlr/backend.h"
+
+c_flags=(
+    # Enable unstable features of Wlroots.
+    --clang-option -DWLR_USE_UNSTABLE
+)
+
+parse_flags=(
+    --parse-all
+)
+
+select_flags=(
+    --select-by-header-path "${header}"
+    --enable-program-slicing
+)
+
+module_flags=(
+    --unique-id com.hs-bindgen.wlroots
+    --overwrite-files
+    -o include-graph.mermaid
+)
+
+hs-bindgen-cli info include-graph "${header}" \
+    "${debug[@]}" \
+    "${c_flags[@]}" \
+    "${parse_flags[@]}" \
+    "${select_flags[@]}" \
+    "${module_flags[@]}"

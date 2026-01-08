@@ -2,7 +2,42 @@
 
 debug=(-v 2)
 
-wl() {
+wayland-util() {
+    local header="wayland-util.h"
+
+    local c_flags=(
+    )
+
+    local parse_flags=(
+        --parse-all
+    )
+
+    local select_flags=(
+        --enable-program-slicing
+    )
+
+    local module_flags=(
+        --unique-id com.hs-bindgen.wayland-util
+        --module Generated.Wayland.Util
+        --hs-output-dir src
+        --create-output-dirs
+        --overwrite-files
+    )
+
+    local binding_specs_flags=(
+        --gen-binding-spec WaylandUtil.yaml
+    )
+
+    hs-bindgen-cli preprocess "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${parse_flags[@]}" \
+        "${select_flags[@]}" \
+        "${module_flags[@]}" \
+        "${binding_specs_flags[@]}"
+}
+
+wayland-core() {
     local header="wayland-server-core.h"
 
     local c_flags=(
@@ -17,15 +52,16 @@ wl() {
     )
 
     local module_flags=(
-        --unique-id com.hs-bindgen.wayland
-        --module Generated.Wayland
+        --unique-id com.hs-bindgen.wayland-server-core
+        --module Generated.Wayland.Server.Core
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
     )
 
     local binding_specs_flags=(
-        --gen-binding-spec Wayland.yaml
+        --gen-binding-spec WaylandServerCore.yaml
+        --external-binding-spec WaylandUtil.yaml
     )
 
     hs-bindgen-cli preprocess "${header}" \
@@ -37,7 +73,7 @@ wl() {
         "${binding_specs_flags[@]}"
 }
 
-wlr() {
+wlroots() {
     local header="wlr/backend.h"
 
     local c_flags=(
@@ -50,12 +86,12 @@ wlr() {
     )
 
     local select_flags=(
-        --select-by-header-path wlr/backend.h
+        --select-by-header-path "${header}"
         --enable-program-slicing
     )
 
     local module_flags=(
-        --unique-id com.hs-bindgen.wlroots
+        --unique-id com.hs-bindgen.wlroots.backend
         --module Generated.Wlroots.Backend
         --hs-output-dir src
         --create-output-dirs
@@ -63,7 +99,8 @@ wlr() {
     )
 
     local binding_specs_flags=(
-        --external-binding-spec Wayland.yaml
+        --external-binding-spec WaylandUtil.yaml
+        --external-binding-spec WaylandServerCore.yaml
     )
 
     hs-bindgen-cli preprocess "${header}" \
@@ -75,5 +112,6 @@ wlr() {
         "${binding_specs_flags[@]}"
 }
 
-wl
-wlr
+wayland-util
+wayland-core
+wlroots

@@ -4,10 +4,13 @@ module Main where
 
 import Control.Monad
 import Data.Proxy (Proxy (..))
+import Foreign (Ptr)
 import Foreign qualified
 import Foreign.C qualified as Foreign
-import Generated.Wayland
-import Generated.Wayland.Safe
+import Generated.Wayland.Server.Core
+import Generated.Wayland.Server.Core.Safe
+import Generated.Wayland.Util
+import Generated.Wayland.Util.Safe
 import Generated.Wlroots.Backend
 import Generated.Wlroots.Backend.Safe
 import HsBindgen.Runtime.FunPtr
@@ -21,29 +24,59 @@ handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do
     Foreign.peekCString =<< peekCField (Proxy @"wlr_output_description") output
   putStrLn $ "Detected output with description: " <> outputDescription
 
-getListener :: IO (Foreign.Ptr Wl_listener)
+getListener :: IO (Ptr Wl_listener)
 getListener = do
   let noList = Wl_list Foreign.nullPtr Foreign.nullPtr
   funPtr <- Wl_notify_func_t <$> toFunPtr handler
   Foreign.new $ Wl_listener noList funPtr
 
+failWhenNull :: String -> IO () -> Ptr a -> IO ()
+failWhenNull what destructor p =
+  when (p == Foreign.nullPtr) $ do
+    destructor
+    (error $ "failed to obtain resource: " <> what)
+
 main :: IO ()
 main = do
   eventLoop <- wl_event_loop_create
-  backend <- wlr_backend_autocreate eventLoop Foreign.nullPtr
-  listener <- getListener
+  failWhenNull "Event loop" (wl_event_loop_destroy eventLoop) eventLoop
 
-  let events :: Foreign.Ptr Wlr_backend_events
+  backend <- wlr_backend_autocreate eventLoop Foreign.nullPtr
+  let destructor = wlr_backend_destroy backend >> wl_event_loop_destroy eventLoop
+  failWhenNull "Backend" destructor backend
+
+  listener <- getListener
+  failWhenNull "Listener" (pure ()) listener
+
+  let events :: Ptr Wlr_backend_events
       events = ptrToCField (Proxy @"wlr_backend_events") backend
 
-      newOutputSignal :: Foreign.Ptr Wl_signal
+      newOutputSignal :: Ptr Wl_signal
       newOutputSignal = ptrToCField (Proxy @"wlr_backend_events_new_output") events
+
+  failWhenNull "Events" destructor events
+  failWhenNull "New output signal" destructor newOutputSignal
 
   wl_signal_add newOutputSignal listener
 
-  res <- wlr_backend_start backend
-  when (res == 0) $ error "failed to start backend"
+  -- It is annoying that we have to free the list of listeners manually.
+  let signalList :: Ptr Wl_list
+      signalList = ptrToCField (Proxy @"wl_signal_listener_list") newOutputSignal
+  prev :: Ptr Wl_list <- peekCField (Proxy @"wl_list_prev") signalList
+  let destructorWithList = wl_list_remove prev >> destructor
+
+  backendOk <- wlr_backend_start backend
+  when (backendOk == 0) $ do
+    destructorWithList
+    error "failed to start backend"
 
   -- Not sure if this is necessary. I always detect exactly one fake monitor on
   -- X11.
-  void $ wl_event_loop_dispatch eventLoop 0
+  eventLoopOk <- wl_event_loop_dispatch eventLoop 0
+  -- Also, interestingly, `wlr_backend_start` returns zero on error;
+  -- `wl_event_loop_dispatch` returns non-zero on error.
+  unless (eventLoopOk == 0) $ do
+    destructorWithList
+    error "failed to dispatch event loop"
+
+  destructorWithList

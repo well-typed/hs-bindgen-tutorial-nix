@@ -21,10 +21,14 @@ library
   import:          common
   hs-source-dirs:  src
   exposed-modules:
-    , Generated.Wayland
-    , Generated.Wayland.FunPtr
-    , Generated.Wayland.Safe
-    , Generated.Wayland.Unsafe
+    , Generated.Wayland.Util
+    , Generated.Wayland.Util.FunPtr
+    , Generated.Wayland.Util.Safe
+    , Generated.Wayland.Util.Unsafe
+    , Generated.Wayland.Server.Core
+    , Generated.Wayland.Server.Core.FunPtr
+    , Generated.Wayland.Server.Core.Safe
+    , Generated.Wayland.Server.Core.Unsafe
     , Generated.Wlroots.Backend
     , Generated.Wlroots.Backend.FunPtr
     , Generated.Wlroots.Backend.Safe
