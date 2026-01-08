@@ -50,13 +50,69 @@ sub-modules or layers:
 - `pixman.h`, and
 - `wlroots`.
 
-We generate external binding specifications for lower-level layers such as
+We use [_external binding
+specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md)
+to inform higher-level layers of the types provided by lower-level libraries. We
+generate external binding specifications for lower-level layers such as
 `wayland-util.h` with the `--gen-binding-spec` flag, and use those binding
 specifications in higher-level layers such as `wlroots` with the
 `--external-binding-spec` flag. For details, see the [binding generation
-script](./generate-bindings) script
+script](./generate-bindings)
 
 ```bash
 ./generate-bindings
 ```
 
+For example, an excerpt of the external binding specifications which we
+generated for `wayland-util.h`, and which covers the definition of `Wl_message`
+is
+
+```yaml
+version:
+  hs_bindgen: 0.1.0
+  binding_specification: '1.0'
+target: x86_64-pc-linux-gnu
+hsmodule: Generated.Wayland.Util
+ctypes:
+- headers: wayland-util.h
+  cname: struct wl_message
+  hsname: Wl_message
+- hsname: Wl_message
+  representation:
+    record:
+      constructor: Wl_message
+      fields:
+      - wl_message_name
+      - wl_message_signature
+      - wl_message_types
+  instances:
+  - Eq
+  - Show
+  - Storable
+```
+
+Higher level modules directly use this information, avoiding incompatible
+duplicate definitions of data types. For example, `Wayland.Server.Core`
+contains
+
+```haskell
+...
+
+import qualified Generated.Wayland.Util
+
+...
+
+instance HasCField Wl_protocol_logger_message "wl_protocol_logger_message_message" where
+  type CFieldType Wl_protocol_logger_message "wl_protocol_logger_message_message" =
+    ConstPtr Wl_message
+
+...
+```
+
+This code states that the data type `Wl_ptrotocol_logger_message` contains a
+field `wl_protocol_logger_message_message` of type `ConstPtr Wl_message`.
+
+# Application code
+
+The [application code](./app/Wlroots.hs) briefly creates a `wlroots` backend and
+prints the detected output descriptions. Run the application with `cabal run`.
