@@ -1,0 +1,13 @@
+#!/usr/bin/env magix
+#!magix bash
+#!packages mermaid-cli
+
+graphs=(
+  include-graph-all.mmd
+  include-graph-backend.mmd
+  include-graph-no-stdlibs.mmd
+)
+
+for graph in "${graphs[@]}"; do
+    mmdc -i "${graph}" -o "${graph%mmd}svg"
+done
