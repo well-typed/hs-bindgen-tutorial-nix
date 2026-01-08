@@ -69,9 +69,9 @@ Nixpkgs, and also takes care of installing the default version of the required
 parts of the Clang toolchain.
 
 > [!NOTE]
-> At the time of writing (October 13, 2025),
+> At the time of writing (January 8, 2026),
 > - the default version of GHC is 9.10.3;
-> - the Clang toolchain includes version 21.1.1 of packages
+> - the Clang toolchain includes version 21.1.7 of packages
 >   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
@@ -516,7 +516,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ### Use specific versions of the GHC or Clang toolchains
 
 > [!NOTE]
-> As of 2025, November 28, pinning the version of LLVM is problematic because
+> As of 2026, January 8, pinning the version of LLVM is problematic because
 > the build is cached. See the corresponding [GitHub issue](https://github.com/well-typed/hs-bindgen-tutorial-nix/issues/2) for more details.
 
 One possibility to specify the GHC toolchain is to simply use a different
@@ -559,5 +559,5 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: November 11, 2025. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
+> Last update: January 8, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
 > updates in the meantime.
