@@ -51,14 +51,12 @@ sub-modules or layers:
 - `wlroots` output type (`wlr/types/wlr_output.h`), and
 - `wlroots` backend (`wlr/backend.h`).
 
-We use [_external binding
-specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md)
-to inform higher-level layers of the types provided by lower-level libraries. We
-generate external binding specifications for lower-level layers such as
-`wayland-util.h` with the `--gen-binding-spec` flag, and use those binding
-specifications in higher-level layers such as the `wlroots` backend with the
-`--external-binding-spec` flag. For details, see the [binding generation
-script](./generate-bindings)
+We use [_external binding specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level layers of
+the types provided by lower-level libraries. We generate external binding
+specifications for lower-level layers such as `wayland-util.h` with the
+`--gen-binding-spec` flag, and use those binding specifications in higher-level
+layers such as the `wlroots` backend with the `--external-binding-spec` flag.
+For details, see the [binding generation script](./generate-bindings)
 
 ```bash
 ./generate-bindings
@@ -114,5 +112,5 @@ field `wl_protocol_logger_message_message` of type `ConstPtr Wl_message`.
 
 # Application code
 
-The [application code](./app/Wlroots.hs) briefly creates a `wlroots` backend and
-prints the detected output descriptions. Run the application with `cabal run`.
+The [application code](./app/Wlroots.hs) briefly creates a `wlroots` backend and prints the
+detected output descriptions. Run the application with `cabal run`.
