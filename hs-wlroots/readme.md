@@ -21,27 +21,81 @@ with `cabal run`.
 
 ## Include graphs
 
-Include graphs are indispensable tools in the process of generating bindings for
-larger projects because they give an overview of the header and library
-inter-dependencies. For example, the include graph for `backend.h` of `wlroots`
-without standard headers and with manually collapsed nodes (_Wlroots
-sub-headers_, _Wayland server_, and _Pixman_) is
+Include graphs show the inter-dependencies of C header files. Include graphs are
+indispensable tools in the process of generating bindings for larger projects
+because they give an overview of the header and, in particular also library
+inter-dependencies. For example, the C header `libfoo-higher-level.h` may
+include (`#include`) another C header `libfoo-lower-level.h`, which in turn may
+include another header `libbar.h` from a different library altogether.
 
-![Reduced, manually edited include graph](./include-graph-reduced-edited.svg)
+<p align="center">
+  <img src="./include-graph-example.png" />
+</p>
+
+`hs-bindgen` can _generate include graphs for you_. For example, (the last
+option is required to satisfy the C preprocessor)
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE
+```
+
+```mermaid
+graph TD;
+  v0["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
+  v72["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
+  v69["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
+  v68["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
+  v71["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
+  v73["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
+  v56["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
+  v74["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
+  v70["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
+  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v56
+  v56-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v68
+  v68-->|"#include &lt;wlr/render/pass.h&gt;"|v69
+  v56-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v68-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v69-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v71-->|"#include &lt;wlr/util/box.h&gt;"|v70
+  v68-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v71
+  v71-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
+  v73-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
+  v56-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v73
+  v56-->|"#include &lt;wlr/util/addon.h&gt;"|v74
+  v73-->|"#include &lt;wlr/util/addon.h&gt;"|v74
+```
+
+We observe:
+- The include graph is unwieldy.
+- The include graph only shows inter-dependencies of the `wlroots` library, and
+not of any other libraries such as `wayland`.
+
+Parse-related `hs-bindgen` flags control which nodes are shown in the include
+graph.
+- We can add `--parse-all` to include all other library headers, but then the
+[include graph is too large](./include-graph-all.mmd) to be of any use to us.
+- We can [exclude standard headers by tweaking the parse predicate](./include-graph-no-stdlibs.mmd):
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+    --parse-all \
+    --parse-except-by-header-path ".*glibc.*" \
+    --parse-except-by-header-path ".*clang-wrapper.*"
+```
+
+However, even the include graph without standard library headers is large, so we
+manually collapsed some nodes (_Wlroots sub-headers_, _Wayland server_, and
+_Pixman_):
+
+<p align="center">
+  <img src="./include-graph-reduced-edited.png" />
+</p>
 
 We can see that `wayland-util.h` is the core header that the Wayland server as
 well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
 `wlr/backend.h`, but not of the Wayland server.
 
-[Generate the include graphs](./generate-include-graphs) with
-
-```bash
-./generate-include-graphs
-```
-
-> [!NOTE]
-> The generated include graphs are more verbose versions of the manually edited
-> one above.
+Please see the [script generating include graphs](./generate-include-graphs) for the exact commands used.
 
 ## Bindings
 
