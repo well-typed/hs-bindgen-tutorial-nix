@@ -1,11 +1,7 @@
-/pcap-client/.direnv/
-/pcap-client/.envrc
-/pcap-client/dist-newstyle/
-/pcap-client/src/
-/pcap-th/dist-newstyle/
-/pcap-th/.envrc
-/pcap-th/.direnv/
-/hs-wlroots/.direnv/
-/hs-wlroots/.envrc
-/hs-wlroots/dist-newstyle/
+**/.direnv/
+**/.envrc
+**/dist-newstyle/
+
+/hs-pcap/hs-pcap-client/src/
+/hs-pcap/hs-pcap-th/src/
 /hs-wlroots/src/

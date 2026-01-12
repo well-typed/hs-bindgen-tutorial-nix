@@ -1,5 +1,5 @@
 {
-  description = "`hs-bindgen` tutorial: Template Haskell project";
+  description = "`hs-bindgen` tutorial: Client project";
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -15,7 +15,6 @@
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ];
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -30,35 +29,33 @@
             overlays = [ hs-bindgen.overlays.default ];
           };
           hpkgs = pkgs.haskellPackages;
-          pcap-th = hpkgs.callCabal2nix "pcap-th" ./. { };
+          hlib = pkgs.haskell.lib.compose;
+          hs-pcap-client = hlib.generateBindings ./generate-bindings (
+            hpkgs.callCabal2nix "hs-pcap-client" ./. { }
+          );
         in
         {
           packages = {
-            inherit pcap-th;
-            default = pcap-th;
+            hs-pcap-client = hs-pcap-client;
+            inherit (pkgs) hs-bindgen-cli;
+            default = hs-pcap-client;
           };
 
           devShells = {
             default = hpkgs.shellFor {
-              packages = _: [ pcap-th ];
+              packages = _: [ hs-pcap-client ];
               nativeBuildInputs = [
                 # Haskell toolchain.
                 hpkgs.cabal-install
                 hpkgs.ghc
                 hpkgs.haskell-language-server
 
+                # `hs-bindgen` client.
+                pkgs.hs-bindgen-cli
+
                 # Connect `hs-bindgen` to the Clang toolchain and `libpcap`.
                 pkgs.hsBindgenHook
               ];
-              # We need to add the `libpcap` library to `LD_LIBRARY_PATH` manually
-              # here because otherwise Haskell Language Server does not find it.
-              # Nix tooling ensures that other parts of the Haskell toolchain
-              # (e.g., `cabal`, `ghc`) find the shared libraries of dependencies
-              # without the need to temper with `LD_LIBRARY_PATH`.
-              shellHook = ''
-                LD_LIBRARY_PATH="${pkgs.libpcap.lib}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
-                export LD_LIBRARY_PATH
-              '';
             };
           };
         };

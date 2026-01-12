@@ -186,11 +186,43 @@
         "type": "github"
       }
     },
-    "hs-wlroots": {
+    "hs-pcap-client": {
       "inputs": {
         "flake-parts": "flake-parts_2",
         "hs-bindgen": "hs-bindgen",
         "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "path": "./hs-pcap/hs-pcap-client",
+        "type": "path"
+      },
+      "original": {
+        "path": "./hs-pcap/hs-pcap-client",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "hs-pcap-th": {
+      "inputs": {
+        "flake-parts": "flake-parts_4",
+        "hs-bindgen": "hs-bindgen_2",
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "path": "./hs-pcap/hs-pcap-th",
+        "type": "path"
+      },
+      "original": {
+        "path": "./hs-pcap/hs-pcap-th",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "hs-wlroots": {
+      "inputs": {
+        "flake-parts": "flake-parts_6",
+        "hs-bindgen": "hs-bindgen_3",
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "path": "./hs-wlroots",
@@ -454,44 +486,12 @@
         "type": "github"
       }
     },
-    "pcap-client": {
-      "inputs": {
-        "flake-parts": "flake-parts_4",
-        "hs-bindgen": "hs-bindgen_2",
-        "nixpkgs": "nixpkgs_4"
-      },
-      "locked": {
-        "path": "./pcap-client",
-        "type": "path"
-      },
-      "original": {
-        "path": "./pcap-client",
-        "type": "path"
-      },
-      "parent": []
-    },
-    "pcap-th": {
-      "inputs": {
-        "flake-parts": "flake-parts_6",
-        "hs-bindgen": "hs-bindgen_3",
-        "nixpkgs": "nixpkgs_6"
-      },
-      "locked": {
-        "path": "./pcap-th",
-        "type": "path"
-      },
-      "original": {
-        "path": "./pcap-th",
-        "type": "path"
-      },
-      "parent": []
-    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "hs-wlroots": "hs-wlroots",
-        "pcap-client": "pcap-client",
-        "pcap-th": "pcap-th"
+        "hs-pcap-client": "hs-pcap-client",
+        "hs-pcap-th": "hs-pcap-th",
+        "hs-wlroots": "hs-wlroots"
       }
     }
   },
