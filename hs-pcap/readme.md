@@ -286,7 +286,8 @@ $ ./generate-include-graph
 ![Include graph](./hs-pcap-client/pcap.svg)
 
 Include graphs can be tremendously helpful while adapting the command line flags
-to parse and select the desired declarations.
+to parse and select the desired declarations. For a more involved example of how
+to create and use include graphs, see the [`wlroots` tutorial](../hs-wlroots).
 
 ## Method B: Template-Haskell interface
 
