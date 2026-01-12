@@ -21,20 +21,28 @@ with `cabal run`.
 
 ## Include graphs
 
-Include graphs show the inter-dependencies of C header files. For example, the C
-header `.../wlr/backend.h` may include (`#include`) another C header
-`.../wlr/types/wlr_output.h`. Include graphs are indispensable tools in the
-process of generating bindings for larger projects because they give an overview
-of the header and, in particular also library inter-dependencies.
+Include graphs show the inter-dependencies of C header files. Include graphs are
+indispensable tools in the process of generating bindings for larger projects
+because they give an overview of the header and, in particular also library
+inter-dependencies. For example, the C header `libfoo-higher-level.h` may
+include (`#include`) another C header `libfoo-lower-level.h`, which in turn may
+include another header `libbar.h` from a different library altogether.
+
+<p align="center">
+  <img src="./include-graph-example.png" />
+</p>
+
 
 > [!NOTE]
 > `hs-bindgen` can generate include graphs for you!
 
-For example, the include graph for `backend.h` of `wlroots` without standard
-headers and with manually collapsed nodes (_Wlroots sub-headers_, _Wayland
-server_, and _Pixman_) is
+The include graph for `backend.h` of `wlroots` without standard headers and with
+manually collapsed nodes (_Wlroots sub-headers_, _Wayland server_, and _Pixman_)
+is
 
-![Reduced, manually edited include graph](./include-graph-reduced-edited.svg)
+<p align="center">
+  <img src="./include-graph-reduced-edited.png" />
+</p>
 
 We can see that `wayland-util.h` is the core header that the Wayland server as
 well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
