@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedRecordDot #-}
 
 module Main where
 
@@ -11,7 +12,6 @@ import Generated.Wayland.Server.Core
 import Generated.Wayland.Server.Core.Safe
 import Generated.Wayland.Util
 import Generated.Wayland.Util.Safe
-import Generated.Wlr.Backend
 import Generated.Wlr.Backend.Safe
 import Generated.Wlr.Types.Output
 import HsBindgen.Runtime.FunPtr
@@ -28,6 +28,7 @@ handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do
 getListener :: IO (Ptr Wl_listener)
 getListener = do
   let noList = Wl_list Foreign.nullPtr Foreign.nullPtr
+  -- TODO: Highlight the higher-order API.
   funPtr <- Wl_notify_func_t <$> toFunPtr handler
   Foreign.new $ Wl_listener noList funPtr
 
@@ -49,13 +50,10 @@ main = do
   listener <- getListener
   failWhenNull "Listener" (pure ()) listener
 
-  let events :: Ptr Wlr_backend_events
-      events = ptrToCField (Proxy @"wlr_backend_events") backend
+  -- TODO: Highlight the record-dot syntax (zero-copy) API.
+  let newOutputSignal :: Ptr Wl_signal
+      newOutputSignal = backend.wlr_backend_events.wlr_backend_events_new_output
 
-      newOutputSignal :: Ptr Wl_signal
-      newOutputSignal = ptrToCField (Proxy @"wlr_backend_events_new_output") events
-
-  failWhenNull "Events" destructor events
   failWhenNull "New output signal" destructor newOutputSignal
 
   wl_signal_add newOutputSignal listener

@@ -54,19 +54,20 @@ components:
 - `wlroots` backend (`wlr/backend.h`).
 
 We use [_external binding specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level components
-of the types provided by lower-level libraries. We generate external binding
-specifications for lower-level components such as `wayland-util.h` with the
-`--gen-binding-spec` flag, and use those binding specifications in higher-level
-components such as the `wlroots` backend with the `--external-binding-spec`
-flag. For details, see the [binding generation script](./generate-bindings)
+of the types provided by lower-level libraries. We use `hs-bindgen` to generate
+external binding specifications for lower-level components such as
+`wayland-util.h` with the `--gen-binding-spec` flag, and use those binding
+specifications in higher-level components such as the `wlroots` backend with the
+`--external-binding-spec` flag. For details, see the [binding generation
+script](./generate-bindings)
 
 ```bash
 ./generate-bindings
 ```
 
-For example, an excerpt of the external binding specifications which we
-generated for `wayland-util.h`, and which covers the definition of `Wl_message`
-is
+For example, an excerpt of the external binding specifications which
+`hs-bindgen` generated for `wayland-util.h`, and which covers the definition of
+`Wl_message` is
 
 ```yaml
 version:
@@ -113,6 +114,8 @@ This code states that the data type `Wl_ptrotocol_logger_message` contains a
 field `wl_protocol_logger_message_message` of type `ConstPtr Wl_message`.
 
 # Application code
+
+TODO: Briefly discuss how we use the generated bindings in application code.
 
 The [application code](./app/Wlroots.hs) briefly creates a `wlroots` backend and prints the
 detected output descriptions. Run the application with `cabal run`.

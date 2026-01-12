@@ -3,16 +3,16 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    pcap-client.url = "path:./pcap-client";
-    pcap-th.url = "path:./pcap-th";
+    hs-pcap-client.url = "path:./hs-pcap/hs-pcap-client";
+    hs-pcap-th.url = "path:./hs-pcap/hs-pcap-th";
     hs-wlroots.url = "path:./hs-wlroots";
   };
 
   outputs =
     inputs@{
       flake-parts,
-      pcap-client,
-      pcap-th,
+      hs-pcap-client,
+      hs-pcap-th,
       hs-wlroots,
       ...
     }:
@@ -28,9 +28,9 @@
         { system, ... }:
         {
           checks = {
-            hs-bindgen-cli-check = pcap-client.packages.${system}.hs-bindgen-cli;
-            pcap-client-check = pcap-client.packages.${system}.pcap-client;
-            pcap-th-check = pcap-th.packages.${system}.pcap-th;
+            hs-bindgen-cli-check = hs-pcap-client.packages.${system}.hs-bindgen-cli;
+            hs-pcap-client-check = hs-pcap-client.packages.${system}.hs-pcap-client;
+            hs-pcap-th-check = hs-pcap-th.packages.${system}.hs-pcap-th;
             hs-wlroots-check = hs-wlroots.packages.${system}.hs-wlroots;
           };
         };
