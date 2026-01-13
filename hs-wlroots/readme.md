@@ -99,73 +99,85 @@ Please see the [script generating include graphs](./generate-include-graphs) for
 
 ## Bindings
 
-Given the include graph above, we separate binding generation into five
-components:
+`wlroots` is a large library and we suggest _separating binding creation_ into
+multiple steps or components. `hs-bindgen` uses [_external binding
+specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level components of the types provided by
+lower-level components.
+
+First, we will instruct `hs-bindgen` to translate lower-level library
+components, generating external binding specifications for us. We will then use
+these external binding specifications when translating higher-level library
+components. In fact, `hs-bindgen` does not have hard requirements on how to
+"cut" the components (i.e., partition a library). In particular, how C library
+code is partitioned into C headers is irrelevant to `hs-bindgen`. Any
+declarations available in an external binding specification are used, and
+declarations for which no external binding specifications exist will be included
+in the current component.
+
+Given the `wlroots` include graph above, we separate binding generation into
+five components:
 - Wayland utilities (`wayland-util.h`),
 - Wayland server (`wayland-server-core.h`) ,
 - Pixman (`pixman.h`),
 - `wlroots` output type (`wlr/types/wlr_output.h`), and
 - `wlroots` backend (`wlr/backend.h`).
 
-We use [_external binding specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level components
-of the types provided by lower-level libraries. We use `hs-bindgen` to generate
-external binding specifications for lower-level components such as
-`wayland-util.h` with the `--gen-binding-spec` flag, and use those binding
-specifications in higher-level components such as the `wlroots` backend with the
-`--external-binding-spec` flag. For details, see the [binding generation
-script](./generate-bindings)
+First, we use `hs-bindgen` to translate lower-level components such as
+`wayland-util.h`, generating external binding specifications with the
+`--gen-binding-spec` flag
+
+```bash
+hs-bindgen-cli preprocess "wayland-util.h" ... --gen-binding-spec WaylandUtil.yaml
+```
+
+Then we instruct `hs-bindgen` to use those binding specifications when
+translating higher-level components such as the `wlroots` backend with the
+`--external-binding-spec` flag
+
+```bash
+hs-bindgen-cli preprocess "wlr/backend.h" ...
+        --external-binding-spec WaylandUtil.yaml
+        --external-binding-spec WaylandServerCore.yaml
+        --external-binding-spec Pixman.yaml
+        --external-binding-spec WlrTypesOutput.yaml
+```
+
+The [generate-bindings script](./generate-bindings) details all used commands; execute it to
+generate bindings for all `wlroots` library components
 
 ```bash
 ./generate-bindings
 ```
 
-For example, an excerpt of the external binding specifications which
-`hs-bindgen` generated for `wayland-util.h`, and which covers the definition of
-`Wl_message` is
+An excerpt of the external binding specifications which `hs-bindgen` generated
+for the Wayland server, and which covers the opaque definition of `Wl_event_loop` is
 
 ```yaml
 version:
   hs_bindgen: 0.1.0
   binding_specification: '1.0'
 target: x86_64-pc-linux-gnu
-hsmodule: Generated.Wayland.Util
+hsmodule: Generated.Wayland.Server.Core
 ctypes:
-- headers: wayland-util.h
-  cname: struct wl_message
-  hsname: Wl_message
-- hsname: Wl_message
-  representation:
-    record:
-      constructor: Wl_message
-      fields:
-      - wl_message_name
-      - wl_message_signature
-      - wl_message_types
-  instances:
-  - Eq
-  - Show
-  - Storable
+- headers: wayland-server-core.h
+  cname: struct wl_event_loop
+  hsname: Wl_event_loop
+- hsname: Wl_event_loop
+  representation: opaque
 ```
 
 Higher level modules directly use this information, avoiding incompatible
-duplicate definitions of data types. For example, `Wayland.Server.Core` contains
+duplicate definitions of data types. For example, `Wlr.Backend.Safe` contains
 
 ```haskell
-...
+import qualified Generated.Wayland.Server.Core
 
-import qualified Generated.Wayland.Util
-
-...
-
-instance HasCField Wl_protocol_logger_message "wl_protocol_logger_message_message" where
-  type CFieldType Wl_protocol_logger_message "wl_protocol_logger_message_message" =
-    ConstPtr Wl_message
-
-...
+wlr_backend_autocreate ::
+     Ptr Generated.Wayland.Server.Core.Wl_event_loop
+  -> Ptr (Ptr Wlr_session)
+  -> IO (Ptr Wlr_backend)
+wlr_backend_autocreate = ...
 ```
-
-This code states that the data type `Wl_ptrotocol_logger_message` contains a
-field `wl_protocol_logger_message_message` of type `ConstPtr Wl_message`.
 
 # Application code
 
