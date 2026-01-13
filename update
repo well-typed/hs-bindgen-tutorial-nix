@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-flakes=(pcap-client pcap-th hs-wlroots)
+flakes=(hs-pcap/hs-pcap-client hs-pcap/hs-pcap-th hs-wlroots)
 
 for flake in "${flakes[@]}"; do
     (
