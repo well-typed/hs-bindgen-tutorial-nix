@@ -227,6 +227,10 @@ instance HasField "wlr_backend_events" (Ptr Wlr_backend) (Ptr Wlr_backend_events
   getField = ...
 ```
 
+> [!NOTE]
+> The zero-copy API will be even nicer when `hs-bindgen` supports
+> `DuplicateRecordFields`: https://github.com/well-typed/hs-bindgen/issues/69.
+
 ## Function pointers (higher-order API)
 
 C functions sometimes contain arguments that are pointers to other C functions.
