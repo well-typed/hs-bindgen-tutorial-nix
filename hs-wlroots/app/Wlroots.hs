@@ -28,7 +28,6 @@ handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do
 getListener :: IO (Ptr Wl_listener)
 getListener = do
   let noList = Wl_list Foreign.nullPtr Foreign.nullPtr
-  -- TODO: Highlight the higher-order API.
   funPtr <- Wl_notify_func_t <$> toFunPtr handler
   Foreign.new $ Wl_listener noList funPtr
 
@@ -50,7 +49,6 @@ main = do
   listener <- getListener
   failWhenNull "Listener" (pure ()) listener
 
-  -- TODO: Highlight the record-dot syntax (zero-copy) API.
   let newOutputSignal :: Ptr Wl_signal
       newOutputSignal = backend.wlr_backend_events.wlr_backend_events_new_output
 
