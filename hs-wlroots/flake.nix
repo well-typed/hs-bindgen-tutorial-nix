@@ -49,7 +49,8 @@
             export BINDGEN_EXTRA_CLANG_ARGS
             C_INCLUDE_PATH="${wlroots}/include/wlroots-0.19''${C_INCLUDE_PATH:+:''${C_INCLUDE_PATH}}"
             export C_INCLUDE_PATH
-            LD_LIBRARY_PATH="${wlroots}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
+            # We need to inform HLS (and most likely `cabal-install`) about all involved libraries _at runtime_.
+            LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath wlrootsDeps}''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
             export LD_LIBRARY_PATH
           '';
           applyHook = (
