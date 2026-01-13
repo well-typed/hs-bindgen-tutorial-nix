@@ -4,7 +4,6 @@
 module Main where
 
 import Control.Monad
-import Data.Proxy (Proxy (..))
 import Foreign (Ptr)
 import Foreign qualified
 import Foreign.C qualified as Foreign
@@ -15,14 +14,13 @@ import Generated.Wayland.Util.Safe
 import Generated.Wlr.Backend.Safe
 import Generated.Wlr.Types.Output
 import HsBindgen.Runtime.FunPtr
-import HsBindgen.Runtime.HasCField
 
 handler :: Wl_notify_func_t_Aux
 handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do
+  -- Cast the untyped C pointer :-|.
   let output :: Foreign.Ptr Wlr_output
       output = Foreign.castPtr voidPtr
-  outputDescription <-
-    Foreign.peekCString =<< peekCField (Proxy @"wlr_output_description") output
+  outputDescription <- Foreign.peekCString =<< Foreign.peek output.wlr_output_description
   putStrLn $ "Detected output with description: " <> outputDescription
 
 getListener :: IO (Ptr Wl_listener)
@@ -58,8 +56,8 @@ main = do
 
   -- It is annoying that we have to free the list of listeners manually.
   let signalList :: Ptr Wl_list
-      signalList = ptrToCField (Proxy @"wl_signal_listener_list") newOutputSignal
-  prev :: Ptr Wl_list <- peekCField (Proxy @"wl_list_prev") signalList
+      signalList = newOutputSignal.wl_signal_listener_list
+  prev :: Ptr Wl_list <- Foreign.peek signalList.wl_list_prev
   let destructorWithList = wl_list_remove prev >> destructor
 
   backendOk <- wlr_backend_start backend
@@ -70,7 +68,7 @@ main = do
   -- Not sure if this is necessary. I always detect exactly one fake monitor on
   -- X11.
   eventLoopOk <- wl_event_loop_dispatch eventLoop 0
-  -- Also, interestingly, `wlr_backend_start` returns zero on error;
+  -- Interestingly, `wlr_backend_start` returns zero on error;
   -- `wl_event_loop_dispatch` returns non-zero on error.
   unless (eventLoopOk == 0) $ do
     destructorWithList
