@@ -1,7 +1,6 @@
 version:
   hs_bindgen: 0.1.0
   binding_specification: '1.0'
-target: x86_64-pc-linux-gnu
 hsmodule: Generated.Pixman
 ctypes:
 - headers: pixman.h
@@ -262,6 +261,7 @@ hstypes:
       - un_Pixman_bool_t
       ffitype: CInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -574,7 +574,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Pixman_glyph_cache_t
-  representation: opaque
+  representation: emptydata
 - hsname: Pixman_glyph_t
   representation:
     record:
@@ -612,7 +612,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Pixman_image_t
-  representation: opaque
+  representation: emptydata
 - hsname: Pixman_index_type
   representation:
     newtype:

@@ -47,7 +47,6 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
             (BIf $ ParseHeader $ HeaderPathMatches "struct_timeval.h")
     cfg :: Config
     cfg = def
-      & #clang % #gnu    .~ EnableGnu
       & #selectPredicate .~ selectP
       & #parsePredicate  .~ parseP
       & #programSlicing  .~ EnableProgramSlicing

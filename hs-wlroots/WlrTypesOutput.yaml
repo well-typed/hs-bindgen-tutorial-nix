@@ -1,7 +1,6 @@
 version:
   hs_bindgen: 0.1.0
   binding_specification: '1.0'
-target: x86_64-pc-linux-gnu
 hsmodule: Generated.Wlr.Types.Output
 ctypes:
 - headers: wlr/types/wlr_output.h
@@ -166,6 +165,7 @@ hstypes:
       - un_C__Syscall_slong_t
       ffitype: CLong
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -189,6 +189,7 @@ hstypes:
       - un_C__Time_t
       ffitype: CLong
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -292,9 +293,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_allocator
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_backend
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_box
   representation:
     record:
@@ -338,7 +339,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_buffer_impl
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_buffer_pass_options
   representation:
     record:
@@ -353,11 +354,11 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_color_transform
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_drm_format_set
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_drm_syncobj_timeline
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_fbox
   representation:
     record:
@@ -578,9 +579,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_output_impl
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_output_layer_state
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_output_mode
   representation:
     record:
@@ -698,9 +699,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_render_pass
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_render_timer
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_renderer
   representation:
     record:
@@ -747,9 +748,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_renderer_impl
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_swapchain
-  representation: opaque
+  representation: emptydata
 - hsname: Wlr_texture
   representation:
     record:
@@ -764,4 +765,4 @@ hstypes:
   - Show
   - Storable
 - hsname: Wlr_texture_impl
-  representation: opaque
+  representation: emptydata

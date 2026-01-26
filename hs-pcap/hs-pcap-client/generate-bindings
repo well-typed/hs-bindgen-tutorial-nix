@@ -14,13 +14,6 @@ module_flags=(
     --module Generated.Pcap
 )
 
-# Command line flags affecting `libclang`.
-libclang_flags=(
-    # Enable GNU extensions. GNU extensions define types, such as `u_int`, which
-    # `libpcap` requires.
-    --gnu
-)
-
 # `hs-bindgen` parses the C header files using `libclang` and interprets/reifies
 # the declarations into an `hs-bindgen`-internal abstract syntax tree. These
 # flags affect the parsing/reifying step.
@@ -69,7 +62,6 @@ debug_flags=(
 
 hs-bindgen-cli preprocess \
     "${module_flags[@]}" \
-    "${libclang_flags[@]}" \
     "${parse_flags[@]}" \
     "${select_flags[@]}" \
     "${debug_flags[@]}" \

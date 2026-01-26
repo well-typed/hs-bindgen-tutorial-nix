@@ -1,7 +1,6 @@
 version:
   hs_bindgen: 0.1.0
   binding_specification: '1.0'
-target: x86_64-pc-linux-gnu
 hsmodule: Generated.Wayland.Server.Core
 ctypes:
 - headers: wayland-server-core.h
@@ -103,6 +102,7 @@ hstypes:
       - un_C__Gid_t
       ffitype: CUInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -126,6 +126,7 @@ hstypes:
       - un_C__Pid_t
       ffitype: CInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -149,6 +150,7 @@ hstypes:
       - un_C__Uid_t
       ffitype: CUInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -172,6 +174,7 @@ hstypes:
       - un_Gid_t
       ffitype: CUInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -195,6 +198,7 @@ hstypes:
       - un_Pid_t
       ffitype: CInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -218,6 +222,7 @@ hstypes:
       - un_Uid_t
       ffitype: CUInt
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
@@ -234,7 +239,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_client
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_client_for_each_resource_iterator_func_t
   representation:
     newtype:
@@ -249,7 +254,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_display
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_display_global_filter_func_t
   representation:
     newtype:
@@ -264,7 +269,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_event_loop
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_event_loop_fd_func_t
   representation:
     newtype:
@@ -318,9 +323,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_event_source
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_global
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_global_bind_func_t
   representation:
     newtype:
@@ -359,7 +364,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_protocol_logger
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_protocol_logger_func_t
   representation:
     newtype:
@@ -402,7 +407,7 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_resource
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_resource_destroy_func_t
   representation:
     newtype:
@@ -417,9 +422,9 @@ hstypes:
   - Show
   - Storable
 - hsname: Wl_shm_buffer
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_shm_pool
-  representation: opaque
+  representation: emptydata
 - hsname: Wl_signal
   representation:
     record:
