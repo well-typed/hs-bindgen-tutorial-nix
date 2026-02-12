@@ -16,14 +16,14 @@
 module Main where
 
 import HsBindgen.TH
-import HsBindgen.Runtime.Prelude qualified
+import HsBindgen.Runtime.LibC qualified
 
 import Control.Monad (unless)
 
 import Foreign qualified
 import Foreign.C qualified as C
 
-import Optics ((&), (.~), (%))
+import Optics ((&), (.~))
 
 let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     isDeprecated  = BIf $ SelectDecl     DeclDeprecated

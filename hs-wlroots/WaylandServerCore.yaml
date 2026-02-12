@@ -99,8 +99,7 @@ hstypes:
     newtype:
       constructor: C__Gid_t
       fields:
-      - un_C__Gid_t
-      ffitype: CUInt
+      - unwrapC__Gid_t
   instances:
   - Bitfield
   - Bits
@@ -108,23 +107,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: C__Pid_t
   representation:
     newtype:
       constructor: C__Pid_t
       fields:
-      - un_C__Pid_t
-      ffitype: CInt
+      - unwrapC__Pid_t
   instances:
   - Bitfield
   - Bits
@@ -132,23 +135,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: C__Uid_t
   representation:
     newtype:
       constructor: C__Uid_t
       fields:
-      - un_C__Uid_t
-      ffitype: CUInt
+      - unwrapC__Uid_t
   instances:
   - Bitfield
   - Bits
@@ -156,23 +163,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Gid_t
   representation:
     newtype:
       constructor: Gid_t
       fields:
-      - un_Gid_t
-      ffitype: CUInt
+      - unwrapGid_t
   instances:
   - Bitfield
   - Bits
@@ -180,23 +191,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pid_t
   representation:
     newtype:
       constructor: Pid_t
       fields:
-      - un_Pid_t
-      ffitype: CInt
+      - unwrapPid_t
   instances:
   - Bitfield
   - Bits
@@ -204,23 +219,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Uid_t
   representation:
     newtype:
       constructor: Uid_t
       fields:
-      - un_Uid_t
-      ffitype: CUInt
+      - unwrapUid_t
   instances:
   - Bitfield
   - Bits
@@ -228,16 +247,21 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_client
   representation: emptydata
 - hsname: Wl_client_for_each_resource_iterator_func_t
@@ -245,14 +269,18 @@ hstypes:
     newtype:
       constructor: Wl_client_for_each_resource_iterator_func_t
       fields:
-      - un_Wl_client_for_each_resource_iterator_func_t
-      ffitype: FunPtr
+      - unwrapWl_client_for_each_resource_iterator_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_display
   representation: emptydata
 - hsname: Wl_display_global_filter_func_t
@@ -260,14 +288,18 @@ hstypes:
     newtype:
       constructor: Wl_display_global_filter_func_t
       fields:
-      - un_Wl_display_global_filter_func_t
-      ffitype: FunPtr
+      - unwrapWl_display_global_filter_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_event_loop
   representation: emptydata
 - hsname: Wl_event_loop_fd_func_t
@@ -275,53 +307,69 @@ hstypes:
     newtype:
       constructor: Wl_event_loop_fd_func_t
       fields:
-      - un_Wl_event_loop_fd_func_t
-      ffitype: FunPtr
+      - unwrapWl_event_loop_fd_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_event_loop_idle_func_t
   representation:
     newtype:
       constructor: Wl_event_loop_idle_func_t
       fields:
-      - un_Wl_event_loop_idle_func_t
-      ffitype: FunPtr
+      - unwrapWl_event_loop_idle_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_event_loop_signal_func_t
   representation:
     newtype:
       constructor: Wl_event_loop_signal_func_t
       fields:
-      - un_Wl_event_loop_signal_func_t
-      ffitype: FunPtr
+      - unwrapWl_event_loop_signal_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_event_loop_timer_func_t
   representation:
     newtype:
       constructor: Wl_event_loop_timer_func_t
       fields:
-      - un_Wl_event_loop_timer_func_t
-      ffitype: FunPtr
+      - unwrapWl_event_loop_timer_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_event_source
   representation: emptydata
 - hsname: Wl_global
@@ -331,14 +379,18 @@ hstypes:
     newtype:
       constructor: Wl_global_bind_func_t
       fields:
-      - un_Wl_global_bind_func_t
-      ffitype: FunPtr
+      - unwrapWl_global_bind_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_listener
   representation:
     record:
@@ -348,21 +400,30 @@ hstypes:
       - wl_listener_notify
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_notify_func_t
   representation:
     newtype:
       constructor: Wl_notify_func_t
       fields:
-      - un_Wl_notify_func_t
-      ffitype: FunPtr
+      - unwrapWl_notify_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_protocol_logger
   representation: emptydata
 - hsname: Wl_protocol_logger_func_t
@@ -370,14 +431,18 @@ hstypes:
     newtype:
       constructor: Wl_protocol_logger_func_t
       fields:
-      - un_Wl_protocol_logger_func_t
-      ffitype: FunPtr
+      - unwrapWl_protocol_logger_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_protocol_logger_message
   representation:
     record:
@@ -390,22 +455,34 @@ hstypes:
       - wl_protocol_logger_message_arguments
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_protocol_logger_type
   representation:
     newtype:
       constructor: Wl_protocol_logger_type
       fields:
-      - un_Wl_protocol_logger_type
-      ffitype: CUInt
+      - unwrapWl_protocol_logger_type
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_resource
   representation: emptydata
 - hsname: Wl_resource_destroy_func_t
@@ -413,14 +490,18 @@ hstypes:
     newtype:
       constructor: Wl_resource_destroy_func_t
       fields:
-      - un_Wl_resource_destroy_func_t
-      ffitype: FunPtr
+      - unwrapWl_resource_destroy_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_shm_buffer
   representation: emptydata
 - hsname: Wl_shm_pool
@@ -433,18 +514,27 @@ hstypes:
       - wl_signal_listener_list
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_user_data_destroy_func_t
   representation:
     newtype:
       constructor: Wl_user_data_destroy_func_t
       fields:
-      - un_Wl_user_data_destroy_func_t
-      ffitype: FunPtr
+      - unwrapWl_user_data_destroy_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw

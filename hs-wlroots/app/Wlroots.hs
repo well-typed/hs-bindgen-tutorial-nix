@@ -13,7 +13,7 @@ import Generated.Wayland.Util
 import Generated.Wayland.Util.Safe
 import Generated.Wlr.Backend.Safe
 import Generated.Wlr.Types.Output
-import HsBindgen.Runtime.FunPtr
+import HsBindgen.Runtime.Prelude
 
 handler :: Wl_notify_func_t_Aux
 handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do

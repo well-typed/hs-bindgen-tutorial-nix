@@ -162,8 +162,7 @@ hstypes:
     newtype:
       constructor: C__Syscall_slong_t
       fields:
-      - un_C__Syscall_slong_t
-      ffitype: CLong
+      - unwrapC__Syscall_slong_t
   instances:
   - Bitfield
   - Bits
@@ -171,23 +170,27 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: C__Time_t
   representation:
     newtype:
       constructor: C__Time_t
       fields:
-      - un_C__Time_t
-      ffitype: CLong
+      - unwrapC__Time_t
   instances:
   - Bitfield
   - Bits
@@ -195,16 +198,21 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Timespec
   representation:
     record:
@@ -214,9 +222,13 @@ hstypes:
       - timespec_tv_nsec
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_object
   representation:
     record:
@@ -227,36 +239,55 @@ hstypes:
       - wl_object_id
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_output_subpixel
   representation:
     newtype:
       constructor: Wl_output_subpixel
       fields:
-      - un_Wl_output_subpixel
-      ffitype: CUInt
+      - unwrapWl_output_subpixel
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_output_transform
   representation:
     newtype:
       constructor: Wl_output_transform
       fields:
-      - un_Wl_output_transform
-      ffitype: CUInt
+      - unwrapWl_output_transform
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wl_resource
   representation:
     record:
@@ -270,8 +301,13 @@ hstypes:
       - wl_resource_data
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_addon_set
   representation:
     record:
@@ -280,8 +316,13 @@ hstypes:
       - wlr_addon_set_WLR_PRIVATE
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_addon_set_WLR_PRIVATE
   representation:
     record:
@@ -290,8 +331,13 @@ hstypes:
       - wlr_addon_set_WLR_PRIVATE_addons
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_allocator
   representation: emptydata
 - hsname: Wlr_backend
@@ -307,9 +353,13 @@ hstypes:
       - wlr_box_height
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_buffer
   representation:
     record:
@@ -325,8 +375,13 @@ hstypes:
       - wlr_buffer_addons
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_buffer_events
   representation:
     record:
@@ -336,8 +391,13 @@ hstypes:
       - wlr_buffer_events_release
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_buffer_impl
   representation: emptydata
 - hsname: Wlr_buffer_pass_options
@@ -351,8 +411,13 @@ hstypes:
       - wlr_buffer_pass_options_signal_point
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_color_transform
   representation: emptydata
 - hsname: Wlr_drm_format_set
@@ -370,9 +435,13 @@ hstypes:
       - wlr_fbox_height
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output
   representation:
     record:
@@ -424,8 +493,13 @@ hstypes:
       - wlr_output_WLR_PRIVATE
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_WLR_PRIVATE
   representation:
     record:
@@ -434,22 +508,34 @@ hstypes:
       - wlr_output_WLR_PRIVATE_display_destroy
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_adaptive_sync_status
   representation:
     newtype:
       constructor: Wlr_output_adaptive_sync_status
       fields:
-      - un_Wlr_output_adaptive_sync_status
-      ffitype: CUInt
+      - unwrapWlr_output_adaptive_sync_status
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_cursor
   representation:
     record:
@@ -474,8 +560,13 @@ hstypes:
       - wlr_output_cursor_WLR_PRIVATE
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_cursor_WLR_PRIVATE
   representation:
     record:
@@ -484,8 +575,13 @@ hstypes:
       - wlr_output_cursor_WLR_PRIVATE_renderer_destroy
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_bind
   representation:
     record:
@@ -495,8 +591,13 @@ hstypes:
       - wlr_output_event_bind_resource
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_commit
   representation:
     record:
@@ -507,8 +608,13 @@ hstypes:
       - wlr_output_event_commit_state
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_damage
   representation:
     record:
@@ -518,8 +624,13 @@ hstypes:
       - wlr_output_event_damage_damage
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_precommit
   representation:
     record:
@@ -530,8 +641,13 @@ hstypes:
       - wlr_output_event_precommit_state
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_present
   representation:
     record:
@@ -546,8 +662,13 @@ hstypes:
       - wlr_output_event_present_flags
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_event_request_state
   representation:
     record:
@@ -557,8 +678,13 @@ hstypes:
       - wlr_output_event_request_state_state
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_events
   representation:
     record:
@@ -576,8 +702,13 @@ hstypes:
       - wlr_output_events_destroy
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_impl
   representation: emptydata
 - hsname: Wlr_output_layer_state
@@ -595,36 +726,54 @@ hstypes:
       - wlr_output_mode_link
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_mode_aspect_ratio
   representation:
     newtype:
       constructor: Wlr_output_mode_aspect_ratio
       fields:
-      - un_Wlr_output_mode_aspect_ratio
-      ffitype: CUInt
+      - unwrapWlr_output_mode_aspect_ratio
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_present_flag
   representation:
     newtype:
       constructor: Wlr_output_present_flag
       fields:
-      - un_Wlr_output_present_flag
-      ffitype: CUInt
+      - unwrapWlr_output_present_flag
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_state
   representation:
     record:
@@ -656,8 +805,13 @@ hstypes:
       - wlr_output_state_signal_point
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_state_custom_mode
   representation:
     record:
@@ -668,36 +822,54 @@ hstypes:
       - wlr_output_state_custom_mode_refresh
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_state_field
   representation:
     newtype:
       constructor: Wlr_output_state_field
       fields:
-      - un_Wlr_output_state_field
-      ffitype: CUInt
+      - unwrapWlr_output_state_field
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_output_state_mode_type
   representation:
     newtype:
       constructor: Wlr_output_state_mode_type
       fields:
-      - un_Wlr_output_state_mode_type
-      ffitype: CUInt
+      - unwrapWlr_output_state_mode_type
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_render_pass
   representation: emptydata
 - hsname: Wlr_render_timer
@@ -713,8 +885,13 @@ hstypes:
       - wlr_renderer_WLR_PRIVATE
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_renderer_WLR_PRIVATE
   representation:
     record:
@@ -723,8 +900,13 @@ hstypes:
       - wlr_renderer_WLR_PRIVATE_impl
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_renderer_events
   representation:
     record:
@@ -734,8 +916,13 @@ hstypes:
       - wlr_renderer_events_lost
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_renderer_features
   representation:
     record:
@@ -745,8 +932,13 @@ hstypes:
       - wlr_renderer_features_timeline
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_renderer_impl
   representation: emptydata
 - hsname: Wlr_swapchain
@@ -762,7 +954,12 @@ hstypes:
       - wlr_texture_renderer
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Wlr_texture_impl
   representation: emptydata

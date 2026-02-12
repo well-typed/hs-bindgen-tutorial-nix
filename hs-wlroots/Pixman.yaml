@@ -258,8 +258,7 @@ hstypes:
     newtype:
       constructor: Pixman_bool_t
       fields:
-      - un_Pixman_bool_t
-      ffitype: CInt
+      - unwrapPixman_bool_t
   instances:
   - Bitfield
   - Bits
@@ -267,16 +266,21 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
   - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_box16
   representation:
     record:
@@ -288,18 +292,28 @@ hstypes:
       - pixman_box16_y2
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_box16_t
   representation:
     newtype:
       constructor: Pixman_box16_t
       fields:
-      - un_Pixman_box16_t
+      - unwrapPixman_box16_t
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_box32_t
   representation:
     record:
@@ -311,8 +325,13 @@ hstypes:
       - pixman_box32_t_y2
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_box64f_t
   representation:
     record:
@@ -324,9 +343,13 @@ hstypes:
       - pixman_box64f_t_y2
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_color_t
   representation:
     record:
@@ -338,22 +361,34 @@ hstypes:
       - pixman_color_t_alpha
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_dither_t
   representation:
     newtype:
       constructor: Pixman_dither_t
       fields:
-      - un_Pixman_dither_t
-      ffitype: CUInt
+      - unwrapPixman_dither_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_edge_t
   representation:
     record:
@@ -371,8 +406,13 @@ hstypes:
       - pixman_edge_t_dx_big
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_f_transform
   representation:
     record:
@@ -381,18 +421,28 @@ hstypes:
       - pixman_f_transform_m
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_f_transform_t
   representation:
     newtype:
       constructor: Pixman_f_transform_t
       fields:
-      - un_Pixman_f_transform_t
+      - unwrapPixman_f_transform_t
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_f_vector
   representation:
     record:
@@ -401,178 +451,237 @@ hstypes:
       - pixman_f_vector_v
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_f_vector_t
   representation:
     newtype:
       constructor: Pixman_f_vector_t
       fields:
-      - un_Pixman_f_vector_t
+      - unwrapPixman_f_vector_t
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_filter_t
   representation:
     newtype:
       constructor: Pixman_filter_t
       fields:
-      - un_Pixman_filter_t
-      ffitype: CUInt
+      - unwrapPixman_filter_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_16_16_t
   representation:
     newtype:
       constructor: Pixman_fixed_16_16_t
       fields:
-      - un_Pixman_fixed_16_16_t
-      ffitype: Int32
+      - unwrapPixman_fixed_16_16_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_1_16_t
   representation:
     newtype:
       constructor: Pixman_fixed_1_16_t
       fields:
-      - un_Pixman_fixed_1_16_t
-      ffitype: Word32
+      - unwrapPixman_fixed_1_16_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_1_31_t
   representation:
     newtype:
       constructor: Pixman_fixed_1_31_t
       fields:
-      - un_Pixman_fixed_1_31_t
-      ffitype: Word32
+      - unwrapPixman_fixed_1_31_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_32_32_t
   representation:
     newtype:
       constructor: Pixman_fixed_32_32_t
       fields:
-      - un_Pixman_fixed_32_32_t
-      ffitype: Int64
+      - unwrapPixman_fixed_32_32_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_48_16_t
   representation:
     newtype:
       constructor: Pixman_fixed_48_16_t
       fields:
-      - un_Pixman_fixed_48_16_t
-      ffitype: Int64
+      - unwrapPixman_fixed_48_16_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_fixed_t
   representation:
     newtype:
       constructor: Pixman_fixed_t
       fields:
-      - un_Pixman_fixed_t
-      ffitype: Int32
+      - unwrapPixman_fixed_t
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_format_code_t
   representation:
     newtype:
       constructor: Pixman_format_code_t
       fields:
-      - un_Pixman_format_code_t
-      ffitype: CUInt
+      - unwrapPixman_format_code_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_glyph_cache_t
   representation: emptydata
 - hsname: Pixman_glyph_t
@@ -585,8 +694,13 @@ hstypes:
       - pixman_glyph_t_glyph
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_gradient_stop_t
   representation:
     record:
@@ -596,21 +710,30 @@ hstypes:
       - pixman_gradient_stop_t_color
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_image_destroy_func_t
   representation:
     newtype:
       constructor: Pixman_image_destroy_func_t
       fields:
-      - un_Pixman_image_destroy_func_t
-      ffitype: FunPtr
+      - unwrapPixman_image_destroy_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_image_t
   representation: emptydata
 - hsname: Pixman_index_type
@@ -618,23 +741,29 @@ hstypes:
     newtype:
       constructor: Pixman_index_type
       fields:
-      - un_Pixman_index_type
-      ffitype: Word8
+      - unwrapPixman_index_type
   instances:
+  - Bitfield
   - Bits
   - Bounded
   - Enum
   - Eq
   - FiniteBits
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Integral
   - Ix
   - Num
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Real
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_indexed_t
   representation:
     record:
@@ -645,22 +774,34 @@ hstypes:
       - pixman_indexed_t_ent
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_kernel_t
   representation:
     newtype:
       constructor: Pixman_kernel_t
       fields:
-      - un_Pixman_kernel_t
-      ffitype: CUInt
+      - unwrapPixman_kernel_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_line_fixed_t
   representation:
     record:
@@ -670,22 +811,33 @@ hstypes:
       - pixman_line_fixed_t_p2
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_op_t
   representation:
     newtype:
       constructor: Pixman_op_t
       fields:
-      - un_Pixman_op_t
-      ffitype: CUInt
+      - unwrapPixman_op_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_point_fixed_t
   representation:
     record:
@@ -695,21 +847,30 @@ hstypes:
       - pixman_point_fixed_t_y
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_read_memory_func_t
   representation:
     newtype:
       constructor: Pixman_read_memory_func_t
       fields:
-      - un_Pixman_read_memory_func_t
-      ffitype: FunPtr
+      - unwrapPixman_read_memory_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_rectangle16_t
   representation:
     record:
@@ -721,8 +882,13 @@ hstypes:
       - pixman_rectangle16_t_height
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_rectangle32_t
   representation:
     record:
@@ -734,8 +900,13 @@ hstypes:
       - pixman_rectangle32_t_height
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_rectangle64f_t
   representation:
     record:
@@ -747,9 +918,13 @@ hstypes:
       - pixman_rectangle64f_t_height
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region16_data_t
   representation:
     record:
@@ -759,9 +934,13 @@ hstypes:
       - pixman_region16_data_t_numRects
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region16_t
   representation:
     record:
@@ -771,8 +950,13 @@ hstypes:
       - pixman_region16_t_data
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region32_data_t
   representation:
     record:
@@ -782,9 +966,13 @@ hstypes:
       - pixman_region32_data_t_numRects
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region32_t
   representation:
     record:
@@ -794,8 +982,13 @@ hstypes:
       - pixman_region32_t_data
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region64f_data_t
   representation:
     record:
@@ -805,9 +998,13 @@ hstypes:
       - pixman_region64f_data_t_numRects
   instances:
   - Eq
-  - Prim
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region64f_t
   representation:
     record:
@@ -817,36 +1014,55 @@ hstypes:
       - pixman_region64f_t_data
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_region_overlap_t
   representation:
     newtype:
       constructor: Pixman_region_overlap_t
       fields:
-      - un_Pixman_region_overlap_t
-      ffitype: CUInt
+      - unwrapPixman_region_overlap_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_repeat_t
   representation:
     newtype:
       constructor: Pixman_repeat_t
       fields:
-      - un_Pixman_repeat_t
-      ffitype: CUInt
+      - unwrapPixman_repeat_t
   instances:
+  - CEnum
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - Prim
   - Read
+  - ReadRaw
+  - SequentialCEnum
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_span_fix_t
   representation:
     record:
@@ -857,8 +1073,13 @@ hstypes:
       - pixman_span_fix_t_y
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_transform
   representation:
     record:
@@ -867,18 +1088,28 @@ hstypes:
       - pixman_transform_matrix
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_transform_t
   representation:
     newtype:
       constructor: Pixman_transform_t
       fields:
-      - un_Pixman_transform_t
+      - unwrapPixman_transform_t
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_trap_t
   representation:
     record:
@@ -888,8 +1119,13 @@ hstypes:
       - pixman_trap_t_bot
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_trapezoid_t
   representation:
     record:
@@ -901,8 +1137,13 @@ hstypes:
       - pixman_trapezoid_t_right
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_triangle_t
   representation:
     record:
@@ -913,8 +1154,13 @@ hstypes:
       - pixman_triangle_t_p3
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_vector
   representation:
     record:
@@ -923,28 +1169,42 @@ hstypes:
       - pixman_vector_vector
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_vector_t
   representation:
     newtype:
       constructor: Pixman_vector_t
       fields:
-      - un_Pixman_vector_t
+      - unwrapPixman_vector_t
   instances:
   - Eq
+  - HasCField
+  - HasField
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
 - hsname: Pixman_write_memory_func_t
   representation:
     newtype:
       constructor: Pixman_write_memory_func_t
       fields:
-      - un_Pixman_write_memory_func_t
-      ffitype: FunPtr
+      - unwrapPixman_write_memory_func_t
   instances:
   - Eq
-  - HasBaseForeignType
+  - HasCField
+  - HasFFIType
+  - HasField
   - Ord
+  - ReadRaw
   - Show
+  - StaticSize
   - Storable
+  - WriteRaw
