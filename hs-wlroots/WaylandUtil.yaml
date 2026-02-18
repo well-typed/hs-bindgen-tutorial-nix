@@ -38,6 +38,7 @@ hstypes:
       fields:
       - unwrapWl_argument
   instances:
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -54,6 +55,7 @@ hstypes:
       - wl_array_data
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -69,6 +71,7 @@ hstypes:
       - unwrapWl_dispatcher_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -91,6 +94,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -119,6 +123,7 @@ hstypes:
       - wl_interface_events
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -135,6 +140,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -156,6 +162,7 @@ hstypes:
       - wl_list_next
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -173,6 +180,7 @@ hstypes:
       - wl_message_types
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw

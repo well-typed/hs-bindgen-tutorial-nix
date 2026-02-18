@@ -107,6 +107,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -135,6 +136,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -163,6 +165,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -191,6 +194,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -219,6 +223,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -247,6 +252,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -272,6 +278,7 @@ hstypes:
       - unwrapWl_client_for_each_resource_iterator_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -291,6 +298,7 @@ hstypes:
       - unwrapWl_display_global_filter_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -310,6 +318,7 @@ hstypes:
       - unwrapWl_event_loop_fd_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -327,6 +336,7 @@ hstypes:
       - unwrapWl_event_loop_idle_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -344,6 +354,7 @@ hstypes:
       - unwrapWl_event_loop_signal_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -361,6 +372,7 @@ hstypes:
       - unwrapWl_event_loop_timer_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -382,6 +394,7 @@ hstypes:
       - unwrapWl_global_bind_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -400,6 +413,7 @@ hstypes:
       - wl_listener_notify
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -415,6 +429,7 @@ hstypes:
       - unwrapWl_notify_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -434,6 +449,7 @@ hstypes:
       - unwrapWl_protocol_logger_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -455,6 +471,7 @@ hstypes:
       - wl_protocol_logger_message_arguments
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -471,6 +488,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -493,6 +511,7 @@ hstypes:
       - unwrapWl_resource_destroy_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -514,6 +533,7 @@ hstypes:
       - wl_signal_listener_list
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -529,6 +549,7 @@ hstypes:
       - unwrapWl_user_data_destroy_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField

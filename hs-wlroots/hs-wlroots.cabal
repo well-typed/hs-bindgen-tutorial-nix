@@ -11,7 +11,7 @@ synopsis:           Test `hs-bindgen` on the `wlroots` library
 
 common common
   ghc-options:
-      -Wall
+      -Wall -Wunused-packages
   build-depends:
       base >= 4.16 && < 4.22
   default-language:
@@ -48,9 +48,7 @@ library
     , wayland-server
   build-depends:
     , c-expr-runtime
-    , ghc-prim
     , hs-bindgen-runtime
-    , primitive
 
 executable hs-wlroots-bin
   import:          common

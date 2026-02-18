@@ -266,6 +266,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -292,6 +293,7 @@ hstypes:
       - pixman_box16_y2
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -307,6 +309,7 @@ hstypes:
       - unwrapPixman_box16_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -325,6 +328,7 @@ hstypes:
       - pixman_box32_t_y2
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -343,6 +347,7 @@ hstypes:
       - pixman_box64f_t_y2
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -361,6 +366,7 @@ hstypes:
       - pixman_color_t_alpha
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -377,6 +383,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -406,6 +413,7 @@ hstypes:
       - pixman_edge_t_dx_big
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -421,6 +429,7 @@ hstypes:
       - pixman_f_transform_m
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -436,6 +445,7 @@ hstypes:
       - unwrapPixman_f_transform_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -451,6 +461,7 @@ hstypes:
       - pixman_f_vector_v
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -466,6 +477,7 @@ hstypes:
       - unwrapPixman_f_vector_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -482,6 +494,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -507,6 +520,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -535,6 +549,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -563,6 +578,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -591,6 +607,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -619,6 +636,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -647,6 +665,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -671,6 +690,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -694,6 +714,7 @@ hstypes:
       - pixman_glyph_t_glyph
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -710,6 +731,7 @@ hstypes:
       - pixman_gradient_stop_t_color
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -725,6 +747,7 @@ hstypes:
       - unwrapPixman_image_destroy_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -749,6 +772,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -774,6 +798,7 @@ hstypes:
       - pixman_indexed_t_ent
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -790,6 +815,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -811,6 +837,7 @@ hstypes:
       - pixman_line_fixed_t_p2
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -827,6 +854,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -847,6 +875,7 @@ hstypes:
       - pixman_point_fixed_t_y
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -862,6 +891,7 @@ hstypes:
       - unwrapPixman_read_memory_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -882,6 +912,7 @@ hstypes:
       - pixman_rectangle16_t_height
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -900,6 +931,7 @@ hstypes:
       - pixman_rectangle32_t_height
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -918,6 +950,7 @@ hstypes:
       - pixman_rectangle64f_t_height
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -934,6 +967,7 @@ hstypes:
       - pixman_region16_data_t_numRects
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -950,6 +984,7 @@ hstypes:
       - pixman_region16_t_data
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -966,6 +1001,7 @@ hstypes:
       - pixman_region32_data_t_numRects
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -982,6 +1018,7 @@ hstypes:
       - pixman_region32_t_data
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -998,6 +1035,7 @@ hstypes:
       - pixman_region64f_data_t_numRects
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1014,6 +1052,7 @@ hstypes:
       - pixman_region64f_t_data
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1030,6 +1069,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -1051,6 +1091,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -1073,6 +1114,7 @@ hstypes:
       - pixman_span_fix_t_y
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1088,6 +1130,7 @@ hstypes:
       - pixman_transform_matrix
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1103,6 +1146,7 @@ hstypes:
       - unwrapPixman_transform_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1119,6 +1163,7 @@ hstypes:
       - pixman_trap_t_bot
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1137,6 +1182,7 @@ hstypes:
       - pixman_trapezoid_t_right
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1154,6 +1200,7 @@ hstypes:
       - pixman_triangle_t_p3
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1169,6 +1216,7 @@ hstypes:
       - pixman_vector_vector
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1184,6 +1232,7 @@ hstypes:
       - unwrapPixman_vector_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -1199,6 +1248,7 @@ hstypes:
       - unwrapPixman_write_memory_func_t
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField

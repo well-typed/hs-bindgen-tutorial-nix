@@ -170,6 +170,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -198,6 +199,7 @@ hstypes:
   - Enum
   - Eq
   - FiniteBits
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -222,6 +224,7 @@ hstypes:
       - timespec_tv_nsec
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -239,6 +242,7 @@ hstypes:
       - wl_object_id
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -255,6 +259,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -276,6 +281,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -301,6 +307,7 @@ hstypes:
       - wl_resource_data
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -316,6 +323,7 @@ hstypes:
       - wlr_addon_set_WLR_PRIVATE
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -331,6 +339,7 @@ hstypes:
       - wlr_addon_set_WLR_PRIVATE_addons
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -353,6 +362,7 @@ hstypes:
       - wlr_box_height
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -375,6 +385,7 @@ hstypes:
       - wlr_buffer_addons
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -391,6 +402,7 @@ hstypes:
       - wlr_buffer_events_release
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -411,6 +423,7 @@ hstypes:
       - wlr_buffer_pass_options_signal_point
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -435,6 +448,7 @@ hstypes:
       - wlr_fbox_height
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -493,6 +507,7 @@ hstypes:
       - wlr_output_WLR_PRIVATE
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -508,6 +523,7 @@ hstypes:
       - wlr_output_WLR_PRIVATE_display_destroy
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -524,6 +540,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -560,6 +577,7 @@ hstypes:
       - wlr_output_cursor_WLR_PRIVATE
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -575,6 +593,7 @@ hstypes:
       - wlr_output_cursor_WLR_PRIVATE_renderer_destroy
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -591,6 +610,7 @@ hstypes:
       - wlr_output_event_bind_resource
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -608,6 +628,7 @@ hstypes:
       - wlr_output_event_commit_state
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -624,6 +645,7 @@ hstypes:
       - wlr_output_event_damage_damage
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -641,6 +663,7 @@ hstypes:
       - wlr_output_event_precommit_state
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -662,6 +685,7 @@ hstypes:
       - wlr_output_event_present_flags
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -678,6 +702,7 @@ hstypes:
       - wlr_output_event_request_state_state
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -702,6 +727,7 @@ hstypes:
       - wlr_output_events_destroy
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -726,6 +752,7 @@ hstypes:
       - wlr_output_mode_link
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -742,6 +769,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -763,6 +791,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -805,6 +834,7 @@ hstypes:
       - wlr_output_state_signal_point
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -822,6 +852,7 @@ hstypes:
       - wlr_output_state_custom_mode_refresh
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -838,6 +869,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -858,6 +890,7 @@ hstypes:
   instances:
   - CEnum
   - Eq
+  - Generic
   - HasCField
   - HasFFIType
   - HasField
@@ -885,6 +918,7 @@ hstypes:
       - wlr_renderer_WLR_PRIVATE
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -900,6 +934,7 @@ hstypes:
       - wlr_renderer_WLR_PRIVATE_impl
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -916,6 +951,7 @@ hstypes:
       - wlr_renderer_events_lost
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -932,6 +968,7 @@ hstypes:
       - wlr_renderer_features_timeline
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw
@@ -954,6 +991,7 @@ hstypes:
       - wlr_texture_renderer
   instances:
   - Eq
+  - Generic
   - HasCField
   - HasField
   - ReadRaw

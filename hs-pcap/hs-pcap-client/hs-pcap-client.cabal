@@ -11,7 +11,7 @@ synopsis:           Test `hs-bindgen` client on the `pcap` library
 
 common common
   ghc-options:
-      -Wall
+      -Wall -Wunused-packages
   build-depends:
       base >= 4.16 && < 4.22
   default-language:
@@ -30,11 +30,7 @@ library
   extra-libraries: pcap
   build-depends:
     , c-expr-runtime
-    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
-    , ghc-prim
     , hs-bindgen-runtime
-    -- TODO: https://github.com/well-typed/hs-bindgen/issues/1455.
-    , primitive
 
 executable hs-pcap-client-bin
   import:          common
