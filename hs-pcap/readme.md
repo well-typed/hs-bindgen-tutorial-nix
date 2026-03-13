@@ -177,18 +177,17 @@ $ ./generate-bindings
 ```
 
 The [`generate-bindings` script](./hs-pcap-client/generate-bindings) is well documented, please have a look at
-the different command line flags. In particular, analyze the parse and select
-flags which determine the set of translated declarations. In the following, we
-will highlight some selected command line flags:
+the different command line flags. In particular, analyze the select flags which
+determine the set of translated declarations. In the following, we will
+highlight some selected command line flags:
 
 - __`--unique-id`__: C does not have explicit namespaces but only maintains
   separate declaration spaces (e.g, `struct foo` vs `foo`). We use a unique
   identifier to discriminate global C identifiers, ensuring that bindings do not
   clash. This is also relevant when libraries have common dependencies, and
   external binding specifications are not used.
-- [__Parse and select predicates__](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ParsingSelectingAndProgramSlicing.md): Parse predicates determine the
-  declarations `hs-bindgen` tries to parse and reify; select predicates
-  determine the declarations to translate.
+- [__Select predicates__](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ParsingSelectingAndProgramSlicing.md): Select predicates determine the declarations to
+  translate.
 - __`--select-by-header-path`__: Select all declarations in header files with
   file paths matching the provided Perl-compatible regular expression. By
   default, `hs-bindgen` selects all declarations in the provided main header
@@ -286,8 +285,8 @@ $ ./generate-include-graph
 ![Include graph](./hs-pcap-client/pcap.svg)
 
 Include graphs can be tremendously helpful while adapting the command line flags
-to parse and select the desired declarations. For a more involved example of how
-to create and use include graphs, see the [`wlroots` tutorial](../hs-wlroots).
+to select the desired declarations. For a more involved example of how to create
+and use include graphs, see the [`wlroots` tutorial](../hs-wlroots).
 
 ## Method B: Template-Haskell interface
 
@@ -373,7 +372,6 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
                    (BNot isExcluded)
     cfg :: Config
     cfg = def
-      & #parsePredicate  .~ BTrue
       & #selectPredicate .~ selectP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
@@ -381,8 +379,8 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 ```
 
-Most of this code defines the appropriate parse and select predicates; compare
-with the [respective command line flags of the client example](./hs-pcap-client/generate-bindings).
+Most of this code defines the appropriate select predicate; compare with the
+[respective command line flags of the client example](./hs-pcap-client/generate-bindings).
 
 Some notes:
 - In TH mode, we do not have to set a __`unique-id`__; `hs-bindgen`

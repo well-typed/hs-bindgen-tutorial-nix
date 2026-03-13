@@ -32,11 +32,12 @@ include another header `libbar.h` from a different library altogether.
   <img src="./include-graph-example.png" />
 </p>
 
-`hs-bindgen` can _generate include graphs for you_. For example, (the last
+`hs-bindgen` can _generate include graphs for you_. For example, (the Clang
 option is required to satisfy the C preprocessor)
 
 ```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+  --include "wlroots" \
 ```
 
 ```mermaid
@@ -65,27 +66,60 @@ graph TD;
   v73-->|"#include &lt;wlr/util/addon.h&gt;"|v74
 ```
 
-We observe:
-- The include graph is unwieldy.
-- The include graph only shows inter-dependencies of the `wlroots` library, and
-not of any other libraries such as `wayland`.
-
-Parse-related `hs-bindgen` flags control which nodes are shown in the include
-graph.
-- We can add `--parse-all` to include all other library headers, but then the
-[include graph is too large](./include-graph-all.mmd) to be of any use to us.
-- We can [exclude standard headers by tweaking the parse predicate](./include-graph-no-stdlibs.mmd):
+We observe that [include graphs may be too verbose](./include-graph-all.mmd) to be useful. We can
+control which nodes are shown in the include graph using `--include PCRE` and
+`--exclude PCRE` command line options. The above invocation only includes
+headers with paths containing "wrloots". Since the predicates match against
+header paths, they may differ between systems. For example, on my machine I can
+[exclude standard headers](./include-graph-no-stdlibs.mmd) like so
 
 ```bash
 hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-    --parse-all \
-    --parse-except-by-header-path ".*glibc.*" \
-    --parse-except-by-header-path ".*clang-wrapper.*"
+    --exclude ".*glibc.*" --exclude ".*clang-wrapper.*"
 ```
 
-However, even the include graph without standard library headers is large, so we
-manually collapsed some nodes (_Wlroots sub-headers_, _Wayland server_, and
-_Pixman_):
+However, even the include graph without standard library headers is large.
+`hs-bindgen` provides another options `--simple` that minimizes verbosity of
+generated include graphs by
+- removing edge labels,
+- combining dangling (i.e., transient) edges of removed vertices,
+- stripping prefix ".../include/" from paths.
+
+For example
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+    --include "wlroots" --simple
+```
+
+```mermaid
+graph TD;
+  v0["wlroots-0.19/wlr/backend.h"]
+  v90["wlroots-0.19/wlr/render/dmabuf.h"]
+  v87["wlroots-0.19/wlr/render/pass.h"]
+  v86["wlroots-0.19/wlr/render/wlr_renderer.h"]
+  v89["wlroots-0.19/wlr/render/wlr_texture.h"]
+  v91["wlroots-0.19/wlr/types/wlr_buffer.h"]
+  v75["wlroots-0.19/wlr/types/wlr_output.h"]
+  v92["wlroots-0.19/wlr/util/addon.h"]
+  v88["wlroots-0.19/wlr/util/box.h"]
+  v0-->v75
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92
+```
+
+This is much better already. We further tweaked the predicate and manually
+collapsed some nodes (_Wlroots sub-headers_, _Wayland server_, and _Pixman_):
 
 <p align="center">
   <img src="./include-graph-reduced-edited.png" />
@@ -95,7 +129,8 @@ We can see that `wayland-util.h` is the core header that the Wayland server as
 well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
 `wlr/backend.h`, but not of the Wayland server.
 
-Please see the [script generating include graphs](./generate-include-graphs) for the exact commands used.
+Please see the [script generating include graphs](./generate-include-graphs) for the exact commands
+used.
 
 ## Bindings
 

@@ -14,21 +14,6 @@ module_flags=(
     --module Generated.Pcap
 )
 
-# `hs-bindgen` parses the C header files using `libclang` and interprets/reifies
-# the declarations into an `hs-bindgen`-internal abstract syntax tree. These
-# flags affect the parsing/reifying step.
-parse_flags=(
-    # The external binding specifications we provide for the C standard library
-    # do not cover all definitions. We instruct `hs-bindgen` to parse additional
-    # headers.
-    --parse-by-header-path "socket.h"
-    --parse-by-header-path "struct_timeval.h"
-    # By default `hs-bindgen` parses all headers in the main header directory,
-    # but we adjust the parse predicate above, and so need to provide this
-    # option.
-    --parse-from-main-header-dirs
-)
-
 # We only generate bindings for a sub-set of all parsed/reified declarations.
 # These flags configure the selection step.
 select_flags=(
@@ -38,6 +23,7 @@ select_flags=(
     --select-by-header-path pcap.h
     # Select transitive dependencies.
     --enable-program-slicing
+    # De-select deprecated declarations.
     --select-except-deprecated
     # We manually de-select some declarations. These declarations are only
     # available when `libpcap` is built with "remote capture" enabled, which is
@@ -62,7 +48,6 @@ debug_flags=(
 
 hs-bindgen-cli preprocess \
     "${module_flags[@]}" \
-    "${parse_flags[@]}" \
     "${select_flags[@]}" \
     "${debug_flags[@]}" \
     pcap.h
