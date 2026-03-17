@@ -202,7 +202,8 @@ ctypes:
 ```
 
 Higher level modules directly use this information, avoiding incompatible
-duplicate definitions of data types. For example, `Wlr.Backend.Safe` contains
+duplicate definitions of data types. For example, `Generated.Wlr.Backend.Safe`
+contains
 
 ```haskell
 import qualified Generated.Wayland.Server.Core
@@ -221,22 +222,50 @@ detected output descriptions. Run the application with `cabal run`.
 
 Below, we highlight some features of the generated code.
 
-## Record-dot syntax (zero-copy API)
+## Record fields without prefixes
 
-C structures often contain fields with other C structures which in turn contain
-more fields with C structures. For example, the type `Wlr_backend` contains a
-field of type `Wlr_backend_events`, which in turn contains a field
-`Wlr_backend_events_new_output` of type `Wl_signal`
+By default, `hs-bindgen` prefixes field names with the name of the outer data
+type. For example,
 
 ```haskell
 data Wlr_backend = Wlr_backend {
     ...
   , wlr_backend_events :: Wlr_backend_events
   }
+```
+
+We can instruct `hs-bindgen` to use unprefixed field names using the
+`--no-field-prefixes` option
+
+```haskell
+data Wlr_backend = Wlr_backend {
+    ...
+  , events :: Wlr_backend_events
+  }
+```
+
+Usually, field names will clash, necessitating the `DuplicateRecordFields`
+extension. `--no-field-prefixes` plays well with "Record-dot syntax (zero-copy
+API)" highlighted in the next section.
+
+## Record-dot syntax (zero-copy API)
+
+(This section assumes `--no-field-prefixes`).
+
+C structures often contain fields with other C structures which in turn contain
+more fields with C structures. For example, the type `Wlr_backend` contains a
+field `events` of type `Wlr_backend_events`, which in turn contains a field
+`new_output` of type `Wl_signal`
+
+```haskell
+data Wlr_backend = Wlr_backend {
+    ...
+  , events :: Wlr_backend_events
+  }
 
 data Wlr_backend_events = Wlr_backend_events
     ...
-  , wlr_backend_events_new_output :: Wl_signal
+  , new_output :: Wl_signal
   }
 ```
 
@@ -251,20 +280,16 @@ backend :: Ptr Wl_backend
 backend = ...
 
 newOutputSignal :: Ptr Wl_signal
-newOutputSignal = backend.wlr_backend_events.wlr_backend_events_new_output
+newOutputSignal = backend.events.new_output
 ```
 
 Internally, `hs-bindgen` generates `HasField` instances; a simplified instance
 is
 
 ```haskell
-instance HasField "wlr_backend_events" (Ptr Wlr_backend) (Ptr Wlr_backend_events) where
+instance HasField "events" (Ptr Wlr_backend) (Ptr Wlr_backend_events) where
   getField = ...
 ```
-
-> [!NOTE]
-> The zero-copy API will be even nicer when `hs-bindgen` supports
-> `DuplicateRecordFields`: https://github.com/well-typed/hs-bindgen/issues/69.
 
 ## Function pointers (higher-order API)
 

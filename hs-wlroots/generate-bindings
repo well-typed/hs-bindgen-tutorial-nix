@@ -16,6 +16,7 @@ wayland-util() {
     local module_flags=(
         --unique-id com.hs-bindgen.wayland-util
         --module Generated.Wayland.Util
+        --no-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -47,6 +48,7 @@ wayland-core() {
     local module_flags=(
         --unique-id com.hs-bindgen.wayland-server-core
         --module Generated.Wayland.Server.Core
+        --no-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -80,6 +82,7 @@ pixman() {
     local module_flags=(
         --unique-id com.hs-bindgen.pixman
         --module Generated.Pixman
+        --no-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -116,6 +119,7 @@ wlr-types-output() {
     local module_flags=(
         --unique-id com.hs-bindgen.wlr.output
         --module Generated.Wlr.Types.Output
+        --no-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -153,6 +157,7 @@ wlr-backend() {
     local module_flags=(
         --unique-id com.hs-bindgen.wlr.backend
         --module Generated.Wlr.Backend
+        --no-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files

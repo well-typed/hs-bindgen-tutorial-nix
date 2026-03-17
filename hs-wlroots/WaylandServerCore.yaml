@@ -99,7 +99,7 @@ hstypes:
     newtype:
       constructor: C__Gid_t
       fields:
-      - unwrapC__Gid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -128,7 +128,7 @@ hstypes:
     newtype:
       constructor: C__Pid_t
       fields:
-      - unwrapC__Pid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -157,7 +157,7 @@ hstypes:
     newtype:
       constructor: C__Uid_t
       fields:
-      - unwrapC__Uid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -186,7 +186,7 @@ hstypes:
     newtype:
       constructor: Gid_t
       fields:
-      - unwrapGid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -215,7 +215,7 @@ hstypes:
     newtype:
       constructor: Pid_t
       fields:
-      - unwrapPid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -244,7 +244,7 @@ hstypes:
     newtype:
       constructor: Uid_t
       fields:
-      - unwrapUid_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -275,7 +275,7 @@ hstypes:
     newtype:
       constructor: Wl_client_for_each_resource_iterator_func_t
       fields:
-      - unwrapWl_client_for_each_resource_iterator_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -295,7 +295,7 @@ hstypes:
     newtype:
       constructor: Wl_display_global_filter_func_t
       fields:
-      - unwrapWl_display_global_filter_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -315,7 +315,7 @@ hstypes:
     newtype:
       constructor: Wl_event_loop_fd_func_t
       fields:
-      - unwrapWl_event_loop_fd_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -333,7 +333,7 @@ hstypes:
     newtype:
       constructor: Wl_event_loop_idle_func_t
       fields:
-      - unwrapWl_event_loop_idle_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -351,7 +351,7 @@ hstypes:
     newtype:
       constructor: Wl_event_loop_signal_func_t
       fields:
-      - unwrapWl_event_loop_signal_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -369,7 +369,7 @@ hstypes:
     newtype:
       constructor: Wl_event_loop_timer_func_t
       fields:
-      - unwrapWl_event_loop_timer_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -391,7 +391,7 @@ hstypes:
     newtype:
       constructor: Wl_global_bind_func_t
       fields:
-      - unwrapWl_global_bind_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -409,8 +409,8 @@ hstypes:
     record:
       constructor: Wl_listener
       fields:
-      - wl_listener_link
-      - wl_listener_notify
+      - link
+      - notify
   instances:
   - Eq
   - Generic
@@ -426,7 +426,7 @@ hstypes:
     newtype:
       constructor: Wl_notify_func_t
       fields:
-      - unwrapWl_notify_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -446,7 +446,7 @@ hstypes:
     newtype:
       constructor: Wl_protocol_logger_func_t
       fields:
-      - unwrapWl_protocol_logger_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -464,11 +464,11 @@ hstypes:
     record:
       constructor: Wl_protocol_logger_message
       fields:
-      - wl_protocol_logger_message_resource
-      - wl_protocol_logger_message_message_opcode
-      - wl_protocol_logger_message_message
-      - wl_protocol_logger_message_arguments_count
-      - wl_protocol_logger_message_arguments
+      - resource
+      - message_opcode
+      - message
+      - arguments_count
+      - arguments
   instances:
   - Eq
   - Generic
@@ -484,7 +484,7 @@ hstypes:
     newtype:
       constructor: Wl_protocol_logger_type
       fields:
-      - unwrapWl_protocol_logger_type
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -508,7 +508,7 @@ hstypes:
     newtype:
       constructor: Wl_resource_destroy_func_t
       fields:
-      - unwrapWl_resource_destroy_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -530,7 +530,7 @@ hstypes:
     record:
       constructor: Wl_signal
       fields:
-      - wl_signal_listener_list
+      - listener_list
   instances:
   - Eq
   - Generic
@@ -546,7 +546,7 @@ hstypes:
     newtype:
       constructor: Wl_user_data_destroy_func_t
       fields:
-      - unwrapWl_user_data_destroy_func_t
+      - unwrap
   instances:
   - Eq
   - Generic

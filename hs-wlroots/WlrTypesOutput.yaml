@@ -162,7 +162,7 @@ hstypes:
     newtype:
       constructor: C__Syscall_slong_t
       fields:
-      - unwrapC__Syscall_slong_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -191,7 +191,7 @@ hstypes:
     newtype:
       constructor: C__Time_t
       fields:
-      - unwrapC__Time_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -220,8 +220,8 @@ hstypes:
     record:
       constructor: Timespec
       fields:
-      - timespec_tv_sec
-      - timespec_tv_nsec
+      - tv_sec
+      - tv_nsec
   instances:
   - Eq
   - Generic
@@ -237,9 +237,9 @@ hstypes:
     record:
       constructor: Wl_object
       fields:
-      - wl_object_interface
-      - wl_object_implementation
-      - wl_object_id
+      - interface
+      - implementation
+      - id
   instances:
   - Eq
   - Generic
@@ -255,7 +255,7 @@ hstypes:
     newtype:
       constructor: Wl_output_subpixel
       fields:
-      - unwrapWl_output_subpixel
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -277,7 +277,7 @@ hstypes:
     newtype:
       constructor: Wl_output_transform
       fields:
-      - unwrapWl_output_transform
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -299,12 +299,12 @@ hstypes:
     record:
       constructor: Wl_resource
       fields:
-      - wl_resource_object
-      - wl_resource_destroy
-      - wl_resource_link
-      - wl_resource_destroy_signal
-      - wl_resource_client
-      - wl_resource_data
+      - object
+      - destroy
+      - link
+      - destroy_signal
+      - client
+      - data'
   instances:
   - Eq
   - Generic
@@ -320,7 +320,7 @@ hstypes:
     record:
       constructor: Wlr_addon_set
       fields:
-      - wlr_addon_set_WLR_PRIVATE
+      - wLR_PRIVATE
   instances:
   - Eq
   - Generic
@@ -336,7 +336,7 @@ hstypes:
     record:
       constructor: Wlr_addon_set_WLR_PRIVATE
       fields:
-      - wlr_addon_set_WLR_PRIVATE_addons
+      - addons
   instances:
   - Eq
   - Generic
@@ -356,10 +356,10 @@ hstypes:
     record:
       constructor: Wlr_box
       fields:
-      - wlr_box_x
-      - wlr_box_y
-      - wlr_box_width
-      - wlr_box_height
+      - x
+      - 'y'
+      - width
+      - height
   instances:
   - Eq
   - Generic
@@ -375,14 +375,14 @@ hstypes:
     record:
       constructor: Wlr_buffer
       fields:
-      - wlr_buffer_impl
-      - wlr_buffer_width
-      - wlr_buffer_height
-      - wlr_buffer_dropped
-      - wlr_buffer_n_locks
-      - wlr_buffer_accessing_data_ptr
-      - wlr_buffer_events
-      - wlr_buffer_addons
+      - impl
+      - width
+      - height
+      - dropped
+      - n_locks
+      - accessing_data_ptr
+      - events
+      - addons
   instances:
   - Eq
   - Generic
@@ -398,8 +398,8 @@ hstypes:
     record:
       constructor: Wlr_buffer_events
       fields:
-      - wlr_buffer_events_destroy
-      - wlr_buffer_events_release
+      - destroy
+      - release
   instances:
   - Eq
   - Generic
@@ -417,10 +417,10 @@ hstypes:
     record:
       constructor: Wlr_buffer_pass_options
       fields:
-      - wlr_buffer_pass_options_timer
-      - wlr_buffer_pass_options_color_transform
-      - wlr_buffer_pass_options_signal_timeline
-      - wlr_buffer_pass_options_signal_point
+      - timer
+      - color_transform
+      - signal_timeline
+      - signal_point
   instances:
   - Eq
   - Generic
@@ -442,10 +442,10 @@ hstypes:
     record:
       constructor: Wlr_fbox
       fields:
-      - wlr_fbox_x
-      - wlr_fbox_y
-      - wlr_fbox_width
-      - wlr_fbox_height
+      - x
+      - 'y'
+      - width
+      - height
   instances:
   - Eq
   - Generic
@@ -461,50 +461,50 @@ hstypes:
     record:
       constructor: Wlr_output
       fields:
-      - wlr_output_impl
-      - wlr_output_backend
-      - wlr_output_event_loop
-      - wlr_output_global
-      - wlr_output_resources
-      - wlr_output_name
-      - wlr_output_description
-      - wlr_output_make
-      - wlr_output_model
-      - wlr_output_serial
-      - wlr_output_phys_width
-      - wlr_output_phys_height
-      - wlr_output_modes
-      - wlr_output_current_mode
-      - wlr_output_width
-      - wlr_output_height
-      - wlr_output_refresh
-      - wlr_output_enabled
-      - wlr_output_scale
-      - wlr_output_subpixel
-      - wlr_output_transform
-      - wlr_output_adaptive_sync_status
-      - wlr_output_render_format
-      - wlr_output_adaptive_sync_supported
-      - wlr_output_needs_frame
-      - wlr_output_frame_pending
-      - wlr_output_non_desktop
-      - wlr_output_commit_seq
-      - wlr_output_events
-      - wlr_output_idle_frame
-      - wlr_output_idle_done
-      - wlr_output_attach_render_locks
-      - wlr_output_cursors
-      - wlr_output_hardware_cursor
-      - wlr_output_cursor_swapchain
-      - wlr_output_cursor_front_buffer
-      - wlr_output_software_cursor_locks
-      - wlr_output_layers
-      - wlr_output_allocator
-      - wlr_output_renderer
-      - wlr_output_swapchain
-      - wlr_output_addons
-      - wlr_output_data
-      - wlr_output_WLR_PRIVATE
+      - impl
+      - backend
+      - event_loop
+      - global
+      - resources
+      - name
+      - description
+      - make
+      - model
+      - serial
+      - phys_width
+      - phys_height
+      - modes
+      - current_mode
+      - width
+      - height
+      - refresh
+      - enabled
+      - scale
+      - subpixel
+      - transform
+      - adaptive_sync_status
+      - render_format
+      - adaptive_sync_supported
+      - needs_frame
+      - frame_pending
+      - non_desktop
+      - commit_seq
+      - events
+      - idle_frame
+      - idle_done
+      - attach_render_locks
+      - cursors
+      - hardware_cursor
+      - cursor_swapchain
+      - cursor_front_buffer
+      - software_cursor_locks
+      - layers
+      - allocator
+      - renderer
+      - swapchain
+      - addons
+      - data'
+      - wLR_PRIVATE
   instances:
   - Eq
   - Generic
@@ -520,7 +520,7 @@ hstypes:
     record:
       constructor: Wlr_output_WLR_PRIVATE
       fields:
-      - wlr_output_WLR_PRIVATE_display_destroy
+      - display_destroy
   instances:
   - Eq
   - Generic
@@ -536,7 +536,7 @@ hstypes:
     newtype:
       constructor: Wlr_output_adaptive_sync_status
       fields:
-      - unwrapWlr_output_adaptive_sync_status
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -558,23 +558,23 @@ hstypes:
     record:
       constructor: Wlr_output_cursor
       fields:
-      - wlr_output_cursor_output
-      - wlr_output_cursor_x
-      - wlr_output_cursor_y
-      - wlr_output_cursor_enabled
-      - wlr_output_cursor_visible
-      - wlr_output_cursor_width
-      - wlr_output_cursor_height
-      - wlr_output_cursor_src_box
-      - wlr_output_cursor_transform
-      - wlr_output_cursor_hotspot_x
-      - wlr_output_cursor_hotspot_y
-      - wlr_output_cursor_texture
-      - wlr_output_cursor_own_texture
-      - wlr_output_cursor_wait_timeline
-      - wlr_output_cursor_wait_point
-      - wlr_output_cursor_link
-      - wlr_output_cursor_WLR_PRIVATE
+      - output
+      - x
+      - 'y'
+      - enabled
+      - visible
+      - width
+      - height
+      - src_box
+      - transform
+      - hotspot_x
+      - hotspot_y
+      - texture
+      - own_texture
+      - wait_timeline
+      - wait_point
+      - link
+      - wLR_PRIVATE
   instances:
   - Eq
   - Generic
@@ -590,7 +590,7 @@ hstypes:
     record:
       constructor: Wlr_output_cursor_WLR_PRIVATE
       fields:
-      - wlr_output_cursor_WLR_PRIVATE_renderer_destroy
+      - renderer_destroy
   instances:
   - Eq
   - Generic
@@ -606,8 +606,8 @@ hstypes:
     record:
       constructor: Wlr_output_event_bind
       fields:
-      - wlr_output_event_bind_output
-      - wlr_output_event_bind_resource
+      - output
+      - resource
   instances:
   - Eq
   - Generic
@@ -623,9 +623,9 @@ hstypes:
     record:
       constructor: Wlr_output_event_commit
       fields:
-      - wlr_output_event_commit_output
-      - wlr_output_event_commit_when
-      - wlr_output_event_commit_state
+      - output
+      - when
+      - state
   instances:
   - Eq
   - Generic
@@ -641,8 +641,8 @@ hstypes:
     record:
       constructor: Wlr_output_event_damage
       fields:
-      - wlr_output_event_damage_output
-      - wlr_output_event_damage_damage
+      - output
+      - damage
   instances:
   - Eq
   - Generic
@@ -658,9 +658,9 @@ hstypes:
     record:
       constructor: Wlr_output_event_precommit
       fields:
-      - wlr_output_event_precommit_output
-      - wlr_output_event_precommit_when
-      - wlr_output_event_precommit_state
+      - output
+      - when
+      - state
   instances:
   - Eq
   - Generic
@@ -676,13 +676,13 @@ hstypes:
     record:
       constructor: Wlr_output_event_present
       fields:
-      - wlr_output_event_present_output
-      - wlr_output_event_present_commit_seq
-      - wlr_output_event_present_presented
-      - wlr_output_event_present_when
-      - wlr_output_event_present_seq
-      - wlr_output_event_present_refresh
-      - wlr_output_event_present_flags
+      - output
+      - commit_seq
+      - presented
+      - when
+      - seq
+      - refresh
+      - flags
   instances:
   - Eq
   - Generic
@@ -698,8 +698,8 @@ hstypes:
     record:
       constructor: Wlr_output_event_request_state
       fields:
-      - wlr_output_event_request_state_output
-      - wlr_output_event_request_state_state
+      - output
+      - state
   instances:
   - Eq
   - Generic
@@ -715,16 +715,16 @@ hstypes:
     record:
       constructor: Wlr_output_events
       fields:
-      - wlr_output_events_frame
-      - wlr_output_events_damage
-      - wlr_output_events_needs_frame
-      - wlr_output_events_precommit
-      - wlr_output_events_commit
-      - wlr_output_events_present
-      - wlr_output_events_bind
-      - wlr_output_events_description
-      - wlr_output_events_request_state
-      - wlr_output_events_destroy
+      - frame
+      - damage
+      - needs_frame
+      - precommit
+      - commit
+      - present
+      - bind
+      - description
+      - request_state
+      - destroy
   instances:
   - Eq
   - Generic
@@ -744,12 +744,12 @@ hstypes:
     record:
       constructor: Wlr_output_mode
       fields:
-      - wlr_output_mode_width
-      - wlr_output_mode_height
-      - wlr_output_mode_refresh
-      - wlr_output_mode_preferred
-      - wlr_output_mode_picture_aspect_ratio
-      - wlr_output_mode_link
+      - width
+      - height
+      - refresh
+      - preferred
+      - picture_aspect_ratio
+      - link
   instances:
   - Eq
   - Generic
@@ -765,7 +765,7 @@ hstypes:
     newtype:
       constructor: Wlr_output_mode_aspect_ratio
       fields:
-      - unwrapWlr_output_mode_aspect_ratio
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -787,7 +787,7 @@ hstypes:
     newtype:
       constructor: Wlr_output_present_flag
       fields:
-      - unwrapWlr_output_present_flag
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -808,30 +808,30 @@ hstypes:
     record:
       constructor: Wlr_output_state
       fields:
-      - wlr_output_state_committed
-      - wlr_output_state_allow_reconfiguration
-      - wlr_output_state_damage
-      - wlr_output_state_enabled
-      - wlr_output_state_scale
-      - wlr_output_state_transform
-      - wlr_output_state_adaptive_sync_enabled
-      - wlr_output_state_render_format
-      - wlr_output_state_subpixel
-      - wlr_output_state_buffer
-      - wlr_output_state_buffer_src_box
-      - wlr_output_state_buffer_dst_box
-      - wlr_output_state_tearing_page_flip
-      - wlr_output_state_mode_type
-      - wlr_output_state_mode
-      - wlr_output_state_custom_mode
-      - wlr_output_state_gamma_lut
-      - wlr_output_state_gamma_lut_size
-      - wlr_output_state_layers
-      - wlr_output_state_layers_len
-      - wlr_output_state_wait_timeline
-      - wlr_output_state_wait_point
-      - wlr_output_state_signal_timeline
-      - wlr_output_state_signal_point
+      - committed
+      - allow_reconfiguration
+      - damage
+      - enabled
+      - scale
+      - transform
+      - adaptive_sync_enabled
+      - render_format
+      - subpixel
+      - buffer
+      - buffer_src_box
+      - buffer_dst_box
+      - tearing_page_flip
+      - mode_type
+      - mode
+      - custom_mode
+      - gamma_lut
+      - gamma_lut_size
+      - layers
+      - layers_len
+      - wait_timeline
+      - wait_point
+      - signal_timeline
+      - signal_point
   instances:
   - Eq
   - Generic
@@ -847,9 +847,9 @@ hstypes:
     record:
       constructor: Wlr_output_state_custom_mode
       fields:
-      - wlr_output_state_custom_mode_width
-      - wlr_output_state_custom_mode_height
-      - wlr_output_state_custom_mode_refresh
+      - width
+      - height
+      - refresh
   instances:
   - Eq
   - Generic
@@ -865,7 +865,7 @@ hstypes:
     newtype:
       constructor: Wlr_output_state_field
       fields:
-      - unwrapWlr_output_state_field
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -886,7 +886,7 @@ hstypes:
     newtype:
       constructor: Wlr_output_state_mode_type
       fields:
-      - unwrapWlr_output_state_mode_type
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -912,10 +912,10 @@ hstypes:
     record:
       constructor: Wlr_renderer
       fields:
-      - wlr_renderer_render_buffer_caps
-      - wlr_renderer_events
-      - wlr_renderer_features
-      - wlr_renderer_WLR_PRIVATE
+      - render_buffer_caps
+      - events
+      - features
+      - wLR_PRIVATE
   instances:
   - Eq
   - Generic
@@ -931,7 +931,7 @@ hstypes:
     record:
       constructor: Wlr_renderer_WLR_PRIVATE
       fields:
-      - wlr_renderer_WLR_PRIVATE_impl
+      - impl
   instances:
   - Eq
   - Generic
@@ -947,8 +947,8 @@ hstypes:
     record:
       constructor: Wlr_renderer_events
       fields:
-      - wlr_renderer_events_destroy
-      - wlr_renderer_events_lost
+      - destroy
+      - lost
   instances:
   - Eq
   - Generic
@@ -964,8 +964,8 @@ hstypes:
     record:
       constructor: Wlr_renderer_features
       fields:
-      - wlr_renderer_features_output_color_transform
-      - wlr_renderer_features_timeline
+      - output_color_transform
+      - timeline
   instances:
   - Eq
   - Generic
@@ -985,10 +985,10 @@ hstypes:
     record:
       constructor: Wlr_texture
       fields:
-      - wlr_texture_impl
-      - wlr_texture_width
-      - wlr_texture_height
-      - wlr_texture_renderer
+      - impl
+      - width
+      - height
+      - renderer
   instances:
   - Eq
   - Generic

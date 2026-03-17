@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE OverloadedRecordDot #-}
 
 module Main where
@@ -20,7 +21,7 @@ handler = Wl_notify_func_t_Aux $ \_listenerPtr voidPtr -> do
   -- Cast the untyped C pointer :-|.
   let output :: Foreign.Ptr Wlr_output
       output = Foreign.castPtr voidPtr
-  outputDescription <- Foreign.peekCString =<< Foreign.peek output.wlr_output_description
+  outputDescription <- Foreign.peekCString =<< Foreign.peek output.description
   putStrLn $ "Detected output with description: " <> outputDescription
 
 getListener :: IO (Ptr Wl_listener)
@@ -31,7 +32,7 @@ getListener = do
 
 failWhenNull :: String -> IO () -> Ptr a -> IO ()
 failWhenNull what destructor p =
-  when (p == Foreign.nullPtr) $ do
+  Control.Monad.when (p == Foreign.nullPtr) $ do
     destructor
     (error $ "failed to obtain resource: " <> what)
 
@@ -48,7 +49,7 @@ main = do
   failWhenNull "Listener" (pure ()) listener
 
   let newOutputSignal :: Ptr Wl_signal
-      newOutputSignal = backend.wlr_backend_events.wlr_backend_events_new_output
+      newOutputSignal = backend.events.new_output
 
   failWhenNull "New output signal" destructor newOutputSignal
 
@@ -56,12 +57,12 @@ main = do
 
   -- It is annoying that we have to free the list of listeners manually.
   let signalList :: Ptr Wl_list
-      signalList = newOutputSignal.wl_signal_listener_list
-  prev :: Ptr Wl_list <- Foreign.peek signalList.wl_list_prev
+      signalList = newOutputSignal.listener_list
+  prev :: Ptr Wl_list <- Foreign.peek signalList.prev
   let destructorWithList = wl_list_remove prev >> destructor
 
   backendOk <- wlr_backend_start backend
-  when (backendOk == 0) $ do
+  Control.Monad.when (backendOk == 0) $ do
     destructorWithList
     error "failed to start backend"
 

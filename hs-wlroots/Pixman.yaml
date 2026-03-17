@@ -258,7 +258,7 @@ hstypes:
     newtype:
       constructor: Pixman_bool_t
       fields:
-      - unwrapPixman_bool_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -287,10 +287,10 @@ hstypes:
     record:
       constructor: Pixman_box16
       fields:
-      - pixman_box16_x1
-      - pixman_box16_y1
-      - pixman_box16_x2
-      - pixman_box16_y2
+      - x1
+      - y1
+      - x2
+      - y2
   instances:
   - Eq
   - Generic
@@ -306,7 +306,7 @@ hstypes:
     newtype:
       constructor: Pixman_box16_t
       fields:
-      - unwrapPixman_box16_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -322,10 +322,10 @@ hstypes:
     record:
       constructor: Pixman_box32_t
       fields:
-      - pixman_box32_t_x1
-      - pixman_box32_t_y1
-      - pixman_box32_t_x2
-      - pixman_box32_t_y2
+      - x1
+      - y1
+      - x2
+      - y2
   instances:
   - Eq
   - Generic
@@ -341,10 +341,10 @@ hstypes:
     record:
       constructor: Pixman_box64f_t
       fields:
-      - pixman_box64f_t_x1
-      - pixman_box64f_t_y1
-      - pixman_box64f_t_x2
-      - pixman_box64f_t_y2
+      - x1
+      - y1
+      - x2
+      - y2
   instances:
   - Eq
   - Generic
@@ -360,10 +360,10 @@ hstypes:
     record:
       constructor: Pixman_color_t
       fields:
-      - pixman_color_t_red
-      - pixman_color_t_green
-      - pixman_color_t_blue
-      - pixman_color_t_alpha
+      - red
+      - green
+      - blue
+      - alpha
   instances:
   - Eq
   - Generic
@@ -379,7 +379,7 @@ hstypes:
     newtype:
       constructor: Pixman_dither_t
       fields:
-      - unwrapPixman_dither_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -401,16 +401,16 @@ hstypes:
     record:
       constructor: Pixman_edge_t
       fields:
-      - pixman_edge_t_x
-      - pixman_edge_t_e
-      - pixman_edge_t_stepx
-      - pixman_edge_t_signdx
-      - pixman_edge_t_dy
-      - pixman_edge_t_dx
-      - pixman_edge_t_stepx_small
-      - pixman_edge_t_stepx_big
-      - pixman_edge_t_dx_small
-      - pixman_edge_t_dx_big
+      - x
+      - e
+      - stepx
+      - signdx
+      - dy
+      - dx
+      - stepx_small
+      - stepx_big
+      - dx_small
+      - dx_big
   instances:
   - Eq
   - Generic
@@ -426,7 +426,7 @@ hstypes:
     record:
       constructor: Pixman_f_transform
       fields:
-      - pixman_f_transform_m
+      - m
   instances:
   - Eq
   - Generic
@@ -442,7 +442,7 @@ hstypes:
     newtype:
       constructor: Pixman_f_transform_t
       fields:
-      - unwrapPixman_f_transform_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -458,7 +458,7 @@ hstypes:
     record:
       constructor: Pixman_f_vector
       fields:
-      - pixman_f_vector_v
+      - v
   instances:
   - Eq
   - Generic
@@ -474,7 +474,7 @@ hstypes:
     newtype:
       constructor: Pixman_f_vector_t
       fields:
-      - unwrapPixman_f_vector_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -490,7 +490,7 @@ hstypes:
     newtype:
       constructor: Pixman_filter_t
       fields:
-      - unwrapPixman_filter_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -512,7 +512,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_16_16_t
       fields:
-      - unwrapPixman_fixed_16_16_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -541,7 +541,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_1_16_t
       fields:
-      - unwrapPixman_fixed_1_16_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -570,7 +570,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_1_31_t
       fields:
-      - unwrapPixman_fixed_1_31_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -599,7 +599,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_32_32_t
       fields:
-      - unwrapPixman_fixed_32_32_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -628,7 +628,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_48_16_t
       fields:
-      - unwrapPixman_fixed_48_16_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -657,7 +657,7 @@ hstypes:
     newtype:
       constructor: Pixman_fixed_t
       fields:
-      - unwrapPixman_fixed_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -686,7 +686,7 @@ hstypes:
     newtype:
       constructor: Pixman_format_code_t
       fields:
-      - unwrapPixman_format_code_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -709,9 +709,9 @@ hstypes:
     record:
       constructor: Pixman_glyph_t
       fields:
-      - pixman_glyph_t_x
-      - pixman_glyph_t_y
-      - pixman_glyph_t_glyph
+      - x
+      - 'y'
+      - glyph
   instances:
   - Eq
   - Generic
@@ -727,8 +727,8 @@ hstypes:
     record:
       constructor: Pixman_gradient_stop_t
       fields:
-      - pixman_gradient_stop_t_x
-      - pixman_gradient_stop_t_color
+      - x
+      - color
   instances:
   - Eq
   - Generic
@@ -744,7 +744,7 @@ hstypes:
     newtype:
       constructor: Pixman_image_destroy_func_t
       fields:
-      - unwrapPixman_image_destroy_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -764,7 +764,7 @@ hstypes:
     newtype:
       constructor: Pixman_index_type
       fields:
-      - unwrapPixman_index_type
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -793,9 +793,9 @@ hstypes:
     record:
       constructor: Pixman_indexed_t
       fields:
-      - pixman_indexed_t_color
-      - pixman_indexed_t_rgba
-      - pixman_indexed_t_ent
+      - color
+      - rgba
+      - ent
   instances:
   - Eq
   - Generic
@@ -811,7 +811,7 @@ hstypes:
     newtype:
       constructor: Pixman_kernel_t
       fields:
-      - unwrapPixman_kernel_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -833,8 +833,8 @@ hstypes:
     record:
       constructor: Pixman_line_fixed_t
       fields:
-      - pixman_line_fixed_t_p1
-      - pixman_line_fixed_t_p2
+      - p1
+      - p2
   instances:
   - Eq
   - Generic
@@ -850,7 +850,7 @@ hstypes:
     newtype:
       constructor: Pixman_op_t
       fields:
-      - unwrapPixman_op_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -871,8 +871,8 @@ hstypes:
     record:
       constructor: Pixman_point_fixed_t
       fields:
-      - pixman_point_fixed_t_x
-      - pixman_point_fixed_t_y
+      - x
+      - 'y'
   instances:
   - Eq
   - Generic
@@ -888,7 +888,7 @@ hstypes:
     newtype:
       constructor: Pixman_read_memory_func_t
       fields:
-      - unwrapPixman_read_memory_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -906,10 +906,10 @@ hstypes:
     record:
       constructor: Pixman_rectangle16_t
       fields:
-      - pixman_rectangle16_t_x
-      - pixman_rectangle16_t_y
-      - pixman_rectangle16_t_width
-      - pixman_rectangle16_t_height
+      - x
+      - 'y'
+      - width
+      - height
   instances:
   - Eq
   - Generic
@@ -925,10 +925,10 @@ hstypes:
     record:
       constructor: Pixman_rectangle32_t
       fields:
-      - pixman_rectangle32_t_x
-      - pixman_rectangle32_t_y
-      - pixman_rectangle32_t_width
-      - pixman_rectangle32_t_height
+      - x
+      - 'y'
+      - width
+      - height
   instances:
   - Eq
   - Generic
@@ -944,10 +944,10 @@ hstypes:
     record:
       constructor: Pixman_rectangle64f_t
       fields:
-      - pixman_rectangle64f_t_x
-      - pixman_rectangle64f_t_y
-      - pixman_rectangle64f_t_width
-      - pixman_rectangle64f_t_height
+      - x
+      - 'y'
+      - width
+      - height
   instances:
   - Eq
   - Generic
@@ -963,8 +963,8 @@ hstypes:
     record:
       constructor: Pixman_region16_data_t
       fields:
-      - pixman_region16_data_t_size
-      - pixman_region16_data_t_numRects
+      - size
+      - numRects
   instances:
   - Eq
   - Generic
@@ -980,8 +980,8 @@ hstypes:
     record:
       constructor: Pixman_region16_t
       fields:
-      - pixman_region16_t_extents
-      - pixman_region16_t_data
+      - extents
+      - data'
   instances:
   - Eq
   - Generic
@@ -997,8 +997,8 @@ hstypes:
     record:
       constructor: Pixman_region32_data_t
       fields:
-      - pixman_region32_data_t_size
-      - pixman_region32_data_t_numRects
+      - size
+      - numRects
   instances:
   - Eq
   - Generic
@@ -1014,8 +1014,8 @@ hstypes:
     record:
       constructor: Pixman_region32_t
       fields:
-      - pixman_region32_t_extents
-      - pixman_region32_t_data
+      - extents
+      - data'
   instances:
   - Eq
   - Generic
@@ -1031,8 +1031,8 @@ hstypes:
     record:
       constructor: Pixman_region64f_data_t
       fields:
-      - pixman_region64f_data_t_size
-      - pixman_region64f_data_t_numRects
+      - size
+      - numRects
   instances:
   - Eq
   - Generic
@@ -1048,8 +1048,8 @@ hstypes:
     record:
       constructor: Pixman_region64f_t
       fields:
-      - pixman_region64f_t_extents
-      - pixman_region64f_t_data
+      - extents
+      - data'
   instances:
   - Eq
   - Generic
@@ -1065,7 +1065,7 @@ hstypes:
     newtype:
       constructor: Pixman_region_overlap_t
       fields:
-      - unwrapPixman_region_overlap_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -1087,7 +1087,7 @@ hstypes:
     newtype:
       constructor: Pixman_repeat_t
       fields:
-      - unwrapPixman_repeat_t
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -1109,9 +1109,9 @@ hstypes:
     record:
       constructor: Pixman_span_fix_t
       fields:
-      - pixman_span_fix_t_l
-      - pixman_span_fix_t_r
-      - pixman_span_fix_t_y
+      - l
+      - r
+      - 'y'
   instances:
   - Eq
   - Generic
@@ -1127,7 +1127,7 @@ hstypes:
     record:
       constructor: Pixman_transform
       fields:
-      - pixman_transform_matrix
+      - matrix
   instances:
   - Eq
   - Generic
@@ -1143,7 +1143,7 @@ hstypes:
     newtype:
       constructor: Pixman_transform_t
       fields:
-      - unwrapPixman_transform_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -1159,8 +1159,8 @@ hstypes:
     record:
       constructor: Pixman_trap_t
       fields:
-      - pixman_trap_t_top
-      - pixman_trap_t_bot
+      - top
+      - bot
   instances:
   - Eq
   - Generic
@@ -1176,10 +1176,10 @@ hstypes:
     record:
       constructor: Pixman_trapezoid_t
       fields:
-      - pixman_trapezoid_t_top
-      - pixman_trapezoid_t_bottom
-      - pixman_trapezoid_t_left
-      - pixman_trapezoid_t_right
+      - top
+      - bottom
+      - left
+      - right
   instances:
   - Eq
   - Generic
@@ -1195,9 +1195,9 @@ hstypes:
     record:
       constructor: Pixman_triangle_t
       fields:
-      - pixman_triangle_t_p1
-      - pixman_triangle_t_p2
-      - pixman_triangle_t_p3
+      - p1
+      - p2
+      - p3
   instances:
   - Eq
   - Generic
@@ -1213,7 +1213,7 @@ hstypes:
     record:
       constructor: Pixman_vector
       fields:
-      - pixman_vector_vector
+      - vector
   instances:
   - Eq
   - Generic
@@ -1229,7 +1229,7 @@ hstypes:
     newtype:
       constructor: Pixman_vector_t
       fields:
-      - unwrapPixman_vector_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -1245,7 +1245,7 @@ hstypes:
     newtype:
       constructor: Pixman_write_memory_func_t
       fields:
-      - unwrapPixman_write_memory_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
