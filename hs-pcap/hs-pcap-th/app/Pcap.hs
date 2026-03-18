@@ -38,17 +38,9 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     selectP = BAnd headerHasPcap
             $ BAnd (BNot isDeprecated)
                    (BNot isExcluded)
-    parseP =
-        BOr (BIf $ ParseHeader FromMainHeaderDirs)
-      -- The external binding specifications we provide for the C standard
-      -- library do not cover all definitions. We instruct `hs-bindgen` to parse
-      -- additional headers.
-      $ BOr (BIf $ ParseHeader $ HeaderPathMatches "socket.h")
-            (BIf $ ParseHeader $ HeaderPathMatches "struct_timeval.h")
     cfg :: Config
     cfg = def
       & #selectPredicate .~ selectP
-      & #parsePredicate  .~ parseP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
     cfgTH = def { categoryChoice = useSafeCategory }

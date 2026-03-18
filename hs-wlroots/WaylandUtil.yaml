@@ -36,7 +36,7 @@ hstypes:
     newtype:
       constructor: Wl_argument
       fields:
-      - unwrapWl_argument
+      - unwrap
   instances:
   - Generic
   - HasCField
@@ -50,9 +50,9 @@ hstypes:
     record:
       constructor: Wl_array
       fields:
-      - wl_array_size
-      - wl_array_alloc
-      - wl_array_data
+      - size
+      - alloc
+      - data'
   instances:
   - Eq
   - Generic
@@ -68,7 +68,7 @@ hstypes:
     newtype:
       constructor: Wl_dispatcher_func_t
       fields:
-      - unwrapWl_dispatcher_func_t
+      - unwrap
   instances:
   - Eq
   - Generic
@@ -86,7 +86,7 @@ hstypes:
     newtype:
       constructor: Wl_fixed_t
       fields:
-      - unwrapWl_fixed_t
+      - unwrap
   instances:
   - Bitfield
   - Bits
@@ -115,12 +115,12 @@ hstypes:
     record:
       constructor: Wl_interface
       fields:
-      - wl_interface_name
-      - wl_interface_version
-      - wl_interface_method_count
-      - wl_interface_methods
-      - wl_interface_event_count
-      - wl_interface_events
+      - name
+      - version
+      - method_count
+      - methods
+      - event_count
+      - events
   instances:
   - Eq
   - Generic
@@ -136,7 +136,7 @@ hstypes:
     newtype:
       constructor: Wl_iterator_result
       fields:
-      - unwrapWl_iterator_result
+      - unwrap
   instances:
   - CEnum
   - Eq
@@ -158,8 +158,8 @@ hstypes:
     record:
       constructor: Wl_list
       fields:
-      - wl_list_prev
-      - wl_list_next
+      - prev
+      - next
   instances:
   - Eq
   - Generic
@@ -175,9 +175,9 @@ hstypes:
     record:
       constructor: Wl_message
       fields:
-      - wl_message_name
-      - wl_message_signature
-      - wl_message_types
+      - name
+      - signature
+      - types
   instances:
   - Eq
   - Generic

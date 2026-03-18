@@ -32,60 +32,54 @@ include another header `libbar.h` from a different library altogether.
   <img src="./include-graph-example.png" />
 </p>
 
-`hs-bindgen` can _generate include graphs for you_. For example, (the last
+`hs-bindgen` can _generate include graphs for you_. For example, (the Clang
 option is required to satisfy the C preprocessor)
 
 ```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+  --include "wlroots" \
 ```
 
 ```mermaid
 graph TD;
-  v0["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
-  v72["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
-  v69["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
-  v68["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
-  v71["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
-  v73["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
-  v56["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
-  v74["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
-  v70["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
-  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v56
-  v56-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v68
-  v68-->|"#include &lt;wlr/render/pass.h&gt;"|v69
-  v56-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v68-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v69-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v71-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v68-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v71
-  v71-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
-  v73-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
-  v56-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v73
-  v56-->|"#include &lt;wlr/util/addon.h&gt;"|v74
-  v73-->|"#include &lt;wlr/util/addon.h&gt;"|v74
+  v0("wlr/backend.h")
+  v90("wlr/render/dmabuf.h")
+  v87("wlr/render/pass.h")
+  v86("wlr/render/wlr_renderer.h")
+  v89("wlr/render/wlr_texture.h")
+  v91("wlr/types/wlr_buffer.h")
+  v75("wlr/types/wlr_output.h")
+  v92("wlr/util/addon.h")
+  v88("wlr/util/box.h")
+  v0-->v75
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92
 ```
 
-We observe:
-- The include graph is unwieldy.
-- The include graph only shows inter-dependencies of the `wlroots` library, and
-not of any other libraries such as `wayland`.
-
-Parse-related `hs-bindgen` flags control which nodes are shown in the include
-graph.
-- We can add `--parse-all` to include all other library headers, but then the
-[include graph is too large](./include-graph-all.mmd) to be of any use to us.
-- We can [exclude standard headers by tweaking the parse predicate](./include-graph-no-stdlibs.mmd):
+[Include graphs may be too verbose](./include-graph-all.mmd) to be useful. We can control which nodes
+are shown in the include graph using `--include PCRE` and `--exclude PCRE`
+command line options. The above invocation only includes headers with paths
+containing "wrloots". Predicates match against header paths, which may differ
+between systems. For example, on my machine I can [exclude standard headers](./include-graph-no-stdlibs.mmd)
+like so
 
 ```bash
 hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-    --parse-all \
-    --parse-except-by-header-path ".*glibc.*" \
-    --parse-except-by-header-path ".*clang-wrapper.*"
+    --exclude "glibc" --exclude "clang-wrapper"
 ```
 
-However, even the include graph without standard library headers is large, so we
-manually collapsed some nodes (_Wlroots sub-headers_, _Wayland server_, and
-_Pixman_):
+We further tweaked the predicate and manually collapsed some nodes (_Wlroots
+sub-headers_, _Wayland server_, and _Pixman_):
 
 <p align="center">
   <img src="./include-graph-reduced-edited.png" />
@@ -95,7 +89,42 @@ We can see that `wayland-util.h` is the core header that the Wayland server as
 well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
 `wlr/backend.h`, but not of the Wayland server.
 
-Please see the [script generating include graphs](./generate-include-graphs) for the exact commands used.
+Please see the [script generating include graphs](./generate-include-graphs) for the exact commands
+used.
+
+If you prefer, you can increase the verbosity of generated include graphs with
+`--show-paths`. Then, the vertices show the paths of the includes. For example,
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+    --include "wlroots" --show-paths
+```
+
+```mermaid
+graph TD;
+  v0("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h")
+  v90("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h")
+  v87("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h")
+  v86("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h")
+  v89("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h")
+  v91("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h")
+  v75("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h")
+  v92("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h")
+  v88("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h")
+  v0-->v75
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92
+```
 
 ## Bindings
 
@@ -167,7 +196,8 @@ ctypes:
 ```
 
 Higher level modules directly use this information, avoiding incompatible
-duplicate definitions of data types. For example, `Wlr.Backend.Safe` contains
+duplicate definitions of data types. For example, `Generated.Wlr.Backend.Safe`
+contains
 
 ```haskell
 import qualified Generated.Wayland.Server.Core
@@ -186,22 +216,50 @@ detected output descriptions. Run the application with `cabal run`.
 
 Below, we highlight some features of the generated code.
 
-## Record-dot syntax (zero-copy API)
+## Record fields without prefixes
 
-C structures often contain fields with other C structures which in turn contain
-more fields with C structures. For example, the type `Wlr_backend` contains a
-field of type `Wlr_backend_events`, which in turn contains a field
-`Wlr_backend_events_new_output` of type `Wl_signal`
+By default, `hs-bindgen` prefixes field names with the name of the outer data
+type. For example,
 
 ```haskell
 data Wlr_backend = Wlr_backend {
     ...
   , wlr_backend_events :: Wlr_backend_events
   }
+```
+
+We can instruct `hs-bindgen` to use unprefixed field names using the
+`--omit-field-prefixes` option
+
+```haskell
+data Wlr_backend = Wlr_backend {
+    ...
+  , events :: Wlr_backend_events
+  }
+```
+
+Usually, field names will clash, necessitating the `DuplicateRecordFields`
+extension. `--omit-field-prefixes` plays well with "Record-dot syntax (zero-copy
+API)" highlighted in the next section.
+
+## Record-dot syntax (zero-copy API)
+
+(This section assumes `--omit-field-prefixes`).
+
+C structures often contain fields with other C structures which in turn contain
+more fields with C structures. For example, the type `Wlr_backend` contains a
+field `events` of type `Wlr_backend_events`, which in turn contains a field
+`new_output` of type `Wl_signal`
+
+```haskell
+data Wlr_backend = Wlr_backend {
+    ...
+  , events :: Wlr_backend_events
+  }
 
 data Wlr_backend_events = Wlr_backend_events
     ...
-  , wlr_backend_events_new_output :: Wl_signal
+  , new_output :: Wl_signal
   }
 ```
 
@@ -216,20 +274,16 @@ backend :: Ptr Wl_backend
 backend = ...
 
 newOutputSignal :: Ptr Wl_signal
-newOutputSignal = backend.wlr_backend_events.wlr_backend_events_new_output
+newOutputSignal = backend.events.new_output
 ```
 
 Internally, `hs-bindgen` generates `HasField` instances; a simplified instance
 is
 
 ```haskell
-instance HasField "wlr_backend_events" (Ptr Wlr_backend) (Ptr Wlr_backend_events) where
+instance HasField "events" (Ptr Wlr_backend) (Ptr Wlr_backend_events) where
   getField = ...
 ```
-
-> [!NOTE]
-> The zero-copy API will be even nicer when `hs-bindgen` supports
-> `DuplicateRecordFields`: https://github.com/well-typed/hs-bindgen/issues/69.
 
 ## Function pointers (higher-order API)
 

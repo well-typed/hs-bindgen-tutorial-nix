@@ -8,10 +8,6 @@ wayland-util() {
     local c_flags=(
     )
 
-    local parse_flags=(
-        --parse-all
-    )
-
     local select_flags=(
         --select-except-deprecated
         --enable-program-slicing
@@ -20,6 +16,7 @@ wayland-util() {
     local module_flags=(
         --unique-id com.hs-bindgen.wayland-util
         --module Generated.Wayland.Util
+        --omit-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -32,7 +29,6 @@ wayland-util() {
     hs-bindgen-cli preprocess "${header}" \
         "${debug[@]}" \
         "${c_flags[@]}" \
-        "${parse_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -44,10 +40,6 @@ wayland-core() {
     local c_flags=(
     )
 
-    local parse_flags=(
-        --parse-all
-    )
-
     local select_flags=(
         --select-except-deprecated
         --enable-program-slicing
@@ -56,6 +48,7 @@ wayland-core() {
     local module_flags=(
         --unique-id com.hs-bindgen.wayland-server-core
         --module Generated.Wayland.Server.Core
+        --omit-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -69,7 +62,6 @@ wayland-core() {
     hs-bindgen-cli preprocess "${header}" \
         "${debug[@]}" \
         "${c_flags[@]}" \
-        "${parse_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -81,10 +73,6 @@ pixman() {
     local c_flags=(
     )
 
-    local parse_flags=(
-        --parse-all
-    )
-
     local select_flags=(
         --select-by-header-path "${header}"
         --select-except-deprecated
@@ -94,6 +82,7 @@ pixman() {
     local module_flags=(
         --unique-id com.hs-bindgen.pixman
         --module Generated.Pixman
+        --omit-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -108,7 +97,6 @@ pixman() {
     hs-bindgen-cli preprocess "${header}" \
         "${debug[@]}" \
         "${c_flags[@]}" \
-        "${parse_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -122,10 +110,6 @@ wlr-types-output() {
         --clang-option -DWLR_USE_UNSTABLE
     )
 
-    local parse_flags=(
-        --parse-all
-    )
-
     local select_flags=(
         --select-by-header-path "${header}"
         --select-except-deprecated
@@ -135,6 +119,7 @@ wlr-types-output() {
     local module_flags=(
         --unique-id com.hs-bindgen.wlr.output
         --module Generated.Wlr.Types.Output
+        --omit-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -150,7 +135,6 @@ wlr-types-output() {
     hs-bindgen-cli preprocess "${header}" \
         "${debug[@]}" \
         "${c_flags[@]}" \
-        "${parse_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -164,10 +148,6 @@ wlr-backend() {
         --clang-option -DWLR_USE_UNSTABLE
     )
 
-    local parse_flags=(
-        --parse-all
-    )
-
     local select_flags=(
         --select-by-header-path "${header}"
         --select-except-deprecated
@@ -177,6 +157,7 @@ wlr-backend() {
     local module_flags=(
         --unique-id com.hs-bindgen.wlr.backend
         --module Generated.Wlr.Backend
+        --omit-field-prefixes
         --hs-output-dir src
         --create-output-dirs
         --overwrite-files
@@ -192,7 +173,6 @@ wlr-backend() {
     hs-bindgen-cli preprocess "${header}" \
         "${debug[@]}" \
         "${c_flags[@]}" \
-        "${parse_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"

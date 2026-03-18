@@ -1,17 +1,17 @@
 graph TD;
-  v0["pcap.h"]
-  v76["pcap/bpf.h"]
-  v4["pcap/compiler-tests.h"]
-  v77["pcap/dlt.h"]
-  v3["pcap/funcattrs.h"]
-  v5["pcap/pcap-inttypes.h"]
-  v2["pcap/pcap.h"]
-  v52["pcap/socket.h"]
-  v0-->|"#include &lt;pcap/pcap.h&gt;"|v2
-  v2-->|"#include &lt;pcap/funcattrs.h&gt;"|v3
-  v76-->|"#include &lt;pcap/funcattrs.h&gt;"|v3
-  v3-->|"#include &lt;pcap/compiler-tests.h&gt;"|v4
-  v2-->|"#include &lt;pcap/pcap-inttypes.h&gt;"|v5
-  v2-->|"#include &lt;pcap/socket.h&gt;"|v52
-  v2-->|"#include &lt;pcap/bpf.h&gt;"|v76
-  v76-->|"#include &lt;pcap/dlt.h&gt;"|v77
+  v0("pcap.h")
+  v76("pcap/bpf.h")
+  v4("pcap/compiler-tests.h")
+  v77("pcap/dlt.h")
+  v3("pcap/funcattrs.h")
+  v5("pcap/pcap-inttypes.h")
+  v2("pcap/pcap.h")
+  v52("pcap/socket.h")
+  v0-->v2
+  v2-->v3
+  v76-->v3
+  v3-->v4
+  v2-->v5
+  v2-->v52
+  v2-->v76
+  v76-->v77

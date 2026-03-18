@@ -1,64 +1,32 @@
 #!/usr/bin/env bash
 
-debug=(-v 2)
+BINDGEN=hs-bindgen-cli
 
 header="wlr/backend.h"
+
+debug=(-v 2)
 
 c_flags=(
     # Enable unstable features of Wlroots.
     --clang-option -DWLR_USE_UNSTABLE
 )
 
-select_flags=(
-    --select-by-header-path "${header}"
-    --enable-program-slicing
-)
-
 module_flags=(
-    --unique-id com.hs-bindgen.wlroots
     --overwrite-files
 )
 
-hs-bindgen-cli info include-graph "${header}" \
-    "${debug[@]}" \
-    "${c_flags[@]}" \
-    "${select_flags[@]}" \
-    "${module_flags[@]}" \
-    -o include-graph-backend.mmd
+generate_include_graph() {
+    "${BINDGEN}" info include-graph "${header}" \
+        "${debug[@]}" \
+        "${c_flags[@]}" \
+        "${module_flags[@]}" \
+        "$@"
+}
 
-hs-bindgen-cli info include-graph "${header}" \
-    "${debug[@]}" \
-    "${c_flags[@]}" \
-    "${select_flags[@]}" \
-    "${module_flags[@]}" \
-    --parse-all \
-    -o include-graph-all.mmd
+generate_include_graph -o include-graph-all.mmd
 
-hs-bindgen-cli info include-graph "${header}" \
-    "${debug[@]}" \
-    "${c_flags[@]}" \
-    "${select_flags[@]}" \
-    "${module_flags[@]}" \
-    --parse-all \
-    --parse-except-by-header-path ".*glibc.*" \
-    --parse-except-by-header-path ".*clang-wrapper.*" \
-    -o include-graph-no-stdlibs.mmd
+generate_include_graph -o include-graph-backend.mmd \
+    --include "wlroots"
 
-# The above code is shorter than direct exclusion of standard headers (see
-# below), but it is system-dependent!
-
-# Direct exclusion:
-#
-# --parse-except-by-header-path "stdarg" \
-# --parse-except-by-header-path "stdbool" \
-# --parse-except-by-header-path "stddef" \
-# --parse-except-by-header-path "stdint" \
-# --parse-except-by-header-path "bits/.*\.h" \
-# --parse-except-by-header-path "gnu/.*\.h" \
-# --parse-except-by-header-path "features-time64\.h" \
-# --parse-except-by-header-path "features\.h" \
-# --parse-except-by-header-path "inttypes\.h" \
-# --parse-except-by-header-path "math\.h" \
-# --parse-except-by-header-path "stdc-predef\.h" \
-# --parse-except-by-header-path "sys/.*\.h" \
-# --parse-except-by-header-path "time\.h" \
+generate_include_graph -o include-graph-no-stdlibs.mmd \
+    --exclude "glibc" --exclude "clang-wrapper"
