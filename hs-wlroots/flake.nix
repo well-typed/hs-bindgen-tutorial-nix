@@ -4,7 +4,7 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    hs-bindgen.url = "github:well-typed/hs-bindgen/dom/1508/include-graph-predicate";
+    hs-bindgen.url = "github:well-typed/hs-bindgen";
   };
 
   outputs =

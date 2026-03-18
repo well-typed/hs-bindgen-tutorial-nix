@@ -133,16 +133,15 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1773831260,
+        "lastModified": 1773832212,
         "narHash": "sha256-tyxh8e/5yc3jBydqwg1LWsXNeWDoV40SThd+AaDpwvM=",
         "owner": "well-typed",
         "repo": "hs-bindgen",
-        "rev": "6328c317f303527c54695a840994f05c71d063b8",
+        "rev": "f52ef3cd02cc72f4b322faf73db02807a80f42ab",
         "type": "github"
       },
       "original": {
         "owner": "well-typed",
-        "ref": "dom/1508/include-graph-predicate",
         "repo": "hs-bindgen",
         "type": "github"
       }
@@ -154,16 +153,15 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1773831260,
+        "lastModified": 1773832212,
         "narHash": "sha256-tyxh8e/5yc3jBydqwg1LWsXNeWDoV40SThd+AaDpwvM=",
         "owner": "well-typed",
         "repo": "hs-bindgen",
-        "rev": "6328c317f303527c54695a840994f05c71d063b8",
+        "rev": "f52ef3cd02cc72f4b322faf73db02807a80f42ab",
         "type": "github"
       },
       "original": {
         "owner": "well-typed",
-        "ref": "dom/1508/include-graph-predicate",
         "repo": "hs-bindgen",
         "type": "github"
       }
@@ -175,16 +173,15 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1773831260,
+        "lastModified": 1773832212,
         "narHash": "sha256-tyxh8e/5yc3jBydqwg1LWsXNeWDoV40SThd+AaDpwvM=",
         "owner": "well-typed",
         "repo": "hs-bindgen",
-        "rev": "6328c317f303527c54695a840994f05c71d063b8",
+        "rev": "f52ef3cd02cc72f4b322faf73db02807a80f42ab",
         "type": "github"
       },
       "original": {
         "owner": "well-typed",
-        "ref": "dom/1508/include-graph-predicate",
         "repo": "hs-bindgen",
         "type": "github"
       }
