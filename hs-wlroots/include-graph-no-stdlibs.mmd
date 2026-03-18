@@ -1,49 +1,49 @@
 graph TD;
-  v2["/nix/store/blr5zdnxfckm1690cdx6anmh3s17sx5p-wayland-1.24.0-dev/include/wayland-server-core.h"]
-  v84["/nix/store/blr5zdnxfckm1690cdx6anmh3s17sx5p-wayland-1.24.0-dev/include/wayland-server-protocol.h"]
-  v85["/nix/store/blr5zdnxfckm1690cdx6anmh3s17sx5p-wayland-1.24.0-dev/include/wayland-server.h"]
-  v47["/nix/store/blr5zdnxfckm1690cdx6anmh3s17sx5p-wayland-1.24.0-dev/include/wayland-util.h"]
-  v74["/nix/store/blr5zdnxfckm1690cdx6anmh3s17sx5p-wayland-1.24.0-dev/include/wayland-version.h"]
-  v0["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
-  v90["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
-  v87["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
-  v86["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
-  v89["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
-  v91["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
-  v75["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
-  v92["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
-  v88["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
-  v77["/nix/store/s60msvirzaknyjgpsc8yyld1qg5i3hn5-pixman-0.46.4/include/pixman-version.h"]
-  v76["/nix/store/s60msvirzaknyjgpsc8yyld1qg5i3hn5-pixman-0.46.4/include/pixman.h"]
-  v0-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v85-->|"#include &quot;wayland-server-core.h&quot;"|v2
-  v86-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v87-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v89-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v91-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v92-->|"#include &lt;wayland-server-core.h&gt;"|v2
-  v2-->|"#include &quot;wayland-util.h&quot;"|v47
-  v75-->|"#include &lt;wayland-util.h&gt;"|v47
-  v2-->|"#include &quot;wayland-version.h&quot;"|v74
-  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v75
-  v75-->|"#include &lt;pixman.h&gt;"|v76
-  v87-->|"#include &lt;pixman.h&gt;"|v76
-  v89-->|"#include &lt;pixman.h&gt;"|v76
-  v91-->|"#include &lt;pixman.h&gt;"|v76
-  v76-->|"#include &lt;pixman-version.h&gt;"|v77
-  v75-->|"#include &lt;wayland-server-protocol.h&gt;"|v84
-  v85-->|"#include &quot;wayland-server-protocol.h&quot;"|v84
-  v88-->|"#include &lt;wayland-server-protocol.h&gt;"|v84
-  v84-->|"#include &quot;wayland-server.h&quot;"|v85
-  v75-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v86
-  v86-->|"#include &lt;wlr/render/pass.h&gt;"|v87
-  v75-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v86-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v87-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v89-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v86-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v89
-  v89-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v90
-  v91-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v90
-  v75-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v91
-  v75-->|"#include &lt;wlr/util/addon.h&gt;"|v92
-  v91-->|"#include &lt;wlr/util/addon.h&gt;"|v92
+  v77("pixman-version.h")
+  v76("pixman.h")
+  v2("wayland-server-core.h")
+  v84("wayland-server-protocol.h")
+  v47("wayland-util.h")
+  v0("wlr/backend.h")
+  v90("wlr/render/dmabuf.h")
+  v87("wlr/render/pass.h")
+  v86("wlr/render/wlr_renderer.h")
+  v89("wlr/render/wlr_texture.h")
+  v91("wlr/types/wlr_buffer.h")
+  v75("wlr/types/wlr_output.h")
+  v92("wlr/util/addon.h")
+  v88("wlr/util/box.h")
+  v85("wayland-server.h")
+  v74("wayland-version.h")
+  v0-->v2
+  v85-->v2
+  v86-->v2
+  v87-->v2
+  v89-->v2
+  v91-->v2
+  v92-->v2
+  v2-->v47
+  v75-->v47
+  v2-->v74
+  v0-->v75
+  v75-->v76
+  v87-->v76
+  v89-->v76
+  v91-->v76
+  v76-->v77
+  v75-->v84
+  v85-->v84
+  v88-->v84
+  v84-->v85
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92

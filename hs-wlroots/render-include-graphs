@@ -5,9 +5,7 @@
 graphs=(
   include-graph-all.mmd
   include-graph-backend.mmd
-  include-graph-backend-simple.mmd
   include-graph-no-stdlibs.mmd
-  include-graph-no-stdlibs-simple.mmd
 )
 
 for graph in "${graphs[@]}"; do

@@ -28,11 +28,5 @@ generate_include_graph -o include-graph-all.mmd
 generate_include_graph -o include-graph-backend.mmd \
     --include "wlroots"
 
-generate_include_graph -o include-graph-backend-simple.mmd \
-    --include "wlroots" --simple
-
 generate_include_graph -o include-graph-no-stdlibs.mmd \
     --exclude "glibc" --exclude "clang-wrapper"
-
-generate_include_graph -o include-graph-no-stdlibs-simple.mmd \
-    --exclude "glibc" --exclude "clang-wrapper" --simple

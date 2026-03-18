@@ -1,23 +1,23 @@
 graph TD;
-  v0["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
-  v90["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
-  v87["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
-  v86["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
-  v89["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
-  v91["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
-  v75["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
-  v92["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
-  v88["/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
-  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v75
-  v75-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v86
-  v86-->|"#include &lt;wlr/render/pass.h&gt;"|v87
-  v75-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v86-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v87-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v89-->|"#include &lt;wlr/util/box.h&gt;"|v88
-  v86-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v89
-  v89-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v90
-  v91-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v90
-  v75-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v91
-  v75-->|"#include &lt;wlr/util/addon.h&gt;"|v92
-  v91-->|"#include &lt;wlr/util/addon.h&gt;"|v92
+  v0("wlr/backend.h")
+  v90("wlr/render/dmabuf.h")
+  v87("wlr/render/pass.h")
+  v86("wlr/render/wlr_renderer.h")
+  v89("wlr/render/wlr_texture.h")
+  v91("wlr/types/wlr_buffer.h")
+  v75("wlr/types/wlr_output.h")
+  v92("wlr/util/addon.h")
+  v88("wlr/util/box.h")
+  v0-->v75
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92

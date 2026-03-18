@@ -42,67 +42,15 @@ hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTA
 
 ```mermaid
 graph TD;
-  v0["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h"]
-  v72["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h"]
-  v69["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h"]
-  v68["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h"]
-  v71["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h"]
-  v73["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h"]
-  v56["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h"]
-  v74["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h"]
-  v70["/nix/store/vxm9x8hynlq20jsm38waw7ji3qprd6rq-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h"]
-  v0-->|"#include &lt;wlr/types/wlr_output.h&gt;"|v56
-  v56-->|"#include &lt;wlr/render/wlr_renderer.h&gt;"|v68
-  v68-->|"#include &lt;wlr/render/pass.h&gt;"|v69
-  v56-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v68-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v69-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v71-->|"#include &lt;wlr/util/box.h&gt;"|v70
-  v68-->|"#include &lt;wlr/render/wlr_texture.h&gt;"|v71
-  v71-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
-  v73-->|"#include &lt;wlr/render/dmabuf.h&gt;"|v72
-  v56-->|"#include &lt;wlr/types/wlr_buffer.h&gt;"|v73
-  v56-->|"#include &lt;wlr/util/addon.h&gt;"|v74
-  v73-->|"#include &lt;wlr/util/addon.h&gt;"|v74
-```
-
-We observe that [include graphs may be too verbose](./include-graph-all.mmd) to be useful. We can
-control which nodes are shown in the include graph using `--include PCRE` and
-`--exclude PCRE` command line options. The above invocation only includes
-headers with paths containing "wrloots". Since the predicates match against
-header paths, they may differ between systems. For example, on my machine I can
-[exclude standard headers](./include-graph-no-stdlibs.mmd) like so
-
-```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-    --exclude ".*glibc.*" --exclude ".*clang-wrapper.*"
-```
-
-However, even the include graph without standard library headers is large.
-`hs-bindgen` provides another options `--simple` that minimizes verbosity of
-generated include graphs by
-- removing edge labels,
-- combining dangling (i.e., transient) edges of removed vertices,
-- stripping prefix ".../include/" from paths.
-
-For example
-
-```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-    --include "wlroots" --simple
-```
-
-```mermaid
-graph TD;
-  v0["wlroots-0.19/wlr/backend.h"]
-  v90["wlroots-0.19/wlr/render/dmabuf.h"]
-  v87["wlroots-0.19/wlr/render/pass.h"]
-  v86["wlroots-0.19/wlr/render/wlr_renderer.h"]
-  v89["wlroots-0.19/wlr/render/wlr_texture.h"]
-  v91["wlroots-0.19/wlr/types/wlr_buffer.h"]
-  v75["wlroots-0.19/wlr/types/wlr_output.h"]
-  v92["wlroots-0.19/wlr/util/addon.h"]
-  v88["wlroots-0.19/wlr/util/box.h"]
+  v0("wlr/backend.h")
+  v90("wlr/render/dmabuf.h")
+  v87("wlr/render/pass.h")
+  v86("wlr/render/wlr_renderer.h")
+  v89("wlr/render/wlr_texture.h")
+  v91("wlr/types/wlr_buffer.h")
+  v75("wlr/types/wlr_output.h")
+  v92("wlr/util/addon.h")
+  v88("wlr/util/box.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -118,8 +66,20 @@ graph TD;
   v91-->v92
 ```
 
-This is much better already. We further tweaked the predicate and manually
-collapsed some nodes (_Wlroots sub-headers_, _Wayland server_, and _Pixman_):
+[Include graphs may be too verbose](./include-graph-all.mmd) to be useful. We can control which nodes
+are shown in the include graph using `--include PCRE` and `--exclude PCRE`
+command line options. The above invocation only includes headers with paths
+containing "wrloots". Predicates match against header paths, which may differ
+between systems. For example, on my machine I can [exclude standard headers](./include-graph-no-stdlibs.mmd)
+like so
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+    --exclude "glibc" --exclude "clang-wrapper"
+```
+
+We further tweaked the predicate and manually collapsed some nodes (_Wlroots
+sub-headers_, _Wayland server_, and _Pixman_):
 
 <p align="center">
   <img src="./include-graph-reduced-edited.png" />
@@ -131,6 +91,40 @@ well as `wlr/backend.h` depend on. Also, we see that Pixman is a dependency of
 
 Please see the [script generating include graphs](./generate-include-graphs) for the exact commands
 used.
+
+If you prefer, you can increase the verbosity of generated include graphs with
+`--show-paths`. Then, the vertices show the paths of the includes. For example,
+
+```bash
+hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+    --include "wlroots" --show-paths
+```
+
+```mermaid
+graph TD;
+  v0("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h")
+  v90("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h")
+  v87("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h")
+  v86("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h")
+  v89("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h")
+  v91("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h")
+  v75("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h")
+  v92("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h")
+  v88("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h")
+  v0-->v75
+  v75-->v86
+  v86-->v87
+  v75-->v88
+  v86-->v88
+  v87-->v88
+  v89-->v88
+  v86-->v89
+  v89-->v90
+  v91-->v90
+  v75-->v91
+  v75-->v92
+  v91-->v92
+```
 
 ## Bindings
 

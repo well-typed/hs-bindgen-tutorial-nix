@@ -559,5 +559,5 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: January 8, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
+> Last update: March 18, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
 > updates in the meantime.

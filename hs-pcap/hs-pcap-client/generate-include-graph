@@ -11,4 +11,4 @@ module_flags=(
 hs-bindgen-cli info include-graph \
     "${module_flags[@]}" \
     "${include_graph_flags[@]}" \
-    --simple pcap.h -o pcap.mmd
+    pcap.h -o pcap.mmd
