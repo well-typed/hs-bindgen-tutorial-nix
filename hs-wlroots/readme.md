@@ -229,7 +229,7 @@ data Wlr_backend = Wlr_backend {
 ```
 
 We can instruct `hs-bindgen` to use unprefixed field names using the
-`--no-field-prefixes` option
+`--omit-field-prefixes` option
 
 ```haskell
 data Wlr_backend = Wlr_backend {
@@ -239,12 +239,12 @@ data Wlr_backend = Wlr_backend {
 ```
 
 Usually, field names will clash, necessitating the `DuplicateRecordFields`
-extension. `--no-field-prefixes` plays well with "Record-dot syntax (zero-copy
+extension. `--omit-field-prefixes` plays well with "Record-dot syntax (zero-copy
 API)" highlighted in the next section.
 
 ## Record-dot syntax (zero-copy API)
 
-(This section assumes `--no-field-prefixes`).
+(This section assumes `--omit-field-prefixes`).
 
 C structures often contain fields with other C structures which in turn contain
 more fields with C structures. For example, the type `Wlr_backend` contains a
