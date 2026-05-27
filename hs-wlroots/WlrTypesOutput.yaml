@@ -13,23 +13,11 @@ ctypes:
   cname: struct timespec
   hsname: Timespec
 - headers: wlr/types/wlr_output.h
-  cname: struct wlr_addon_set
-  hsname: Wlr_addon_set
-- headers: wlr/types/wlr_output.h
-  cname: struct @wlr_addon_set_WLR_PRIVATE
-  hsname: Wlr_addon_set_WLR_PRIVATE
-- headers: wlr/types/wlr_output.h
   cname: enum wl_output_subpixel
   hsname: Wl_output_subpixel
 - headers: wlr/types/wlr_output.h
   cname: enum wl_output_transform
   hsname: Wl_output_transform
-- headers: wlr/types/wlr_output.h
-  cname: struct wlr_box
-  hsname: Wlr_box
-- headers: wlr/types/wlr_output.h
-  cname: struct wlr_fbox
-  hsname: Wlr_fbox
 - headers: wlr/types/wlr_output.h
   cname: struct wl_object
   hsname: Wl_object
@@ -37,20 +25,11 @@ ctypes:
   cname: struct wl_resource
   hsname: Wl_resource
 - headers: wlr/types/wlr_output.h
-  cname: struct wlr_buffer
-  hsname: Wlr_buffer
+  cname: struct wlr_box
+  hsname: Wlr_box
 - headers: wlr/types/wlr_output.h
-  cname: struct wlr_buffer_impl
-  hsname: Wlr_buffer_impl
-- headers: wlr/types/wlr_output.h
-  cname: struct @wlr_buffer_events
-  hsname: Wlr_buffer_events
-- headers: wlr/types/wlr_output.h
-  cname: struct wlr_texture_impl
-  hsname: Wlr_texture_impl
-- headers: wlr/types/wlr_output.h
-  cname: struct wlr_texture
-  hsname: Wlr_texture
+  cname: struct wlr_fbox
+  hsname: Wlr_fbox
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_render_pass
   hsname: Wlr_render_pass
@@ -66,6 +45,12 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_drm_syncobj_timeline
   hsname: Wlr_drm_syncobj_timeline
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_texture_impl
+  hsname: Wlr_texture_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_texture
+  hsname: Wlr_texture
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_backend
   hsname: Wlr_backend
@@ -87,6 +72,21 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: struct @wlr_renderer_WLR_PRIVATE
   hsname: Wlr_renderer_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_addon_set
+  hsname: Wlr_addon_set
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_addon_set_WLR_PRIVATE
+  hsname: Wlr_addon_set_WLR_PRIVATE
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_buffer
+  hsname: Wlr_buffer
+- headers: wlr/types/wlr_output.h
+  cname: struct wlr_buffer_impl
+  hsname: Wlr_buffer_impl
+- headers: wlr/types/wlr_output.h
+  cname: struct @wlr_buffer_events
+  hsname: Wlr_buffer_events
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_mode_aspect_ratio
   hsname: Wlr_output_mode_aspect_ratio
