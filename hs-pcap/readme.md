@@ -78,7 +78,7 @@ parts of the Clang toolchain.
 
 > [!TIP]
 > - If you are interested in how `hs-bindgen` finds included headers, see the
->   [`hs-bindgen` manual section on includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Includes.md).
+>   [`hs-bindgen` manual section on includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/includes.md).
 > - If you want to analyze how `hs-bindgen` finds the Clang toolchain, see
 >  Section [System environment](#system-environment) of this tutorial.
 > - If you want to use a specific version of GHC or the Clang toolchain, [see
@@ -168,7 +168,7 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 
 The environment variable `BINDGEN_EXTRA_CLANG_ARGS` is used by `hs-bindgen` and
 forwarded to `libclang`. For details, see [the `hs-bindgen` manual section on
-Clang options](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ClangOptions.md).
+Clang options](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/clang-options.md).
 
 Then, generate bindings with the provided script:
 
@@ -186,7 +186,7 @@ highlight some selected command line flags:
   identifier to discriminate global C identifiers, ensuring that bindings do not
   clash. This is also relevant when libraries have common dependencies, and
   external binding specifications are not used.
-- [__Select predicates__](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/ParsingSelectingAndProgramSlicing.md): Select predicates determine the declarations to
+- [__Select predicates__](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/selecting-and-program-slicing.md): Select predicates determine the declarations to
   translate.
 - __`--select-by-header-path`__: Select all declarations in header files with
   file paths matching the provided Perl-compatible regular expression. By

@@ -130,7 +130,7 @@ graph TD;
 
 `wlroots` is a large library and we suggest _separating binding creation_ into
 multiple steps or components. `hs-bindgen` uses [_external binding
-specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/LowLevel/Usage/06-BindingSpecifications.md) to inform higher-level components of the types provided by
+specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/binding-specifications.md) to inform higher-level components of the types provided by
 lower-level components.
 
 First, we will instruct `hs-bindgen` to translate lower-level library
