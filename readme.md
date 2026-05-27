@@ -24,5 +24,5 @@ _sub-folder of this repository_](./hs-wlroots/).
 > `hs-bindgen` and other system dependencies.
 
 > [!IMPORTANT]
-> Last update: March 18, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
+> Last update: May 27, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
 > updates in the meantime.
