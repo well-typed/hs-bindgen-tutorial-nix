@@ -41,16 +41,16 @@ hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTA
 ```
 
 ```mermaid
-graph TD;
+graph TD
   v0("wlr/backend.h")
-  v90("wlr/render/dmabuf.h")
-  v87("wlr/render/pass.h")
-  v86("wlr/render/wlr_renderer.h")
-  v89("wlr/render/wlr_texture.h")
-  v91("wlr/types/wlr_buffer.h")
   v75("wlr/types/wlr_output.h")
-  v92("wlr/util/addon.h")
+  v86("wlr/render/wlr_renderer.h")
+  v87("wlr/render/pass.h")
   v88("wlr/util/box.h")
+  v89("wlr/render/wlr_texture.h")
+  v90("wlr/render/dmabuf.h")
+  v91("wlr/types/wlr_buffer.h")
+  v92("wlr/util/addon.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -101,16 +101,16 @@ hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTA
 ```
 
 ```mermaid
-graph TD;
-  v0("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h")
-  v90("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h")
-  v87("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h")
-  v86("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h")
-  v89("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h")
-  v91("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h")
-  v75("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h")
-  v92("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h")
-  v88("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h")
+graph TD
+  v0("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/backend.h")
+  v75("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_output.h")
+  v86("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_renderer.h")
+  v87("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/pass.h")
+  v88("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/box.h")
+  v89("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_texture.h")
+  v90("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/dmabuf.h")
+  v91("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_buffer.h")
+  v92("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/addon.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -192,7 +192,7 @@ ctypes:
   cname: struct wl_event_loop
   hsname: Wl_event_loop
 - hsname: Wl_event_loop
-  representation: opaque
+  representation: emptydata
 ```
 
 Higher level modules directly use this information, avoiding incompatible
