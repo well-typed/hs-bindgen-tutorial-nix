@@ -35,6 +35,8 @@ same application developed [using the `hs-bindgen` client](#overview-of-method-a
 `hs-bindgen` uses [`libclang`](https://clang.llvm.org/doxygen/index.html) to parse and interpret C header files.
 `libclang` is a part of the [LLVM compiler infrastructure](https://llvm.org/), which we need to
 set up and connect to `hs-bindgen`.
+If available, [`doxygen`](https://www.doxygen.nl/index.html) is used to extract
+documentation.
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template-Haskell
