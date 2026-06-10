@@ -41,16 +41,16 @@ hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTA
 ```
 
 ```mermaid
-graph TD;
+graph TD
   v0("wlr/backend.h")
-  v90("wlr/render/dmabuf.h")
-  v87("wlr/render/pass.h")
-  v86("wlr/render/wlr_renderer.h")
-  v89("wlr/render/wlr_texture.h")
-  v91("wlr/types/wlr_buffer.h")
   v75("wlr/types/wlr_output.h")
-  v92("wlr/util/addon.h")
+  v86("wlr/render/wlr_renderer.h")
+  v87("wlr/render/pass.h")
   v88("wlr/util/box.h")
+  v89("wlr/render/wlr_texture.h")
+  v90("wlr/render/dmabuf.h")
+  v91("wlr/types/wlr_buffer.h")
+  v92("wlr/util/addon.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -101,16 +101,16 @@ hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTA
 ```
 
 ```mermaid
-graph TD;
-  v0("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/backend.h")
-  v90("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/dmabuf.h")
-  v87("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/pass.h")
-  v86("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_renderer.h")
-  v89("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/render/wlr_texture.h")
-  v91("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_buffer.h")
-  v75("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/types/wlr_output.h")
-  v92("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/addon.h")
-  v88("/nix/store/f5cfc57shf92z97y0rawvcbhbl5zn080-wlroots-0.19.2/include/wlroots-0.19/wlr/util/box.h")
+graph TD
+  v0("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/backend.h")
+  v75("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_output.h")
+  v86("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_renderer.h")
+  v87("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/pass.h")
+  v88("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/box.h")
+  v89("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_texture.h")
+  v90("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/dmabuf.h")
+  v91("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_buffer.h")
+  v92("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/addon.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -178,6 +178,30 @@ generate bindings for all `wlroots` library components
 ./generate-bindings
 ```
 
+The output of this command notifies us of some typedefs that have been squashed
+with the definition of the structs they refer to, which avoids indirection.
+More importantly, there are some warnings as well:
+
+```console
+[Warning] [HsBindgen] [select-parse] 'wl_log_func_t' at "/nix/store/v3jm5z02mx668hx7gwd9kwxqxpfyd62i-wayland-1.25.0-dev/include/wayland-util.h 749:16":
+  Could not select declaration:
+    Parse failure of underlying type of typedef 'va_list': Unsupported built-in "__builtin_va_list"
+[Warning] [HsBindgen] [select-parse] 'wl_client_post_implementation_error' at "/nix/store/v3jm5z02mx668hx7gwd9kwxqxpfyd62i-wayland-1.25.0-dev/include/wayland-server-core.h 356:1":
+  Could not select declaration:
+    Unsupported variadic (varargs) function
+...
+[Warning] [HsBindgen] [select] 'macro pixman_fixed_1' at "/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman.h 126:9":
+  Could not select declaration (direct select predicate match):
+    Transitive dependency unusable:
+      'macro pixman_int_to_fixed' at "/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman.h 130:9":
+        Parse failed
+...
+```
+
+These are due to some C features that `hs-bindgen` currently doesn't support.
+For example, it can't generate bindings to variadic functions and function-like
+macros containing casts.
+
 An excerpt of the external binding specifications which `hs-bindgen` generated
 for the Wayland server, and which covers the opaque definition of `Wl_event_loop` is
 
@@ -192,7 +216,7 @@ ctypes:
   cname: struct wl_event_loop
   hsname: Wl_event_loop
 - hsname: Wl_event_loop
-  representation: opaque
+  representation: emptydata
 ```
 
 Higher level modules directly use this information, avoiding incompatible

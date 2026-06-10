@@ -35,6 +35,8 @@ same application developed [using the `hs-bindgen` client](#overview-of-method-a
 `hs-bindgen` uses [`libclang`](https://clang.llvm.org/doxygen/index.html) to parse and interpret C header files.
 `libclang` is a part of the [LLVM compiler infrastructure](https://llvm.org/), which we need to
 set up and connect to `hs-bindgen`.
+If available, [`doxygen`](https://www.doxygen.nl/index.html) is used to extract
+documentation.
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template-Haskell
@@ -71,9 +73,9 @@ Nixpkgs, and also takes care of installing the default version of the required
 parts of the Clang toolchain.
 
 > [!NOTE]
-> At the time of writing (January 8, 2026),
+> At the time of writing (June 2, 2026),
 > - the default version of GHC is 9.10.3;
-> - the Clang toolchain includes version 21.1.7 of packages
+> - the Clang toolchain includes version 21.1.8 of packages
 >   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
@@ -162,7 +164,7 @@ Let's analyze the environment set up by [`hsBindgenHook`](#hs-bindgen-hook):
 ```console
 $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ...
--isystem /nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include
+-isystem /nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include
 ...
 ```
 
@@ -227,7 +229,7 @@ provided by Nix,
 ```console
 $ echo $NIX_CFLAGS_COMPILE
 ...
--isystem /nix/store/0crnzrvmjwvsn2z13v82w71k9nvwafbd-libpcap-1.10.5/include
+-isystem /nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include
 ...
 ```
 
@@ -441,23 +443,24 @@ environment is cumbersome. However, we can use `hs-bindgen-cli` itself to report
 the system environment it is picking up:
 
 ```sh
-nix run .#hs-bindgen-cli -- info libclang -v4
+nix run .#hs-bindgen-cli -- info libclang -v3
 ```
 
 For example,
 
 ```
-[Info   ] [HsBindgen] [extra-clang-args] Picked up evironment variable BINDGEN_EXTRA_CLANG_ARGS; parsed 'libclang' arguments: ["-B/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0","--gcc-toolchain=/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0","-B/nix/store/10mkp77lmqz8x2awd8hzv6pf7f7rkf6d-clang-19.1.7-lib/lib","-nostdlibinc","-resource-dir=/nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/resource-root","-idirafter","/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include","-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include","-frandom-seed=76bkkqxi8g"]
+[Info   ] [HsBindgen] [extra-clang-args] BINDGEN_EXTRA_CLANG_ARGS environment variable parsed 'libclang' arguments: ["-B/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0/lib/gcc/x86_64-unknown-linux-gnu/15.2.0","--gcc-toolchain=/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0","-B/nix/store/jdgw7h0g0l8clmcasaspxnx6v62jz1il-clang-21.1.8-lib/lib","-nostdlibinc","-resource-dir=/nix/store/874j5xydsj6nr6i1zdrjvhln5gmxvvrr-clang-wrapper-21.1.8/resource-root","-idirafter","/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include","-fmacro-prefix-map=/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.42-61-dev/include","-frandom-seed=klpjkqdq3i","-isystem","/nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include","-isystem","/nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include"]
 [Info   ] [HsBindgen] [builtin-include-dir] BINDGEN_BUILTIN_INCLUDE_DIR set: BuiltinIncDirDisable
+[Info   ] [HsBindgen] [boot-c-standard] C standard determined by libclang: ClangCStandard C17 DisableGnu
 ```
 
 In particular (see the [Clang command line argument reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
 
-- `-B/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0`,
-  and `--gcc-toolchain=/nix/store/82kmz7r96navanrc2fgckh2bamiqrgsw-gcc-14.3.0`:
+- `-B/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0/lib/gcc/x86_64-unknown-linux-gnu/15.2.0`,
+  and `--gcc-toolchain=/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0`:
   Use and search GCC toolchain for executables, libraries, and data files.
-- `-B/nix/store/10mkp77lmqz8x2awd8hzv6pf7f7rkf6d-clang-19.1.7-lib/lib`, and
-  `-resource-dir=/nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/resource-root`:
+- `-B/nix/store/jdgw7h0g0l8clmcasaspxnx6v62jz1il-clang-21.1.8-lib/lib`, and
+  `-resource-dir=/nix/store/874j5xydsj6nr6i1zdrjvhln5gmxvvrr-clang-wrapper-21.1.8/resource-root`:
   Use and search the Clang toolchain for executables, libraries, and data files.
   The `resource-dir` is particularly important, because it contains the headers
   of the C standard library. We let `hs-bindgen` know that we specified the
@@ -465,12 +468,13 @@ In particular (see the [Clang command line argument reference](https://clang.llv
   (`BINDGEN_BUILTIN_INCLUDE_DIR=disable` environment variable).
 - `-nostdlibinc`: Disable standard system `#include` directories only.
 - `-idirafter
-  /nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include`: Fall
+  /nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include`: Fall
   back to the `glibc` standard library headers.
 
 Other options not discussed here:
+`-fmacro-prefix-map=/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.42-61-dev/include`,
 `-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
-and `-frandom-seed=76bkkqxi8g`.
+and `-frandom-seed=klpjkqdq3i`.
 
 #### `hs-bindgen` hook
 
@@ -498,7 +502,7 @@ For example,
 populateHsBindgenEnv() {
     # Inform `hs-bindgen` about Nix-specific `CFLAGS` and `CCFLAGS`. In contrast
     # to `rust-bindgen-hook.sh` (see Nixpkgs), we do not set `CXXFLAGS`.
-    BINDGEN_EXTRA_CLANG_ARGS="$(</nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/nix-support/cc-cflags) $(</nix/store/fbfcll570w9vimfbh41f9b4rrwnp33f3-clang-wrapper-19.1.7/nix-support/libc-cflags) $NIX_CFLAGS_COMPILE"
+    BINDGEN_EXTRA_CLANG_ARGS="$(</nix/store/mw4gasdvwgscgpxpzihjgchfhs3hhqhn-clang-wrapper-21.1.8/nix-support/cc-cflags) $(</nix/store/mw4gasdvwgscgpxpzihjgchfhs3hhqhn-clang-wrapper-21.1.8/nix-support/libc-cflags) $NIX_CFLAGS_COMPILE"
     export BINDGEN_EXTRA_CLANG_ARGS
 
     # Inform `hs-bindgen` that it does not have to perform heuristic search for
@@ -506,8 +510,6 @@ populateHsBindgenEnv() {
     # `BINDGEN_EXTRA_CLANG_ARGS`).
     BINDGEN_BUILTIN_INCLUDE_DIR=disable
     export BINDGEN_BUILTIN_INCLUDE_DIR
-
-    # ...
 }
 
 postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
@@ -516,7 +518,7 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 ### Use specific versions of the GHC or Clang toolchains
 
 > [!NOTE]
-> As of 2026, January 8, pinning the version of LLVM is problematic because
+> As of 2026, June 2, pinning the version of LLVM is problematic because
 > the build is cached. See the corresponding [GitHub issue](https://github.com/well-typed/hs-bindgen-tutorial-nix/issues/2) for more details.
 
 One possibility to specify the GHC toolchain is to simply use a different
@@ -545,7 +547,7 @@ pkgs = import nixpkgs {
 };
 ```
 
-Note that even when you have `clang` version 19 in your path, `hs-bindgen` uses
+Note that even when you have a different `clang` version in your path, `hs-bindgen` uses
 `clang` version 20 when the above overlay is activated. You can see this by
 inspecting `BINDGEN_EXTRA_CLANG_ARGS` when the development shell is active:
 
@@ -559,5 +561,5 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ## Notes
 
 > [!IMPORTANT]
-> Last update: March 18, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
+> Last update: June 2, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
 > updates in the meantime.

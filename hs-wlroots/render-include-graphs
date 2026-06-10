@@ -1,6 +1,5 @@
-#!/usr/bin/env magix
-#!magix bash
-#!packages mermaid-cli
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p mermaid-cli
 
 graphs=(
   include-graph-all.mmd

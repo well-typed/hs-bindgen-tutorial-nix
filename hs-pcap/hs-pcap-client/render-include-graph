@@ -1,5 +1,4 @@
-#!/usr/bin/env magix
-#!magix bash
-#!packages mermaid-cli
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p mermaid-cli
 
 mmdc -i pcap.mmd -o pcap.svg
