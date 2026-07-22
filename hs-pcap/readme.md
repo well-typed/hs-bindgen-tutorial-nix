@@ -25,28 +25,31 @@ C header files.
 
 ### Overview of Method B: Template-Haskell interface
 
-The [`hs-bindgen` Template-Haskell interface](#method-b-template-haskell-interface) allows direct inclusion (a'la
+The [`hs-bindgen` Template-Haskell
+interface](#method-b-template-haskell-interface) allows direct inclusion (a'la
 `#include`) of C header files into our Haskell source code files. We rebuild the
-same application developed [using the `hs-bindgen` client](#overview-of-method-a-command-line-client) with the
-`hs-bindgen` Template-Haskell interface.
+same application developed [using the `hs-bindgen`
+client](#overview-of-method-a-command-line-client) with the `hs-bindgen`
+Template-Haskell interface.
 
 ### System environment, LLVM and Nix
 
-`hs-bindgen` uses [`libclang`](https://clang.llvm.org/doxygen/index.html) to parse and interpret C header files.
-`libclang` is a part of the [LLVM compiler infrastructure](https://llvm.org/), which we need to
-set up and connect to `hs-bindgen`.
-If available, [`doxygen`](https://www.doxygen.nl/index.html) is used to extract
-documentation.
+`hs-bindgen` uses [`libclang`](https://clang.llvm.org/doxygen/index.html) to
+parse and interpret C header files. `libclang` is a part of the [LLVM compiler
+infrastructure](https://llvm.org/), which we need to set up and connect to
+`hs-bindgen`. If available, [`doxygen`](https://www.doxygen.nl/index.html) is
+used to extract documentation.
 
 Nix, the package manager and build system, takes care of setting up the Clang
 toolchain, the `hs-bindgen` client, and the `hs-bindgen` Template-Haskell
 interface for us. In particular, this tutorial contains self-contained [Nix
-Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html) exposing the `hs-bindgen` the client, and `hs-bindgen` the
-Template-Haskell interface, respectively. These Nix Flakes only export outputs
-provided by the [`hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen) which we maintain alongside
-`hs-bindgen`. You should use this upstream Nix Flake directly in your future
-projects, if you decide to use the Nix package manager to manage your
-`hs-bindgen` installation.
+Flakes](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-flake.html)
+exposing the `hs-bindgen` the client, and `hs-bindgen` the Template-Haskell
+interface, respectively. These Nix Flakes only export outputs provided by the
+[`hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen) which we
+maintain alongside `hs-bindgen`. You should use this upstream Nix Flake directly
+in your future projects, if you decide to use the Nix package manager to manage
+your `hs-bindgen` installation.
 
 ## Method A: Command line client
 

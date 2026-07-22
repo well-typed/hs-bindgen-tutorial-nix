@@ -15,9 +15,11 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: enum wl_output_subpixel
   hsname: Wl_output_subpixel
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: enum wl_output_transform
   hsname: Wl_output_transform
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: struct wl_object
   hsname: Wl_object
@@ -90,6 +92,7 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_mode_aspect_ratio
   hsname: Wlr_output_mode_aspect_ratio
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_output_mode
   hsname: Wlr_output_mode
@@ -102,12 +105,15 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_adaptive_sync_status
   hsname: Wlr_output_adaptive_sync_status
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_state_field
   hsname: Wlr_output_state_field
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_state_mode_type
   hsname: Wlr_output_state_mode_type
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_output_state
   hsname: Wlr_output_state
@@ -147,6 +153,7 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: enum wlr_output_present_flag
   hsname: Wlr_output_present_flag
+  enum: open
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_output_event_present
   hsname: Wlr_output_event_present
@@ -174,6 +181,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Integral
   - Ix
   - Num
@@ -203,6 +212,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Integral
   - Ix
   - Num
@@ -227,6 +238,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -245,6 +258,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -263,6 +278,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -285,6 +302,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -310,6 +329,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -326,6 +347,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -342,6 +365,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -365,6 +390,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -388,6 +415,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -405,6 +434,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -426,6 +457,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -451,6 +484,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -510,6 +545,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -526,6 +563,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -544,6 +583,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -580,6 +621,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -596,6 +639,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -613,6 +658,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -631,6 +678,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -648,6 +697,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -666,6 +717,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -688,6 +741,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -705,6 +760,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -730,6 +787,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -755,6 +814,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -773,6 +834,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -795,6 +858,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -837,6 +902,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -855,6 +922,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -873,6 +942,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -894,6 +965,8 @@ hstypes:
   - HasCField
   - HasFFIType
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - Ord
   - Prim
   - Read
@@ -921,6 +994,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -937,6 +1012,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -954,6 +1031,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -971,6 +1050,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize
@@ -994,6 +1075,8 @@ hstypes:
   - Generic
   - HasCField
   - HasField
+  - HasFieldCompat
+  - HasFieldPtr
   - ReadRaw
   - Show
   - StaticSize

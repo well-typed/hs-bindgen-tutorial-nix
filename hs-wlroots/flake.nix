@@ -86,9 +86,6 @@
                 # `hs-bindgen` client.
                 pkgs.hs-bindgen-cli
 
-                # `hs-bindgen` uses Doxygen to extract documentation blocks from the C headers.
-                pkgs.doxygen
-
                 # Connect `hs-bindgen` to the Clang toolchain and libraries.
                 pkgs.hsBindgenHook
               ];
