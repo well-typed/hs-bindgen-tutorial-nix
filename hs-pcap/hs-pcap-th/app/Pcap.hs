@@ -35,12 +35,12 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       $ BOr (hasName "pcap_findalldevs_ex")
       $ BOr (hasName "pcap_setsampling")
             (hasName "pcap_remoteact")
-    selectP = BAnd headerHasPcap
-            $ BAnd (BNot isDeprecated)
-                   (BNot isExcluded)
+    selectionP = BAnd headerHasPcap
+               $ BAnd (BNot isDeprecated)
+                      (BNot isExcluded)
     cfg :: Config
     cfg = def
-      & #selectPredicate .~ selectP
+      & #selectionPredicate .~ selectionP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
     cfgTH = def { categoryChoice = useSafeCategory }
