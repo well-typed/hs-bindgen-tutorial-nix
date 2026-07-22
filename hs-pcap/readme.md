@@ -369,12 +369,12 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       $ BOr (hasName "pcap_findalldevs_ex")
       $ BOr (hasName "pcap_setsampling")
             (hasName "pcap_remoteact")
-    selectP = BAnd headerHasPcap
-            $ BAnd (BNot isDeprecated)
-                   (BNot isExcluded)
+    selectionP = BAnd headerHasPcap
+               $ BAnd (BNot isDeprecated)
+                      (BNot isExcluded)
     cfg :: Config
     cfg = def
-      & #selectPredicate .~ selectP
+      & #selectionPredicate .~ selectionP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
     cfgTH = ConfigTH { safety = Safe }
@@ -517,10 +517,6 @@ postHook="${postHook:-}"$'\n'"populateHsBindgenEnv"$'\n'
 
 ### Use specific versions of the GHC or Clang toolchains
 
-> [!NOTE]
-> As of 2026, June 2, pinning the version of LLVM is problematic because
-> the build is cached. See the corresponding [GitHub issue](https://github.com/well-typed/hs-bindgen-tutorial-nix/issues/2) for more details.
-
 One possibility to specify the GHC toolchain is to simply use a different
 Haskell package set. For example, building the `hs-pcap-client` project with GHC
 9.12 only requires a small change in the Nix Flake:
@@ -557,9 +553,3 @@ $ echo $BINDGEN_EXTRA_CLANG_ARGS
 -resource-dir=/nix/store/8s647qbgn3yy2l52ykznsh0xkvgcrqhx-clang-wrapper-20.1.8/resource-root
 ...
 ```
-
-## Notes
-
-> [!IMPORTANT]
-> Last update: June 2, 2026. The [upstream Nix Flake](https://github.com/well-typed/hs-bindgen) may have received
-> updates in the meantime.

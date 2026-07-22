@@ -41,6 +41,15 @@
             default = hs-pcap-client;
           };
 
+          checks = {
+            # Run the built executable. `pcap_findalldevs` needs no privileges
+            # and works with only `lo` present, so it succeeds in the sandbox.
+            hs-pcap-client-run = pkgs.runCommand "hs-pcap-client-run" { } ''
+              set -euo pipefail
+              ${hs-pcap-client}/bin/hs-pcap-client-bin | tee "$out"
+            '';
+          };
+
           devShells = {
             default = hpkgs.shellFor {
               packages = _: [ hs-pcap-client ];

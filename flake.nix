@@ -28,11 +28,16 @@
         { system, ... }:
         {
           checks = {
+            # Build checks: everything compiles.
             hs-bindgen-cli-check = hs-pcap-client.packages.${system}.hs-bindgen-cli;
             hs-pcap-client-check = hs-pcap-client.packages.${system}.hs-pcap-client;
             hs-pcap-th-check = hs-pcap-th.packages.${system}.hs-pcap-th;
             hs-wlroots-check = hs-wlroots.packages.${system}.hs-wlroots;
-          };
+          }
+          # Run checks: the built executables actually run. `hs-wlroots` is
+          # build-only; its executable needs a Wayland/DRM/X11 session.
+          // hs-pcap-client.checks.${system}
+          // hs-pcap-th.checks.${system};
         };
     };
 }
