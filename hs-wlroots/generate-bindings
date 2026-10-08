@@ -26,9 +26,8 @@ wayland-util() {
         --gen-binding-spec WaylandUtil.yaml
     )
 
-    hs-bindgen-cli preprocess "${header}" \
+    hs-bindgen-cli preprocess "${c_flags[@]}" "${header}" \
         "${debug[@]}" \
-        "${c_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -59,9 +58,8 @@ wayland-core() {
         --gen-binding-spec WaylandServerCore.yaml
     )
 
-    hs-bindgen-cli preprocess "${header}" \
+    hs-bindgen-cli preprocess "${c_flags[@]}" "${header}" \
         "${debug[@]}" \
-        "${c_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -94,9 +92,8 @@ pixman() {
         --gen-binding-spec Pixman.yaml
     )
 
-    hs-bindgen-cli preprocess "${header}" \
+    hs-bindgen-cli preprocess "${c_flags[@]}" "${header}" \
         "${debug[@]}" \
-        "${c_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -106,8 +103,9 @@ wlr-types-output() {
     local header="wlr/types/wlr_output.h"
 
     local c_flags=(
-        # Enable unstable features of Wlroots.
-        --clang-option -DWLR_USE_UNSTABLE
+        # Enable unstable features of Wlroots. A `--hash-define` applies to the
+        # headers that follow it, and to the generated C wrappers.
+        --hash-define WLR_USE_UNSTABLE 1
     )
 
     local select_flags=(
@@ -132,9 +130,8 @@ wlr-types-output() {
         --gen-binding-spec WlrTypesOutput.yaml
     )
 
-    hs-bindgen-cli preprocess "${header}" \
+    hs-bindgen-cli preprocess "${c_flags[@]}" "${header}" \
         "${debug[@]}" \
-        "${c_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"
@@ -144,8 +141,9 @@ wlr-backend() {
     local header="wlr/backend.h"
 
     local c_flags=(
-        # Enable unstable features of Wlroots.
-        --clang-option -DWLR_USE_UNSTABLE
+        # Enable unstable features of Wlroots. A `--hash-define` applies to the
+        # headers that follow it, and to the generated C wrappers.
+        --hash-define WLR_USE_UNSTABLE 1
     )
 
     local select_flags=(
@@ -170,9 +168,8 @@ wlr-backend() {
         --external-binding-spec WlrTypesOutput.yaml
     )
 
-    hs-bindgen-cli preprocess "${header}" \
+    hs-bindgen-cli preprocess "${c_flags[@]}" "${header}" \
         "${debug[@]}" \
-        "${c_flags[@]}" \
         "${select_flags[@]}" \
         "${module_flags[@]}" \
         "${binding_specs_flags[@]}"

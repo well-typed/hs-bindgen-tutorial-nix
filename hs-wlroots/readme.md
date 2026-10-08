@@ -32,12 +32,13 @@ include another header `libbar.h` from a different library altogether.
   <img src="./include-graph-example.png" />
 </p>
 
-`hs-bindgen` can _generate include graphs for you_. For example, (the Clang
-option is required to satisfy the C preprocessor)
+`hs-bindgen` can _generate include graphs for you_. For example, (the
+`--hash-define` is required to satisfy the C preprocessor; see [Root
+directives](#root-directives) below)
 
 ```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-  --include "wlroots" \
+hs-bindgen-cli info include-graph --hash-define WLR_USE_UNSTABLE 1 "wlr/backend.h" \
+  --include "wlroots"
 ```
 
 ```mermaid
@@ -69,13 +70,13 @@ graph TD
 [Include graphs may be too verbose](./include-graph-all.mmd) to be useful. We can control which nodes
 are shown in the include graph using `--include PCRE` and `--exclude PCRE`
 command line options. The above invocation only includes headers with paths
-containing "wrloots". Predicates match against header paths, which may differ
+containing "wlroots". Predicates match against header paths, which may differ
 between systems. For example, on my machine I can [exclude standard headers](./include-graph-no-stdlibs.mmd)
 like so
 
 ```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
-    --exclude "glibc" --exclude "clang-wrapper"
+hs-bindgen-cli info include-graph --hash-define WLR_USE_UNSTABLE 1 "wlr/backend.h" \
+    --exclude "glibc" --exclude "lib/clang/"
 ```
 
 We further tweaked the predicate and manually collapsed some nodes (_Wlroots
@@ -96,21 +97,21 @@ If you prefer, you can increase the verbosity of generated include graphs with
 `--show-paths`. Then, the vertices show the paths of the includes. For example,
 
 ```bash
-hs-bindgen-cli info include-graph "wlr/backend.h" --clang-option -DWLR_USE_UNSTABLE \
+hs-bindgen-cli info include-graph --hash-define WLR_USE_UNSTABLE 1 "wlr/backend.h" \
     --include "wlroots" --show-paths
 ```
 
 ```mermaid
 graph TD
-  v0("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/backend.h")
-  v75("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_output.h")
-  v86("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_renderer.h")
-  v87("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/pass.h")
-  v88("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/box.h")
-  v89("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_texture.h")
-  v90("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/render/dmabuf.h")
-  v91("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_buffer.h")
-  v92("/nix/store/b493bdch73a6d0477a8v94p32vwr2i7r-wlroots-0.19.3/include/wlroots-0.19/wlr/util/addon.h")
+  v0("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/backend.h")
+  v75("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_output.h")
+  v86("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_renderer.h")
+  v87("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/render/pass.h")
+  v88("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/util/box.h")
+  v89("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/render/wlr_texture.h")
+  v90("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/render/dmabuf.h")
+  v91("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/types/wlr_buffer.h")
+  v92("/nix/store/r5mggkxxib2983f3jpc07yhi9cmn10p3-wlroots-0.19.3/include/wlroots-0.19/wlr/util/addon.h")
   v0-->v75
   v75-->v86
   v86-->v87
@@ -130,7 +131,7 @@ graph TD
 
 `wlroots` is a large library and we suggest _separating binding creation_ into
 multiple steps or components. `hs-bindgen` uses [_external binding
-specifications_](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/binding-specifications.md) to inform higher-level components of the types provided by
+specifications_](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/manual/low-level/usage/binding-specifications.md) to inform higher-level components of the types provided by
 lower-level components.
 
 First, we will instruct `hs-bindgen` to translate lower-level library
@@ -183,17 +184,17 @@ with the definition of the structs they refer to, which avoids indirection.
 More importantly, there are some warnings as well:
 
 ```console
-[Warning] [HsBindgen] [select-parse] 'wl_log_func_t' at "/nix/store/v3jm5z02mx668hx7gwd9kwxqxpfyd62i-wayland-1.25.0-dev/include/wayland-util.h 749:16":
+[Warning] [HsBindgen] [select-parse] 'wl_log_func_t' at "/nix/store/6bvizw9qcnw5qz273y2qyix2wnb3r6ns-wayland-1.26.0-dev/include/wayland-util.h 749:16":
   Could not select declaration:
     Parse failure of underlying type of typedef 'va_list': Unsupported built-in "__builtin_va_list"
-[Warning] [HsBindgen] [select-parse] 'wl_client_post_implementation_error' at "/nix/store/v3jm5z02mx668hx7gwd9kwxqxpfyd62i-wayland-1.25.0-dev/include/wayland-server-core.h 356:1":
+[Warning] [HsBindgen] [select-parse] 'wl_client_post_implementation_error' at "/nix/store/6bvizw9qcnw5qz273y2qyix2wnb3r6ns-wayland-1.26.0-dev/include/wayland-server-core.h 366:1":
   Could not select declaration:
     Unsupported variadic (varargs) function
 ...
-[Warning] [HsBindgen] [select] 'macro pixman_fixed_1' at "/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman.h 126:9":
-  Could not select declaration (direct select predicate match):
+[Warning] [HsBindgen] [select] 'macro pixman_fixed_1' at "/nix/store/z84rpj9zlzjfn84374g8ss54w5vfiar6-pixman-0.46.4/include/pixman-1/pixman.h 126:9":
+  Could not select declaration (direct selection predicate match):
     Transitive dependency unusable:
-      'macro pixman_int_to_fixed' at "/nix/store/hm1ms40h2srvff9kznnj9rj40cc6qcax-pixman-0.46.4/include/pixman.h 130:9":
+      'macro pixman_int_to_fixed' at "/nix/store/z84rpj9zlzjfn84374g8ss54w5vfiar6-pixman-0.46.4/include/pixman-1/pixman.h 130:9":
         Parse failed
 ...
 ```
@@ -207,16 +208,20 @@ for the Wayland server, and which covers the opaque definition of `Wl_event_loop
 
 ```yaml
 version:
-  hs_bindgen: 0.1.0
+  hs_bindgen: 1.0.0.0
   binding_specification: '1.0'
-target: x86_64-pc-linux-gnu
 hsmodule: Generated.Wayland.Server.Core
 ctypes:
+...
 - headers: wayland-server-core.h
   cname: struct wl_event_loop
   hsname: Wl_event_loop
+...
+hstypes:
+...
 - hsname: Wl_event_loop
   representation: emptydata
+...
 ```
 
 Higher level modules directly use this information, avoiding incompatible
@@ -232,6 +237,30 @@ wlr_backend_autocreate ::
   -> IO (Ptr Wlr_backend)
 wlr_backend_autocreate = ...
 ```
+
+## Root directives
+
+Some `wlroots` headers (e.g., `wlr/util/addon.h`) raise an `#error` unless the
+macro `WLR_USE_UNSTABLE` is defined. The [generate-bindings script](./generate-bindings) therefore
+defines it with `--hash-define`
+
+```bash
+hs-bindgen-cli preprocess --hash-define WLR_USE_UNSTABLE 1 "wlr/backend.h" ...
+```
+
+`hs-bindgen` parses a synthesized _root header_
+
+```c
+#define WLR_USE_UNSTABLE 1
+#include <wlr/backend.h>
+```
+
+and prepends the same lines to the C wrappers embedded in the generated modules.
+Binding generation and the C compiler invoked by GHC thus see the same
+definition, and the Cabal file needs no `-optc-DWLR_USE_UNSTABLE`. A
+`--hash-define` only affects the headers that follow it on the command line. For
+details, see the [`hs-bindgen` manual section on root
+directives](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/manual/low-level/usage/c-stages.md#root-directives).
 
 # Application code
 
@@ -334,6 +363,6 @@ functions. For example, the module `Generated.Wayland.Server.Core.FunPtr`
 contains
 
 ```haskell
-wl_event_loop_destroy :: Ptr.FunPtr ((Ptr.Ptr Wl_event_loop) -> IO ())
+wl_event_loop_destroy :: FunPtr (Ptr Wl_event_loop -> IO ())
 wl_event_loop_destroy = ...
 ```

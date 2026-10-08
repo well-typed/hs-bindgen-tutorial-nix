@@ -1,5 +1,5 @@
 version:
-  hs_bindgen: 0.1.0
+  hs_bindgen: 1.0.0.0
   binding_specification: '1.0'
 hsmodule: Generated.Pixman
 ctypes:
@@ -266,6 +266,9 @@ hstypes:
       constructor: Pixman_bool_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CInt
   instances:
   - Bitfield
   - Bits
@@ -307,6 +310,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -346,6 +350,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -367,6 +372,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -388,6 +394,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -399,6 +406,9 @@ hstypes:
       constructor: Pixman_dither_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -439,6 +449,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -457,6 +468,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -493,6 +505,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -522,6 +535,9 @@ hstypes:
       constructor: Pixman_filter_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -546,6 +562,9 @@ hstypes:
       constructor: Pixman_fixed_16_16_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Int32
   instances:
   - Bitfield
   - Bits
@@ -577,6 +596,9 @@ hstypes:
       constructor: Pixman_fixed_1_16_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Word32
   instances:
   - Bitfield
   - Bits
@@ -608,6 +630,9 @@ hstypes:
       constructor: Pixman_fixed_1_31_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Word32
   instances:
   - Bitfield
   - Bits
@@ -639,6 +664,9 @@ hstypes:
       constructor: Pixman_fixed_32_32_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Int64
   instances:
   - Bitfield
   - Bits
@@ -670,6 +698,9 @@ hstypes:
       constructor: Pixman_fixed_48_16_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Int64
   instances:
   - Bitfield
   - Bits
@@ -701,6 +732,9 @@ hstypes:
       constructor: Pixman_fixed_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Int32
   instances:
   - Bitfield
   - Bits
@@ -732,6 +766,9 @@ hstypes:
       constructor: Pixman_format_code_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -766,6 +803,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -785,6 +823,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -796,6 +835,9 @@ hstypes:
       constructor: Pixman_image_destroy_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -818,6 +860,9 @@ hstypes:
       constructor: Pixman_index_type
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Word8
   instances:
   - Bitfield
   - Bits
@@ -858,6 +903,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -869,6 +915,9 @@ hstypes:
       constructor: Pixman_kernel_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -901,6 +950,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -912,6 +962,9 @@ hstypes:
       constructor: Pixman_op_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -943,6 +996,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -954,6 +1008,9 @@ hstypes:
       constructor: Pixman_read_memory_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -984,6 +1041,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1005,6 +1063,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1026,6 +1085,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1045,6 +1105,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1064,6 +1125,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1083,6 +1145,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1102,6 +1165,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1121,6 +1185,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1140,6 +1205,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1151,6 +1217,9 @@ hstypes:
       constructor: Pixman_region_overlap_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -1175,6 +1244,9 @@ hstypes:
       constructor: Pixman_repeat_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -1208,6 +1280,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1226,6 +1299,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1263,6 +1337,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1284,6 +1359,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1304,6 +1380,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1322,6 +1399,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1351,6 +1429,9 @@ hstypes:
       constructor: Pixman_write_memory_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic

@@ -1,5 +1,5 @@
 version:
-  hs_bindgen: 0.1.0
+  hs_bindgen: 1.0.0.0
   binding_specification: '1.0'
 hsmodule: Generated.Wayland.Util
 ctypes:
@@ -64,6 +64,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -75,6 +76,9 @@ hstypes:
       constructor: Wl_dispatcher_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -95,6 +99,9 @@ hstypes:
       constructor: Wl_fixed_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.LibC
+        hsname: Int32
   instances:
   - Bitfield
   - Bits
@@ -138,6 +145,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -149,6 +157,9 @@ hstypes:
       constructor: Wl_iterator_result
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -181,6 +192,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -201,6 +213,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize

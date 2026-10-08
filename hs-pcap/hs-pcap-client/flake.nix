@@ -4,7 +4,7 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    hs-bindgen.url = "github:well-typed/hs-bindgen";
+    hs-bindgen.url = "github:well-typed/hs-bindgen/release-1.0.0.0";
   };
 
   outputs =
@@ -37,7 +37,7 @@
         {
           packages = {
             hs-pcap-client = hs-pcap-client;
-            inherit (pkgs) hs-bindgen-cli;
+            inherit (pkgs) hs-bindgen-cli hsBindgenHook;
             default = hs-pcap-client;
           };
 
