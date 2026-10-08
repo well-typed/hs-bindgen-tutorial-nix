@@ -59,14 +59,14 @@ Install the [Nix package manager](https://nixos.org/download/), [enable Nix Flak
 and run the client with
 
 ```console
-$ nix run ./hs-pcap-client#hs-bindgen-cli -- --help | head -n 6
+$ nix run ./hs-pcap-client#hs-bindgen-cli -- --help | head -n 7
+Usage: hs-bindgen-cli [--color WHEN] [-v|--verbosity INT] 
+                      [--log-as-info TRACE_ID]... [--log-as-warning TRACE_ID]...
+                      [--log-as-error TRACE_ID]... [--log-as-error-bugs] 
+                      [--log-as-error-warnings] [--log-enable-macro-warnings] 
+                      [--log-squashed-as-info] [--log-show-call-stack] COMMAND
 
-hs-bindgen - generate Haskell bindings from C headers
-
-Usage: hs-bindgen [-v|--verbosity INT] [--log-as-info TRACE_ID]
-                  [--log-as-warning TRACE_ID] [--log-as-error TRACE_ID]
-                  [--log-as-error-warnings] [--log-enable-macro-warnings]
-                  [--log-show-time] [--log-show-call-stack] COMMAND
+  Generate Haskell bindings from C headers
 ```
 
 The build uses the [default NixOS binary cache](https://cache.nixos.org/), but some dependencies are
@@ -76,14 +76,14 @@ Nixpkgs, and also takes care of installing the default version of the required
 parts of the Clang toolchain.
 
 > [!NOTE]
-> At the time of writing (June 2, 2026),
+> At the time of writing (October 8, 2026),
 > - the default version of GHC is 9.10.3;
 > - the Clang toolchain includes version 21.1.8 of packages
 >   `llvmPackages.clang`, `llvmPackages.libclang`, and `llvmPackages.llvm`.
 
 > [!TIP]
 > - If you are interested in how `hs-bindgen` finds included headers, see the
->   [`hs-bindgen` manual section on includes](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/includes.md).
+>   [`hs-bindgen` manual section on includes](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/manual/low-level/usage/includes.md).
 > - If you want to analyze how `hs-bindgen` finds the Clang toolchain, see
 >  Section [System environment](#system-environment) of this tutorial.
 > - If you want to use a specific version of GHC or the Clang toolchain, [see
@@ -146,11 +146,11 @@ devShells.default = haskellPackges.shellFor {
 };
 ```
 
-The [overlay provided by the `hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen/blob/main/nix/overlay/default.nix):
+The [overlay provided by the `hs-bindgen` Nix Flake](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/nix/overlay/default.nix):
 - Adds `hs-bindgen` relevant packages to the Haskell package sets (i.e.,
 `haskell.packages.ghc*`). In particular, it also adds [`libclang-bindings`](https://github.com/well-typed/libclang),
-which is not yet available on Hackage nor in Nixpkgs.
-- Provides [the function `generateBindings`](https://github.com/well-typed/hs-bindgen/blob/main/nix/hs-bindgen-lib.nix) in the `haskell.lib.compose`
+which is not yet available in Nixpkgs.
+- Provides [the function `generateBindings`](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/nix/hs-bindgen-lib.nix) in the `haskell.lib.compose`
   attribute set. The function `generateBindings` executes the provided binding
   generation script during build.
 - Provides the `hs-bindgen-cli` as well as `hsBindgenHook` packages.
@@ -167,13 +167,13 @@ Let's analyze the environment set up by [`hsBindgenHook`](#hs-bindgen-hook):
 ```console
 $ echo $BINDGEN_EXTRA_CLANG_ARGS
 ...
--isystem /nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include
+-isystem /nix/store/g93a4w46dmhf36h5i1zx37l2aldb6d8z-libpcap-1.10.7/include
 ...
 ```
 
 The environment variable `BINDGEN_EXTRA_CLANG_ARGS` is used by `hs-bindgen` and
 forwarded to `libclang`. For details, see [the `hs-bindgen` manual section on
-Clang options](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/clang-options.md).
+Clang options](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/manual/low-level/usage/clang-options.md).
 
 Then, generate bindings with the provided script:
 
@@ -191,7 +191,7 @@ highlight some selected command line flags:
   identifier to discriminate global C identifiers, ensuring that bindings do not
   clash. This is also relevant when libraries have common dependencies, and
   external binding specifications are not used.
-- [__Select predicates__](https://github.com/well-typed/hs-bindgen/blob/main/manual/low-level/usage/selecting-and-program-slicing.md): Select predicates determine the declarations to
+- [__Selection predicates__](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/manual/low-level/usage/selecting-and-program-slicing.md): Selection predicates determine the declarations to
   translate.
 - __`--select-by-header-path`__: Select all declarations in header files with
   file paths matching the provided Perl-compatible regular expression. By
@@ -199,7 +199,7 @@ highlight some selected command line flags:
   file. However, the main header `pcap.h` does not declare anything but only
   imports sub-headers, so we need to provide this option.
 - __`--enable-program-slicing`__: Do not only select declarations that match the
-  select predicate but all transitive dependencies.
+  selection predicate but all transitive dependencies.
 
 We generated the script using an iterative procedure, adding and removing
 command line flags as required. The script should generate several files in
@@ -232,7 +232,7 @@ provided by Nix,
 ```console
 $ echo $NIX_CFLAGS_COMPILE
 ...
--isystem /nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include
+-isystem /nix/store/g93a4w46dmhf36h5i1zx37l2aldb6d8z-libpcap-1.10.7/include
 ...
 ```
 
@@ -365,7 +365,7 @@ The TH function generating the `hs-bindgen` splice is
 let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
     isDeprecated  = BIf $ SelectDecl     DeclDeprecated
     hasName       = BIf . SelectDecl   . DeclNameMatches
-    isExcluded     =
+    isExcluded    =
         BOr (hasName "pcap_open")
       $ BOr (hasName "pcap_createsrcstr")
       $ BOr (hasName "pcap_parsesrcstr")
@@ -380,11 +380,11 @@ let headerHasPcap = BIf $ SelectHeader $ HeaderPathMatches "pcap.h"
       & #selectionPredicate .~ selectionP
       & #programSlicing  .~ EnableProgramSlicing
     cfgTH :: ConfigTH
-    cfgTH = ConfigTH { safety = Safe }
+    cfgTH = def { categoryChoice = useSafeCategory }
  in withHsBindgen cfg cfgTH $ hashInclude "pcap.h"
 ```
 
-Most of this code defines the appropriate select predicate; compare with the
+Most of this code defines the appropriate selection predicate; compare with the
 [respective command line flags of the client example](./hs-pcap-client/generate-bindings).
 
 Some notes:
@@ -424,10 +424,14 @@ to the top of the file. For example, the generated code corresponding to the doc
 of `pcap_finalldevs` above is
 
 ```haskell
-foreign import ccall safe
-  "hs_bindgen_hspcap0_1_0_0inplacehspcapbin_172d2c8dfa18cccf" pcap_findalldevs
-  :: Foreign.Ptr (Foreign.Ptr Pcap_if_t)
-     -> Foreign.Ptr C.CChar -> IO C.CIn
+pcap_findalldevs ::
+  Foreign.Ptr (Foreign.Ptr Pcap_if_t)
+  -> Foreign.Ptr C.CChar -> IO C.CInt
+pcap_findalldevs = hs_bindgen_6ac72531545d4969
+...
+foreign import ccall safe "hs_bindgen_6ac72531545d4969" hs_bindgen_6ac72531545d4969_base
+  :: Foreign.Ptr ghc-internal:GHC.Internal.Base.Void
+     -> Foreign.Ptr ghc-internal:GHC.Internal.Base.Void -> IO C.CInt
 ```
 
 > [!TIP]
@@ -452,18 +456,18 @@ nix run .#hs-bindgen-cli -- info libclang -v3
 For example,
 
 ```
-[Info   ] [HsBindgen] [extra-clang-args] BINDGEN_EXTRA_CLANG_ARGS environment variable parsed 'libclang' arguments: ["-B/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0/lib/gcc/x86_64-unknown-linux-gnu/15.2.0","--gcc-toolchain=/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0","-B/nix/store/jdgw7h0g0l8clmcasaspxnx6v62jz1il-clang-21.1.8-lib/lib","-nostdlibinc","-resource-dir=/nix/store/874j5xydsj6nr6i1zdrjvhln5gmxvvrr-clang-wrapper-21.1.8/resource-root","-idirafter","/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include","-fmacro-prefix-map=/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.42-61-dev/include","-frandom-seed=klpjkqdq3i","-isystem","/nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include","-isystem","/nix/store/zjkxvpnsayafcijxw32saqr2vr018rpr-libpcap-1.10.6/include"]
+[Info   ] [HsBindgen] [extra-clang-args] BINDGEN_EXTRA_CLANG_ARGS environment variable parsed 'libclang' arguments: ["-B/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0","--gcc-toolchain=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0","-B/nix/store/adr7l6vazpqqjy2wab0v27pzp17c4sq6-clang-21.1.8-lib/lib","-nostdlibinc","-resource-dir=/nix/store/2msw5nclhpsm80z65dqmjiv8kkras989-clang-wrapper-21.1.8/resource-root","-idirafter","/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include","-fmacro-prefix-map=/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include","-frandom-seed=lnanxsdfr6","-isystem","/nix/store/g93a4w46dmhf36h5i1zx37l2aldb6d8z-libpcap-1.10.7/include","-isystem","/nix/store/g93a4w46dmhf36h5i1zx37l2aldb6d8z-libpcap-1.10.7/include"]
 [Info   ] [HsBindgen] [builtin-include-dir] BINDGEN_BUILTIN_INCLUDE_DIR set: BuiltinIncDirDisable
 [Info   ] [HsBindgen] [boot-c-standard] C standard determined by libclang: ClangCStandard C17 DisableGnu
 ```
 
 In particular (see the [Clang command line argument reference](https://clang.llvm.org/docs/ClangCommandLineReference.html)),
 
-- `-B/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0/lib/gcc/x86_64-unknown-linux-gnu/15.2.0`,
-  and `--gcc-toolchain=/nix/store/qxaq7jz61a6zkr2mq49i0zvqip2m2jj8-gcc-15.2.0`:
+- `-B/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0`,
+  and `--gcc-toolchain=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0`:
   Use and search GCC toolchain for executables, libraries, and data files.
-- `-B/nix/store/jdgw7h0g0l8clmcasaspxnx6v62jz1il-clang-21.1.8-lib/lib`, and
-  `-resource-dir=/nix/store/874j5xydsj6nr6i1zdrjvhln5gmxvvrr-clang-wrapper-21.1.8/resource-root`:
+- `-B/nix/store/adr7l6vazpqqjy2wab0v27pzp17c4sq6-clang-21.1.8-lib/lib`, and
+  `-resource-dir=/nix/store/2msw5nclhpsm80z65dqmjiv8kkras989-clang-wrapper-21.1.8/resource-root`:
   Use and search the Clang toolchain for executables, libraries, and data files.
   The `resource-dir` is particularly important, because it contains the headers
   of the C standard library. We let `hs-bindgen` know that we specified the
@@ -471,18 +475,17 @@ In particular (see the [Clang command line argument reference](https://clang.llv
   (`BINDGEN_BUILTIN_INCLUDE_DIR=disable` environment variable).
 - `-nostdlibinc`: Disable standard system `#include` directories only.
 - `-idirafter
-  /nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include`: Fall
+  /nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include`: Fall
   back to the `glibc` standard library headers.
 
 Other options not discussed here:
-`-fmacro-prefix-map=/nix/store/15h9askp4k1lx44d9871wid23j2a8ijp-glibc-2.42-61-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.42-61-dev/include`,
-`-fmacro-prefix-map=/nix/store/gf3wh0x0rzb1dkx0wx1jvmipydwfzzd5-glibc-2.40-66-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include`,
-and `-frandom-seed=klpjkqdq3i`.
+`-fmacro-prefix-map=/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include`
+and `-frandom-seed=lnanxsdfr6`.
 
 #### `hs-bindgen` hook
 
 We also provide a [setup hook](https://nixos.org/manual/nixpkgs/stable/#ssec-setup-hooks) that can be used by projects depending on
-`hs-bindgen` during their build process. [The `hs-bindgen` setup hook](https://github.com/well-typed/hs-bindgen/blob/main/nix/hs-bindgen/hs-bindgen-hook.sh)
+`hs-bindgen` during their build process. [The `hs-bindgen` setup hook](https://github.com/well-typed/hs-bindgen/blob/release-1.0.0.0/nix/hs-bindgen-hook.sh)
 performs the same setup as the wrapper discussed in the section [Client
 wrapper](#client-wrapper) above. The `hs-bindgen` setup hook can be used like other setup
 hooks by adding it to `buildInputs` or `propagatedBuildInputs`.
@@ -505,7 +508,7 @@ For example,
 populateHsBindgenEnv() {
     # Inform `hs-bindgen` about Nix-specific `CFLAGS` and `CCFLAGS`. In contrast
     # to `rust-bindgen-hook.sh` (see Nixpkgs), we do not set `CXXFLAGS`.
-    BINDGEN_EXTRA_CLANG_ARGS="$(</nix/store/mw4gasdvwgscgpxpzihjgchfhs3hhqhn-clang-wrapper-21.1.8/nix-support/cc-cflags) $(</nix/store/mw4gasdvwgscgpxpzihjgchfhs3hhqhn-clang-wrapper-21.1.8/nix-support/libc-cflags) $NIX_CFLAGS_COMPILE"
+    BINDGEN_EXTRA_CLANG_ARGS="$(</nix/store/2msw5nclhpsm80z65dqmjiv8kkras989-clang-wrapper-21.1.8/nix-support/cc-cflags) $(</nix/store/2msw5nclhpsm80z65dqmjiv8kkras989-clang-wrapper-21.1.8/nix-support/libc-cflags) $NIX_CFLAGS_COMPILE"
     export BINDGEN_EXTRA_CLANG_ARGS
 
     # Inform `hs-bindgen` that it does not have to perform heuristic search for

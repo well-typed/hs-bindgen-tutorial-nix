@@ -1,5 +1,5 @@
 version:
-  hs_bindgen: 0.1.0
+  hs_bindgen: 1.0.0.0
   binding_specification: '1.0'
 hsmodule: Generated.Wayland.Server.Core
 ctypes:
@@ -49,11 +49,14 @@ ctypes:
   cname: struct wl_client
   hsname: Wl_client
 - headers: wayland-server-core.h
+  cname: struct wl_global
+  hsname: Wl_global
+- headers: wayland-server-core.h
   cname: wl_global_bind_func_t
   hsname: Wl_global_bind_func_t
 - headers: wayland-server-core.h
-  cname: struct wl_global
-  hsname: Wl_global
+  cname: wl_global_withdrawn_func_t
+  hsname: Wl_global_withdrawn_func_t
 - headers: wayland-server-core.h
   cname: wl_display_global_filter_func_t
   hsname: Wl_display_global_filter_func_t
@@ -101,6 +104,9 @@ hstypes:
       constructor: C__Gid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - Bitfield
   - Bits
@@ -132,6 +138,9 @@ hstypes:
       constructor: C__Pid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CInt
   instances:
   - Bitfield
   - Bits
@@ -163,6 +172,9 @@ hstypes:
       constructor: C__Uid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - Bitfield
   - Bits
@@ -194,6 +206,9 @@ hstypes:
       constructor: Gid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - Bitfield
   - Bits
@@ -225,6 +240,9 @@ hstypes:
       constructor: Pid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CInt
   instances:
   - Bitfield
   - Bits
@@ -256,6 +274,9 @@ hstypes:
       constructor: Uid_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - Bitfield
   - Bits
@@ -289,6 +310,9 @@ hstypes:
       constructor: Wl_client_for_each_resource_iterator_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -311,6 +335,9 @@ hstypes:
       constructor: Wl_display_global_filter_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -333,6 +360,9 @@ hstypes:
       constructor: Wl_event_loop_fd_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -353,6 +383,9 @@ hstypes:
       constructor: Wl_event_loop_idle_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -373,6 +406,9 @@ hstypes:
       constructor: Wl_event_loop_signal_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -393,6 +429,9 @@ hstypes:
       constructor: Wl_event_loop_timer_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -417,6 +456,32 @@ hstypes:
       constructor: Wl_global_bind_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
+  instances:
+  - Eq
+  - Generic
+  - HasCField
+  - HasFFIType
+  - HasField
+  - HasFieldCompat
+  - HasFieldPtr
+  - Ord
+  - ReadRaw
+  - Show
+  - StaticSize
+  - Storable
+  - WriteRaw
+- hsname: Wl_global_withdrawn_func_t
+  representation:
+    newtype:
+      constructor: Wl_global_withdrawn_func_t
+      fields:
+      - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -445,6 +510,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -456,6 +522,9 @@ hstypes:
       constructor: Wl_notify_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -478,6 +547,9 @@ hstypes:
       constructor: Wl_protocol_logger_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -509,6 +581,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -520,6 +593,9 @@ hstypes:
       constructor: Wl_protocol_logger_type
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -546,6 +622,9 @@ hstypes:
       constructor: Wl_resource_destroy_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic
@@ -577,6 +656,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -588,6 +668,9 @@ hstypes:
       constructor: Wl_user_data_destroy_func_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: FunPtrVoid
   instances:
   - Eq
   - Generic

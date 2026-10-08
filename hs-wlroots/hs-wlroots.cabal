@@ -42,7 +42,7 @@ library
     , Generated.Wlr.Types.Output.Safe
     , Generated.Wlr.Types.Output.Unsafe
   autogen-modules:
-  ghc-options: -optc-DWLR_USE_UNSTABLE
+  ghc-options:
   extra-libraries:
     , wlroots-0.19
     , wayland-server

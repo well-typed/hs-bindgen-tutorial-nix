@@ -1,5 +1,5 @@
 version:
-  hs_bindgen: 0.1.0
+  hs_bindgen: 1.0.0.0
   binding_specification: '1.0'
 hsmodule: Generated.Wlr.Types.Output
 ctypes:
@@ -32,9 +32,6 @@ ctypes:
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_fbox
   hsname: Wlr_fbox
-- headers: wlr/types/wlr_output.h
-  cname: struct wlr_render_pass
-  hsname: Wlr_render_pass
 - headers: wlr/types/wlr_output.h
   cname: struct wlr_render_timer
   hsname: Wlr_render_timer
@@ -127,6 +124,9 @@ ctypes:
   cname: struct wlr_output_impl
   hsname: Wlr_output_impl
 - headers: wlr/types/wlr_output.h
+  cname: struct wlr_render_pass
+  hsname: Wlr_render_pass
+- headers: wlr/types/wlr_output.h
   cname: struct wlr_output
   hsname: Wlr_output
 - headers: wlr/types/wlr_output.h
@@ -170,6 +170,9 @@ hstypes:
       constructor: C__Syscall_slong_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CLong
   instances:
   - Bitfield
   - Bits
@@ -201,6 +204,9 @@ hstypes:
       constructor: C__Time_t
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CLong
   instances:
   - Bitfield
   - Bits
@@ -240,6 +246,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -260,6 +267,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -271,6 +279,9 @@ hstypes:
       constructor: Wl_output_subpixel
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -295,6 +306,9 @@ hstypes:
       constructor: Wl_output_transform
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -331,6 +345,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -349,6 +364,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -367,6 +383,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -392,6 +409,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -417,6 +435,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -436,6 +455,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -459,6 +479,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -486,6 +507,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -547,6 +569,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -565,6 +588,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -576,6 +600,9 @@ hstypes:
       constructor: Wlr_output_adaptive_sync_status
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -623,6 +650,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -641,6 +669,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -660,6 +689,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -680,6 +710,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -699,6 +730,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -719,6 +751,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -743,6 +776,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -762,6 +796,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -789,6 +824,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -816,6 +852,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -827,6 +864,9 @@ hstypes:
       constructor: Wlr_output_mode_aspect_ratio
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -851,6 +891,9 @@ hstypes:
       constructor: Wlr_output_present_flag
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -904,6 +947,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -924,6 +968,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -935,6 +980,9 @@ hstypes:
       constructor: Wlr_output_state_field
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -958,6 +1006,9 @@ hstypes:
       constructor: Wlr_output_state_mode_type
       fields:
       - unwrap
+      ffitype:
+        hsmodule: HsBindgen.Runtime.Support
+        hsname: CUInt
   instances:
   - CEnum
   - Eq
@@ -996,6 +1047,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1014,6 +1066,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1033,6 +1086,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1052,6 +1106,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
@@ -1077,6 +1132,7 @@ hstypes:
   - HasField
   - HasFieldCompat
   - HasFieldPtr
+  - IsStruct
   - ReadRaw
   - Show
   - StaticSize
